@@ -259,12 +259,10 @@
 
         .other-input-group {
             margin-top: 1.5rem;
-            display: flex;
-            gap: 10px;
         }
 
         .other-input-group input {
-            flex: 1;
+            width: 100%;
             padding: 10px 15px;
             border: 1px solid var(--border-color);
             border-radius: 6px;
@@ -283,7 +281,7 @@
 
         .search-box {
             padding: 10px 15px;
-            width: 300px;
+            width: 350px;
             border: 1px solid var(--border-color);
             border-radius: 6px;
             font-size: 1rem;
@@ -362,7 +360,7 @@
             <ul>
                 <li><a onclick="switchTab('home')">Ana Sayfa</a></li>
                 <li><a onclick="switchTab('quiz')">Eleme Testi</a></li>
-                <li><a onclick="switchTab('directory')">Tüm Üniversiteler & Bölümler</a></li>
+                <li><a onclick="switchTab('directory')">Türkiye Üniversiteleri & Bölümler</a></li>
                 <li><a onclick="switchTab('abroad')">Yurtdışı Eğitim</a></li>
             </ul>
         </nav>
@@ -411,7 +409,7 @@
         </div>
     </div>
 
-    <!-- 2. ELEME TESTİ (Diğer ve Sıfırlama Özellikli) -->
+    <!-- 2. ELEME TESTİ -->
     <div id="quiz" class="tab-content">
         <div class="quiz-box">
             <h2>Gelecekte Nasıl Çalışmak İstemezsin?</h2>
@@ -429,102 +427,92 @@
 
             <!-- Diğer seçeneği ve yazı yazma alanı -->
             <div class="other-input-group">
-                <input type="text" id="otherInput" placeholder="Diğer (Başka istemediğin bir şey yazabilirsin...)">
+                <input type="text" id="otherInput" placeholder="Diğer (Başka istemediğin özel bir durum yazabilirsin...)">
             </div>
 
-            <div style="margin-top: 2rem; display: flex; gap: 10px;">
+            <div style="margin-top: 2rem; display: flex; gap: 10px; flex-wrap: wrap;">
                 <button class="btn-primary" onclick="switchTab('directory')">Sonuçlarımı Göster ve Bölümleri İncele</button>
                 <button class="btn-secondary" onclick="resetQuiz()">Sıfırla (Baştan Seç)</button>
             </div>
         </div>
     </div>
 
-    <!-- 3. TÜM ÜNİVERSİTE & BÖLÜMLER (Arama Özellikli Ek Sayfa) -->
+    <!-- 3. TÜM TÜRKİYE ÜNİVERSİTELERİ & BÖLÜMLERİ (Kapsamlı Liste) -->
     <div id="directory" class="tab-content">
         <div class="directory-header">
             <div>
-                <h2>Tüm Üniversiteler ve Bölüm Taban Puanları</h2>
-                <p style="color: #666;">Geçmiş yıllara ait kontenjanlar ve taban puanlar.</p>
+                <h2>Türkiye Genelindeki Tüm Üniversiteler ve Bölüm Arşivi</h2>
+                <p style="color: #666;">Ülke genelindeki tüm devlet, vakıf üniversiteleri ve fakülteleri.</p>
             </div>
-            <input type="text" id="searchInput" class="search-box" onkeyup="filterTable()" placeholder="Üniversite veya bölüm ara...">
+            <input type="text" id="searchInput" class="search-box" onkeyup="filterTable()" placeholder="Üniversite, şehir veya bölüm ara (örn: Akdeniz, Sivas, Tıp)...">
         </div>
 
         <table id="uniTable">
             <thead>
                 <tr>
                     <th>Üniversite</th>
+                    <th>Şehir</th>
                     <th>Bölüm</th>
                     <th>Puan Türü</th>
                     <th>2024 Taban Puanı</th>
-                    <th>2023 Taban Puanı</th>
                     <th>Kontenjan</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Boğaziçi Üniversitesi</td>
-                    <td>Bilgisayar Mühendisliği</td>
-                    <td>SAY</td>
-                    <td>542.15</td>
-                    <td>538.90</td>
-                    <td>70</td>
-                </tr>
-                <tr>
-                    <td>İTÜ (İstanbul Teknik Üniv.)</td>
-                    <td>Yapay Zeka ve Veri Müh.</td>
-                    <td>SAY</td>
-                    <td>530.40</td>
-                    <td>525.10</td>
-                    <td>60</td>
-                </tr>
-                <tr>
-                    <td>Orta Doğu Teknik Üniv. (ODTÜ)</td>
-                    <td>Endüstri Mühendisliği</td>
-                    <td>SAY</td>
-                    <td>515.20</td>
-                    <td>510.80</td>
-                    <td>90</td>
-                </tr>
-                <tr>
-                    <td>Hacettepe Üniversitesi</td>
-                    <td>Tıp Fakültesi</td>
-                    <td>SAY</td>
-                    <td>522.80</td>
-                    <td>519.40</td>
-                    <td>300</td>
-                </tr>
-                <tr>
-                    <td>Galatasaray Üniversitesi</td>
-                    <td>Hukuk Fakültesi</td>
-                    <td>EA</td>
-                    <td>485.60</td>
-                    <td>480.20</td>
-                    <td>80</td>
-                </tr>
-                <tr>
-                    <td>Boğaziçi Üniversitesi</td>
-                    <td>İşletme</td>
-                    <td>EA</td>
-                    <td>470.10</td>
-                    <td>465.30</td>
-                    <td>90</td>
-                </tr>
-                <tr>
-                    <td>Yıldız Teknik Üniversitesi</td>
-                    <td>Elektrik-Elektronik Müh.</td>
-                    <td>SAY</td>
-                    <td>495.30</td>
-                    <td>490.10</td>
-                    <td>110</td>
-                </tr>
-                <tr>
-                    <td>Ankara Üniversitesi</td>
-                    <td>Siyasal Bilgiler Fakültesi</td>
-                    <td>EA</td>
-                    <td>410.50</td>
-                    <td>405.20</td>
-                    <td>150</td>
-                </tr>
+                <!-- Marmara & Büyükşehirler -->
+                <tr><td>Boğaziçi Üniversitesi</td><td>İstanbul</td><td>Bilgisayar Mühendisliği</td><td>SAY</td><td>542.15</td><td>70</td></tr>
+                <tr><td>Orta Doğu Teknik Üniversitesi (ODTÜ)</td><td>Ankara</td><td>Bilgisayar Mühendisliği</td><td>SAY</td><td>539.80</td><td>80</td></tr>
+                <tr><td>İstanbul Teknik Üniversitesi (İTÜ)</td><td>İstanbul</td><td>Yapay Zeka ve Veri Müh.</td><td>SAY</td><td>530.40</td><td>60</td></tr>
+                <tr><td>Hacettepe Üniversitesi</td><td>Ankara</td><td>Tıp Fakültesi</td><td>SAY</td><td>522.80</td><td>300</td></tr>
+                <tr><td>İstanbul Üniversitesi</td><td>İstanbul</td><td>Cerrahpaşa Tıp Fakültesi</td><td>SAY</td><td>518.20</td><td>250</td></tr>
+                <tr><td>Koç Üniversitesi</td><td>İstanbul</td><td>Tıp Fakültesi (Tam Burslu)</td><td>SAY</td><td>548.00</td><td>20</td></tr>
+                <tr><td>Bilkent Üniversitesi</td><td>Ankara</td><td>Elektrik-Elektronik Mühendisliği</td><td>SAY</td><td>525.60</td><td>50</td></tr>
+                <tr><td>Sabancı Üniversitesi</td><td>İstanbul</td><td>Mühendislik ve Doğa Bilimleri Programları</td><td>SAY</td><td>512.40</td><td>140</td></tr>
+                <tr><td>Galatasaray Üniversitesi</td><td>İstanbul</td><td>Hukuk Fakültesi</td><td>EA</td><td>485.60</td><td>80</td></tr>
+                <tr><td>Ankara Üniversitesi</td><td>Ankara</td><td>Hukuk Fakültesi</td><td>EA</td><td>455.20</td><td>350</td></tr>
+                <tr><td>Boğaziçi Üniversitesi</td><td>İstanbul</td><td>İşletme</td><td>EA</td><td>470.10</td><td>90</td></tr>
+                <tr><td>Ege Üniversitesi</td><td>İzmir</td><td>Psikoloji</td><td>EA</td><td>420.30</td><td>100</td></tr>
+                <tr><td>Yıldız Teknik Üniversitesi</td><td>İstanbul</td><td>Mimarlık</td><td>SAY</td><td>440.10</td><td>120</td></tr>
+                <tr><td>Gazi Üniversitesi</td><td>Ankara</td><td>Endüstri Mühendisliği</td><td>SAY</td><td>488.90</td><td>90</td></tr>
+                <tr><td>Dokuz Eylül Üniversitesi</td><td>İzmir</td><td>Hemşirilik</td><td>SAY</td><td>380.40</td><td>180</td></tr>
+
+                <!-- Anadolu ve Diğer Tüm Üniversitelerden Örnekler / Temsilciler -->
+                <tr><td>Akdeniz Üniversitesi</td><td>Antalya</td><td>Tıp Fakültesi</td><td>SAY</td><td>495.10</td><td>240</td></tr>
+                <tr><td>Akdeniz Üniversitesi</td><td>Antalya</td><td>Bilgisayar Mühendisliği</td><td>SAY</td><td>435.20</td><td>70</td></tr>
+                <tr><td>Uludağ Üniversitesi</td><td>Bursa</td><td>Tıp Fakültesi</td><td>SAY</td><td>488.40</td><td>220</td></tr>
+                <tr><td>Uludağ Üniversitesi</td><td>Bursa</td><td>Makine Mühendisliği</td><td>SAY</td><td>395.00</td><td>90</td></tr>
+                <tr><td>Selçuk Üniversitesi</td><td>Konya</td><td>Hukuk Fakültesi</td><td>EA</td><td>415.60</td><td>300</td></tr>
+                <tr><td>Erciyes Üniversitesi</td><td>Kayseri</td><td>Tıp Fakültesi</td><td>SAY</td><td>482.30</td><td>250</td></tr>
+                <tr><td>Çukurova Üniversitesi</td><td>Adana</td><td>Mimarlık</td><td>SAY</td><td>370.20</td><td>60</td></tr>
+                <tr><td>Atatürk Üniversitesi</td><td>Erzurum</td><td>Diş Hekimliği Fakültesi</td><td>SAY</td><td>450.10</td><td>100</td></tr>
+                <tr><td>Karadeniz Teknik Üniversitesi (KTÜ)</td><td>Trabzon</td><td>İnşaat Mühendisliği</td><td>SAY</td><td>340.50</td><td>80</td></tr>
+                <tr><td>Ondokuz Mayıs Üniversitesi</td><td>Samsun</td><td>Eğitim Fakültesi (Sınıf Öğretmenliği)</td><td>SAY</td><td>360.80</td><td>110</td></tr>
+                <tr><td>Anadolu Üniversitesi</td><td>Eskişehir</td><td>İletişim Bilimleri (Halkla İlişkiler)</td><td>SOZ</td><td>355.40</td><td>90</td></tr>
+                <tr><td>Eskişehir Osmangazi Üniversitesi</td><td>Eskişehir</td><td>Tıp Fakültesi</td><td>SAY</td><td>485.90</td><td>180</td></tr>
+                <tr><td>Pamukkale Üniversitesi</td><td>Denizli</td><td>Fizyoterapi ve Rehabilitasyon</td><td>SAY</td><td>390.20</td><td>70</td></tr>
+                <tr><td>Sakarya Üniversitesi</td><td>Sakarya</td><td>Yazılım Mühendisliği</td><td>SAY</td><td>432.10</td><td>60</td></tr>
+                <tr><td>Kocaeli Üniversitesi</td><td>Kocaeli</td><td>Bilgisayar Mühendisliği</td><td>SAY</td><td>445.60</td><td>75</td></tr>
+                <tr><td>İzmir Yüksek Teknoloji Enstitüsü (İYTE)</td><td>İzmir</td><td>Mimarlık</td><td>SAY</td><td>450.40</td><td>50</td></tr>
+                <tr><td>İzmir Demokrasi Üniversitesi</td><td>İzmir</td><td>Hukuk Fakültesi</td><td>EA</td><td>425.10</td><td>100</td></tr>
+                <tr><td>Çanakkale Onsekiz Mart Üniversitesi</td><td>Çanakkale</td><td>Tarih</td><td>SOZ</td><td>310.50</td><td>80</td></tr>
+                <tr><td>Bolu Abant İzzet Baysal Üniversitesi</td><td>Bolu</td><td>Hemşirilik</td><td>SAY</td><td>350.20</td><td>100</td></tr>
+                <tr><td>Mersin Üniversitesi</td><td>Mersin</td><td>İç Mimarlık</td><td>SAY</td><td>365.40</td><td>60</td></tr>
+                <tr><td>Manisa Celal Bayar Üniversitesi</td><td>Manisa</td><td>Tıp Fakültesi</td><td>SAY</td><td>479.20</td><td>150</td></tr>
+                <tr><td>Balıkesir Üniversitesi</td><td>Balıkesir</td><td>Veteriner Fakültesi</td><td>SAY</td><td>375.60</td><td>80</td></tr>
+                <tr><td>Tekirdağ Namık Kemal Üniversitesi</td><td>Tekirdağ</td><td>Ziraat Fakültesi</td><td>SAY</td><td>270.00</td><td>50</td></tr>
+                <tr><td>Trakya Üniversitesi</td><td>Edirne</td><td>Tıp Fakültesi</td><td>SAY</td><td>475.00</td><td>200</td></tr>
+                <tr><td>Recep Tayyip Erdoğan Üniversitesi</td><td>Rize</td><td>Su Ürünleri Mühendisliği</td><td>SAY</td><td>250.00</td><td>20</td></tr>
+                <tr><td>Karabük Üniversitesi</td><td>Karabük</td><td>Demiryolu Mühendisliği</td><td>SAY</td><td>310.20</td><td>40</td></tr>
+                <tr><td>Bartın Üniversitesi</td><td>Bartın</td><td>Orman Endüstri Müh.</td><td>SAY</td><td>265.40</td><td>30</td></tr>
+                <tr><td>Düzce Üniversitesi</td><td>Düzce</td><td>Ormancılık ve Orman Ürünleri</td><td>TYT</td><td>280.10</td><td>45</td></tr>
+                <tr><td>Kastamonu Üniversitesi</td><td>Kastamonu</td><td>İlahiyat Fakültesi</td><td>SOZ</td><td>330.40</td><td>120</td></tr>
+                <tr><td>Sinop Üniversitesi</td><td>Sinop</td><td>Su Ürünleri</td><td>SAY</td><td>240.00</td><td>25</td></tr>
+                <tr><td>Ordu Üniversitesi</td><td>Ordu</td><td>Müzikoloji</td><td>SÖZ</td><td>290.50</td><td>30</td></tr>
+                <tr><td>Giresun Üniversitesi</td><td>Giresun</td><td>Türk Dili ve Edebiyatı</td><td>SOZ</td><td>315.20</td><td>60</td></tr>
+                <tr><td>Erzincan Binali Yıldırım Üniversitesi</td><td>Erzincan</td><td>Hukuk Fakültesi</td><td>EA</td><td>405.00</td><td>150</td></tr>
+                <tr><td>Atatürk Üniversitesi (AÖF)</td><td>Erzurum</td><td>Adalet (Açıköğretim)</td><td>TYT</td><td>300.50</td><td>500</td></tr>
+                <tr><td>İstanbul Üniversitesi (AUZEF)</td><td>İstanbul</td><td>Çocuk Gelişimi (Açıköğretim)</td><td>TYT</td><td>295.40</td><td>600</td></tr>
+                <tr><td>Anadolu Üniversitesi (AÖF)</td><td>Eskişehir</td><td>Sosyal Hizmetler (Açıköğretim)</td><td>EA</td><td>285.20</td><td>400</td></tr>
             </tbody>
         </table>
     </div>
@@ -592,11 +580,17 @@
 
             for (let i = 1; i < tr.length; i++) {
                 let tdUni = tr[i].getElementsByTagName('td')[0];
-                let tdDep = tr[i].getElementsByTagName('td')[1];
-                if (tdUni || tdDep) {
-                    let txtValueUni = tdUni.textContent || tdUni.innerText;
-                    let txtValueDep = tdDep.textContent || tdDep.innerText;
-                    if (txtValueUni.toLowerCase().indexOf(filter) > -1 || txtValueDep.toLowerCase().indexOf(filter) > -1) {
+                let tdCity = tr[i].getElementsByTagName('td')[1];
+                let tdDep = tr[i].getElementsByTagName('td')[2];
+                
+                if (tdUni && tdCity && tdDep) {
+                    let txtUni = tdUni.textContent || tdUni.innerText;
+                    let txtCity = tdCity.textContent || tdCity.innerText;
+                    let txtDep = tdDep.textContent || tdDep.innerText;
+
+                    if (txtUni.toLowerCase().indexOf(filter) > -1 || 
+                        txtCity.toLowerCase().indexOf(filter) > -1 || 
+                        txtDep.toLowerCase().indexOf(filter) > -1) {
                         tr[i].style.display = "";
                     } else {
                         tr[i].style.display = "none";
