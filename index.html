@@ -155,6 +155,23 @@
             background-color: #e05a5a;
         }
 
+        .btn-secondary {
+            background-color: #64748b;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            margin-left: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #475569;
+        }
+
         .hero-image {
             flex: 1;
             text-align: center;
@@ -240,12 +257,28 @@
             color: var(--accent-color);
         }
 
+        .other-input-group {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .other-input-group input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
         /* 3. Üniversite & Bölüm Veri Tablosu */
         .directory-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .search-box {
@@ -329,7 +362,7 @@
             <ul>
                 <li><a onclick="switchTab('home')">Ana Sayfa</a></li>
                 <li><a onclick="switchTab('quiz')">Eleme Testi</a></li>
-                <li><a onclick="switchTab('directory')">Üniversite & Puanlar</a></li>
+                <li><a onclick="switchTab('directory')">Tüm Üniversiteler & Bölümler</a></li>
                 <li><a onclick="switchTab('abroad')">Yurtdışı Eğitim</a></li>
             </ul>
         </nav>
@@ -367,7 +400,7 @@
                 <div class="step-card">
                     <span class="step-num">2</span>
                     <h3>Yapay Zeka Analiz Etsin</h3>
-                    <p>Algoritmamız istemediğin koşulları barındıran tüm sektör ve bölümleri tek tekelesin.</p>
+                    <p>Algoritmamız istemediğin koşulları barındıran tüm sektör ve bölümleri tek tek elesin.</p>
                 </div>
                 <div class="step-card">
                     <span class="step-num">3</span>
@@ -378,13 +411,13 @@
         </div>
     </div>
 
-    <!-- 2. ELEME TESTİ -->
+    <!-- 2. ELEME TESTİ (Diğer ve Sıfırlama Özellikli) -->
     <div id="quiz" class="tab-content">
         <div class="quiz-box">
             <h2>Gelecekte Nasıl Çalışmak İstemezsin?</h2>
             <p style="color: #666; margin-top: 0.5rem;">Seni rahatsız edecek tüm koşulları işaretle (birden fazla seçebilirsin):</p>
             
-            <div class="chips-container">
+            <div class="chips-container" id="chipContainer">
                 <div class="chip" onclick="toggleChip(this)">Sürekli masa başında oturmak</div>
                 <div class="chip" onclick="toggleChip(this)">Vardiyalı ve düzensiz saatler</div>
                 <div class="chip" onclick="toggleChip(this)">Yoğun matematik ve formüller</div>
@@ -394,21 +427,29 @@
                 <div class="chip" onclick="toggleChip(this)">Ağır fiziksel saha çalışmaları</div>
             </div>
 
-            <button class="btn-primary" onclick="switchTab('directory')">Sonuçlarımı Göster ve Üniversitelere Bak</button>
+            <!-- Diğer seçeneği ve yazı yazma alanı -->
+            <div class="other-input-group">
+                <input type="text" id="otherInput" placeholder="Diğer (Başka istemediğin bir şey yazabilirsin...)">
+            </div>
+
+            <div style="margin-top: 2rem; display: flex; gap: 10px;">
+                <button class="btn-primary" onclick="switchTab('directory')">Sonuçlarımı Göster ve Bölümleri İncele</button>
+                <button class="btn-secondary" onclick="resetQuiz()">Sıfırla (Baştan Seç)</button>
+            </div>
         </div>
     </div>
 
-    <!-- 3. ÜNİVERSİTE & BÖLÜM TABLOSU (Geçmiş Yıl Puanları Dahil) -->
+    <!-- 3. TÜM ÜNİVERSİTE & BÖLÜMLER (Arama Özellikli Ek Sayfa) -->
     <div id="directory" class="tab-content">
         <div class="directory-header">
             <div>
-                <h2>Üniversite ve Bölüm Taban Puanları</h2>
+                <h2>Tüm Üniversiteler ve Bölüm Taban Puanları</h2>
                 <p style="color: #666;">Geçmiş yıllara ait kontenjanlar ve taban puanlar.</p>
             </div>
-            <input type="text" class="search-box" placeholder="Üniversite veya bölüm ara...">
+            <input type="text" id="searchInput" class="search-box" onkeyup="filterTable()" placeholder="Üniversite veya bölüm ara...">
         </div>
 
-        <table>
+        <table id="uniTable">
             <thead>
                 <tr>
                     <th>Üniversite</th>
@@ -468,6 +509,22 @@
                     <td>465.30</td>
                     <td>90</td>
                 </tr>
+                <tr>
+                    <td>Yıldız Teknik Üniversitesi</td>
+                    <td>Elektrik-Elektronik Müh.</td>
+                    <td>SAY</td>
+                    <td>495.30</td>
+                    <td>490.10</td>
+                    <td>110</td>
+                </tr>
+                <tr>
+                    <td>Ankara Üniversitesi</td>
+                    <td>Siyasal Bilgiler Fakültesi</td>
+                    <td>EA</td>
+                    <td>410.50</td>
+                    <td>405.20</td>
+                    <td>150</td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -517,6 +574,35 @@
         // Çip seçim efekti
         function toggleChip(chipElement) {
             chipElement.classList.toggle('selected');
+        }
+
+        // Testi Sıfırlama Fonksiyonu
+        function resetQuiz() {
+            const chips = document.querySelectorAll('.chip');
+            chips.forEach(chip => chip.classList.remove('selected'));
+            document.getElementById('otherInput').value = '';
+        }
+
+        // Tabloda Arama / Filtreleme Fonksiyonu
+        function filterTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('uniTable');
+            const tr = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < tr.length; i++) {
+                let tdUni = tr[i].getElementsByTagName('td')[0];
+                let tdDep = tr[i].getElementsByTagName('td')[1];
+                if (tdUni || tdDep) {
+                    let txtValueUni = tdUni.textContent || tdUni.innerText;
+                    let txtValueDep = tdDep.textContent || tdDep.innerText;
+                    if (txtValueUni.toLowerCase().indexOf(filter) > -1 || txtValueDep.toLowerCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
         }
     </script>
 </body>
