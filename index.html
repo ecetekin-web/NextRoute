@@ -332,4 +332,309 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextRoute - Ne İstemediğini Bilerek Kariyerini Planla</title>
+    <style>
+        :root {
+            --primary-color: #11224e;
+            --accent-color: #f76c6c;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Header / Navbar */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--accent-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-login, .btn-register {
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-login {
+            background: none;
+            border: 1px solid white;
+            color: white;
+        }
+
+        .btn-register {
+            background-color: var(--accent-color);
+            border: none;
+            color: white;
+        }
+
+        /* İçerik Alanları (Sekmeler) */
+        .tab-content {
+            display: none;
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Hero / Ana Sayfa Bölümü */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            background: white;
+            padding: 4rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .mission-box {
+            background: #fff3f3;
+            border-left: 4px solid var(--accent-color);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+            color: #444;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #e05a5a;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Kartlar / Özellikler */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #11224e;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media(max-width: 768px) {
+            .hero {
+                flex-direction: column;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigasyon -->
+    <header>
+        <div class="logo">
+            <h1>NextRoute</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a onclick="switchTab('home')">Ana Sayfa</a></li>
+                <li><a onclick="switchTab('quiz')">Eleme Testi</a></li>
+                <li><a onclick="switchTab('directory')">Üniversite & Bölümler</a></li>
+                <li><a onclick="switchTab('abroad')">Yurtdışı Eğitim</a></li>
+            </ul>
+        </nav>
+        <div class="header-buttons">
+            <button class="btn-login">Giriş Yap</button>
+            <button class="btn-register">Kayıt Ol</button>
+        </div>
+    </header>
+
+    <!-- 1. ANA SAYFA -->
+    <div id="home" class="tab-content active">
+        <div class="hero">
+            <div class="hero-text">
+                <div class="mission-box">
+                    "Herkes ne istediğini bilmek zorunda değil; ama hepimiz ne **istemediğimizi** çok iyi biliriz."
+                </div>
+                <h2>Ne İstediğini Bilmeyebilirsin, Ama Ne İstemediğini Biliyorsun!</h2>
+                <p>Kendini tanımaya çalışırken yanlış bir bölüme mahkum olma. İstemediğin çalışma koşullarını ve ortamları eleyerek sana en uygun geleceği birlikte inşa edelim.</p>
+                <button class="btn-primary" onclick="switchTab('quiz')">Testi Başlat</button>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" alt="Öğrenciler Çalışıyor">
+            </div>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>1. Eleme Metodu</h3>
+                <p>Sana imkansız hayaller sormuyoruz. Seni mutsuz edecek koşulları ayıklıyor, geriye kalan net seçenekleri sunuyoruz.</p>
+            </div>
+            <div class="feature-card">
+                <h3>2. Gerçekçi Veriler</h3>
+                <p>Üniversitelerin geçmiş yıllardaki taban puanları, kontenjanları ve gerçek mezuniyet koşulları parmaklarının ucunda.</p>
+            </div>
+            <div class="feature-card">
+                <h3>3. Global Alternatifler</h3>
+                <p>Sadece Türkiye ile sınırlı kalma; Almanya, Hollanda ve İngiltere gibi ülkelerin şartlarını incele.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. ELEME TESTİ (Örnek Alan) -->
+    <div id="quiz" class="tab-content">
+        <h2>Eleme Anketi</h2>
+        <p style="margin-top: 1rem; color: #666;">Gelecekte katlanamayacağın, seni rahatsız edecek çalışma koşullarını seçmeye başla...</p>
+        <!-- Buraya interaktif çipli soru bileşenleri eklenecek -->
+        <div style="margin-top: 2rem; background: white; padding: 2rem; border-radius: 8px;">
+            <h3>Soru 1: Gelecekte nasıl bir çalışma ortamı istemezsin?</h3>
+            <p style="font-size: 0.9rem; color: #888; margin-bottom: 1rem;">Seni rahatsız edecek tüm seçenekleri işaretle.</p>
+            <!-- Örnek çip butonlar buraya gelecek -->
+            <button class="btn-primary" style="margin-top: 1rem;" onclick="switchTab('directory')">Sonuçları ve Bölümleri Gör</button>
+        </div>
+    </div>
+
+    <!-- 3. ÜNİVERSİTE & BÖLÜMLER -->
+    <div id="directory" class="tab-content">
+        <h2>Üniversite ve Bölüm Rehberi</h2>
+        <p style="margin-top: 1rem; color: #666;">Geçmiş yıl puanları, kontenjanlar ve detaylı iş tanımı rehberi.</p>
+    </div>
+
+    <!-- 4. YURTDIŞI EĞİTİM -->
+    <div id="abroad" class="tab-content">
+        <h2>Global Eğitim & Yurtdışı Seçenekleri</h2>
+        <p style="margin-top: 1rem; color: #666;">Almanya, Hollanda, İngiltere ve diğer ülkelerin yaşam ve kabul şartları.</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 NextRoute Platformu. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <!-- Sekme Değiştirme Mantığı için JavaScript -->
+    <script>
+        function switchTab(tabId) {
+            // Tüm sekmeleri gizle
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // İstenen sekmeyi aç
+            document.getElementById(tabId).classList.add('active');
+            
+            // Sayfanın en üstüne kaydır
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
