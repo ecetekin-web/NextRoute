@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NextRoute - Üniversite Tercih Rehberi</title>
     <style>
-        /* Temel Stiller */
         :root {
-            --primary-color: #11224e; /* Koyu Mavi - Header */
-            --accent-color: #f76c6c;  /* Kırmızı - Butonlar */
+            --primary-color: #11224e;
+            --accent-color: #f76c6c;
             --text-color: #333;
             --bg-color: #fff;
             --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -95,22 +94,36 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
             padding: 4rem 2rem;
             background: linear-gradient(135deg, #f4f7f6 0%, #e8eef1 100%);
         }
 
-        main h2 {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1100px;
+            width: 100%;
+            gap: 40px;
+            margin-bottom: 4rem;
         }
 
-        main p {
-            font-size: 1.2rem;
-            max-width: 600px;
+        .hero-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .hero-text h2 {
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #555;
             margin-bottom: 2rem;
         }
 
@@ -119,12 +132,25 @@
             gap: 15px;
         }
 
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
         .btn-primary {
             background-color: var(--accent-color);
             color: white;
             border: none;
             padding: 12px 24px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             border-radius: 5px;
@@ -136,20 +162,76 @@
         }
 
         .btn-secondary {
-            background-color: white;
+            background-color: transparent;
             color: var(--primary-color);
-            border: 2px solid var(--primary-color);
+            border: none;
             padding: 12px 24px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            border-radius: 5px;
-            transition: all 0.3s;
+            transition: color 0.3s;
         }
 
         .btn-secondary:hover {
-            background-color: var(--primary-color);
+            color: var(--accent-color);
+        }
+
+        /* Eleme Metodu Bölümü */
+        .methods-section {
+            max-width: 1000px;
+            width: 100%;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .methods-section h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .methods-section > p {
+            color: #666;
+            margin-bottom: 2.5rem;
+        }
+
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .method-card {
+            background: white;
+            padding: 2rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: left;
+            position: relative;
+        }
+
+        .method-number {
+            display: inline-block;
+            background-color: var(--accent-color);
             color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .method-card h4 {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .method-card p {
+            font-size: 0.9rem;
+            color: #666;
         }
 
         /* Footer Stili */
@@ -165,11 +247,24 @@
             color: #666;
         }
 
+        /* Responsive */
+        @media(max-width: 768px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-text {
+                text-align: center;
+            }
+            .methods-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Header Bölümü (Üst Kısım) -->
+    <!-- Header Bölümü -->
     <header>
         <div class="logo">
             <h1>NextRoute</h1>
@@ -188,20 +283,53 @@
         </div>
     </header>
 
-    <!-- Ana İçerik (Hero Bölümü) -->
+    <!-- Ana İçerik (Hero & Eleme Metodu) -->
     <main>
-        <h2>Geleceğin İçin En Doğru Adres</h2>
-        <p>Üniversite tercih sürecinde yanındayız. Puanını ve ilgi alanlarını paylaş, sana özel rehberlik hizmeti al.</p>
-        <div class="main-buttons">
-            <button class="btn-primary">Hemen Başla</button>
-            <button class="btn-secondary">Daha Fazla Bilgi</button>
+        <div class="hero-container">
+            <div class="hero-text">
+                <h2>Ne İstediğini Bilmeyebilirsin. Ama Ne İstemediğini Biliyorsun!</h2>
+                <p>Çoğumuz kendimizi tanımadan kritik bir tercih yapmak zorunda kalıyoruz. Gel, istemediğin her şeyi eleyerek senin için en doğru üniversite bölümünü birlikte bulalım.</p>
+                <div class="main-buttons">
+                    <button class="btn-primary">Kendini Keşfet (Başla)</button>
+                    <button class="btn-secondary">Nasıl Çalışır?</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- Buraya Figma'daki görselin linkini veya dosya adını koyabilirsin -->
+                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80" alt="Çalışan Öğrenci">
+            </div>
+        </div>
+
+        <!-- 3'lü Kart Bölümü (Eleme Metodu) -->
+        <div class="methods-section">
+            <h3>Eleme Metodu Nasıl Çalışır?</h3>
+            <p>Sana ne istediğini sormuyoruz. Seni neyin mutsuz edeceğini buluyor, onları denklemden çıkarıyoruz.</p>
+            
+            <div class="methods-grid">
+                <div class="method-card">
+                    <span class="method-number">1</span>
+                    <h4>Katlanamayacaklarını Seç</h4>
+                    <p>"Bana başı İSTEMEM", "Yoğun matematik İSTEMEM" gibi sınırları çizerek işe başla.</p>
+                </div>
+                <div class="method-card">
+                    <span class="method-number">2</span>
+                    <h4>Yapay Zeka Analiz Etsin</h4>
+                    <p>Yüksek doğruluklu algoritmamız, istediğin koşulları bırakan tüm sektör ve bölümleri eler.</p>
+                </div>
+                <div class="method-card">
+                    <span class="method-number">3</span>
+                    <h4>Sana Kalanları Keşfet</h4>
+                    <p>Geriye kalan, seni mutsuz etmeyecek ve gerçek potansiyelini çıkaracak bölümleri sırala.</p>
+                </div>
+            </div>
         </div>
     </main>
 
-    <!-- Footer Bölümü (Alt Kısım) -->
+    <!-- Footer Bölümü -->
     <footer>
-        <p>&copy; 2023 NextRoute Platformu. Tüm hakları saklıdır.</p>
+        <p>&copy; 2026 NextRoute Platformu. Tüm hakları saklıdır.</p>
     </footer>
 
 </body>
 </html>
+
