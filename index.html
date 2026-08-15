@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextRoute - Üniversite Tercih Rehberi</title>
+    <style>
+        /* Temel Stiller */
+        :root {
+            --primary-color: #11224e; /* Koyu Mavi - Header */
+            --accent-color: #f76c6c;  /* Kırmızı - Butonlar */
+            --text-color: #333;
+            --bg-color: #fff;
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Stili */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-login {
+            background: none;
+            border: 1px solid white;
+            color: white;
+            padding: 6px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .btn-login:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-register {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* Ana İçerik (Hero Section) */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #f4f7f6 0%, #e8eef1 100%);
+        }
+
+        main h2 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        main p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .main-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #e05a5a;
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Footer Stili */
+        footer {
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+        
+        footer p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header Bölümü (Üst Kısım) -->
+    <header>
+        <div class="logo">
+            <h1>NextRoute</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Ana Sayfa</a></li>
+                <li><a href="#">Üniversiteler</a></li>
+                <li><a href="#">Bölümler</a></li>
+                <li><a href="#">Hakkımızda</a></li>
+            </ul>
+        </nav>
+        <div class="header-buttons">
+            <button class="btn-login">Giriş Yap</button>
+            <button class="btn-register">Kayıt Ol</button>
+        </div>
+    </header>
+
+    <!-- Ana İçerik (Hero Bölümü) -->
+    <main>
+        <h2>Geleceğin İçin En Doğru Adres</h2>
+        <p>Üniversite tercih sürecinde yanındayız. Puanını ve ilgi alanlarını paylaş, sana özel rehberlik hizmeti al.</p>
+        <div class="main-buttons">
+            <button class="btn-primary">Hemen Başla</button>
+            <button class="btn-secondary">Daha Fazla Bilgi</button>
+        </div>
+    </main>
+
+    <!-- Footer Bölümü (Alt Kısım) -->
+    <footer>
+        <p>&copy; 2023 NextRoute Platformu. Tüm hakları saklıdır.</p>
+    </footer>
+
+</body>
+</html>
