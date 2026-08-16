@@ -3,1451 +3,1427 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextRoute - Tam Kapsamlı Üniversite ve Bölüm Arşivi</title>
+    <title>Ne İstemiyorsun?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #11224e;
-            --accent: #f76c6c;
-            --accent-hover: #e05a5a;
-            --bg: #f8f9fa;
-            --card-bg: #ffffff;
-            --text: #333333;
-            --text-light: #666666;
-            --border: #e2e8f0;
-            --radius: 12px;
-        }
-
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
+            background-color: #FAFAFA;
+            color: #111;
         }
 
+        /* Navbar */
         header {
-            background-color: var(--primary);
-            color: white;
-            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 20px 80px;
+            background: #fff;
+            border-bottom: 1px solid #eaeaea;
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 3px solid var(--accent);
         }
 
-        .logo h1 {
-            font-size: 1.5rem;
-            letter-spacing: 0.5px;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 18px;
             cursor: pointer;
         }
 
-        nav ul {
-            list-style: none;
+        .logo-icon {
+            background: #2563eb;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 8px;
+        }
+
+        nav {
             display: flex;
-            gap: 20px;
+            gap: 30px;
         }
 
         nav a {
             text-decoration: none;
-            color: white;
+            color: #666;
+            font-size: 14px;
             font-weight: 500;
             cursor: pointer;
-            transition: color 0.3s;
+            transition: color 0.2s;
         }
 
         nav a:hover, nav a.active {
-            color: var(--accent);
+            color: #2563eb;
         }
 
-        .screen {
-            display: none;
-            padding: 3rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .screen.active {
-            display: block;
-        }
-
-        .btn-primary {
-            background-color: var(--accent);
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background-color 0.3s;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--accent-hover);
-        }
-
-        .btn-secondary {
-            background-color: #64748b;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background-color 0.3s;
-        }
-
-        .btn-secondary:hover {
-            background-color: #475569;
-        }
-
-        .hero {
+        .user-area {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-            background: var(--card-bg);
-            padding: 4rem;
-            border-radius: var(--radius);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-        }
-
-        .hero-text {
-            flex: 1;
-        }
-
-        .mission-box {
-            background: #fff3f3;
-            border-left: 4px solid var(--accent);
-            padding: 1.2rem;
-            margin-bottom: 2rem;
-            font-style: italic;
-            color: #444;
-            border-radius: 0 var(--radius) var(--radius) 0;
-            font-size: 1.05rem;
-        }
-
-        .hero-text h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero-text p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            margin-bottom: 2rem;
-        }
-
-        .steps-container {
-            margin-top: 4rem;
-            text-align: center;
-        }
-
-        .steps-container h3 {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 2rem;
-            text-align: left;
-        }
-
-        .step-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .step-num {
-            display: inline-block;
-            background-color: var(--accent);
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 35px;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-
-        .quiz-box {
-            background: var(--card-bg);
-            padding: 3rem;
-            border-radius: var(--radius);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .chips-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin: 2rem 0;
-        }
-
-        .chip {
-            background: #f1f5f9;
-            border: 2px solid var(--border);
-            padding: 10px 18px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.2s;
-            user-select: none;
-        }
-
-        .chip.selected {
-            background-color: #fff3f3;
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .other-input-group {
-            margin-top: 1.5rem;
-        }
-
-        .other-input-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
-            outline: none;
-        }
-
-        .result-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-bottom: 1.5rem;
-            border-left: 5px solid var(--accent);
-        }
-
-        .match-badge {
-            background: #e0f2fe;
-            color: #0369a1;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        .directory-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
             gap: 15px;
         }
 
-        .search-box {
-            padding: 12px 18px;
-            width: 380px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
-            outline: none;
+        .notification-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
         }
 
-        .table-container {
-            max-height: 600px;
-            overflow-y: auto;
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            position: relative;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.95rem;
-        }
-
-        th {
-            background-color: var(--primary);
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        tr:hover {
-            background-color: #f8fafc;
-        }
-
-        .info-bar {
-            padding: 10px 15px;
-            background: #e2e8f0;
-            font-size: 0.9rem;
-            color: var(--primary);
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
             font-weight: 600;
+        }
+
+        /* Sayfa Yönetimi */
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+
+        /* Hero Section (Ana Sayfa) */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 40px;
+        }
+
+        .hero-content {
+            max-width: 550px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #f1f5f9;
+            color: #ea580c;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 42px;
+            line-height: 1.2;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #0f172a;
+        }
+
+        .hero-content p {
+            color: #475569;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn-primary {
+            background: #ea580c;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #c2410c;
+        }
+
+        .hero-image img {
+            width: 480px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .process {
+            text-align: center;
+            padding: 60px 20px;
+            background: #fff;
+        }
+
+        .process h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .process > p {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 50px;
+        }
+
+        .steps-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .step-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: left;
+            flex: 1;
+        }
+
+        .step-number {
+            background: #e2e8f0;
+            color: #334155;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .step-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .stats-bar {
+            background: #3b82f6;
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .stat-item h3 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-item p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Quiz Layout (Eleme Testi) */
+        .quiz-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 40px;
+            display: flex;
+            gap: 40px;
+        }
+
+        .quiz-sidebar {
+            width: 260px;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .quiz-sidebar h3 {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .quiz-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            font-size: 14px;
+            color: #64748b;
+            border-radius: 8px;
+            margin-bottom: 5px;
+        }
+
+        .quiz-menu-item.active {
+            background: #eff6ff;
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .quiz-menu-item.completed {
+            color: #16a34a;
+            font-weight: 600;
+        }
+
+        .quiz-content {
+            flex: 1;
+        }
+
+        .quiz-progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .progress-bar-container {
+            background: #e2e8f0;
+            height: 6px;
+            border-radius: 3px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            background: #2563eb;
+            height: 100%;
+        }
+
+        .quiz-content h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .quiz-content > p {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #334155;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tag:hover {
+            background: #e2e8f0;
+        }
+
+        .tag.selected {
+            background: #eff6ff;
+            border-color: #3b82f6;
+            color: #2563eb;
+        }
+
+        .quiz-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eaeaea;
+            padding-top: 20px;
+        }
+
+        .btn-back {
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* Sonuçlar Sayfası */
+        .results-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .results-header {
+            margin-bottom: 30px;
+        }
+
+        .results-header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .results-header p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .criteria-box {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+
+        .criteria-title {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+
+        .criteria-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .criteria-tag {
+            background: #f1f5f9;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #334155;
+        }
+
+        .result-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+        }
+
+        .result-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .result-title-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .result-rank {
+            background: #f1f5f9;
+            color: #334155;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+
+        .result-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .match-badge {
+            background: #ecfdf5;
+            color: #059669;
+            font-weight: 600;
+            font-size: 13px;
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+
+        .result-section-title {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .reason-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .reason-list li {
+            font-size: 13px;
+            color: #334155;
+            margin-bottom: 6px;
+        }
+
+        .result-footer-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 20px;
+        }
+
+        .uni-list span {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            margin-right: 8px;
+            color: #334155;
+        }
+
+        .salary-info {
             text-align: right;
         }
 
-        .abroad-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 2rem;
+        .salary-label {
+            font-size: 11px;
+            color: #64748b;
         }
 
-        .country-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-top: 4px solid var(--primary);
+        .salary-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0f172a;
         }
 
-        .country-card h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .feedback-box {
-            background: var(--card-bg);
-            padding: 3rem;
-            border-radius: var(--radius);
-            max-width: 700px;
-            margin: 0 auto;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
+        .btn-detail {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
             font-weight: 600;
+            color: #334155;
+            cursor: pointer;
+        }
+
+        /* Üniversiteler Sayfası */
+        .uni-page-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .uni-page-header {
+            margin-bottom: 25px;
+        }
+
+        .uni-page-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0f172a;
             margin-bottom: 6px;
         }
 
-        .form-group input, .form-group textarea {
+        .uni-page-header p {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .search-bar-box {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .search-bar-box input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border);
+            padding: 12px 16px 12px 40px;
+            border: 1px solid #e2e8f0;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 13px;
+            outline: none;
+            background: #fff;
         }
 
-        footer {
-            background-color: var(--primary);
-            color: white;
-            text-align: center;
-            padding: 1.5rem;
-            margin-top: 4rem;
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 14px;
         }
 
-        @media(max-width: 768px) {
-            .hero, .steps-grid, .abroad-grid {
-                flex-direction: column;
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Navigasyon -->
-    <header>
-        <div class="logo">
-            <h1 onclick="switchScreen('home')">NextRoute</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a onclick="switchScreen('home')" id="nav-home" class="active">Ana Sayfa</a></li>
-                <li><a onclick="switchScreen('quiz')" id="nav-quiz">Eleme Testi</a></li>
-                <li><a onclick="switchScreen('directory')" id="nav-directory">Üni & Bölümler</a></li>
-                <li><a onclick="switchScreen('detail'); renderCompleteDepartmentGuideWithSalaries();" id="nav-detail">Bölüm Rehberi</a></li>
-                <li><a onclick="switchScreen('abroad')" id="nav-abroad">Yurtdışı Eğitim</a></li>
-                <li><a onclick="switchScreen('feedback')" id="nav-feedback">Öneri & Geri Bildirim</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- EKRAN 1: ANA SAYFA -->
-    <div id="screen-home" class="screen active">
-        <div class="hero">
-            <div class="hero-text">
-                <div class="mission-box">
-                    "Herkes ne istediğini bilmek zorunda değil; ama hepimiz ne istemediğimizi çok iyi biliriz."
-                </div>
-                <h2>Ne İstediğini Bilmeyebilirsin, Ama Ne İstemediğini Kesin Biliyorsun!</h2>
-                <p>Kendi karakterini henüz yeni keşfederken yanlış bir meslek seçmeye mecbur değilsin. İstemediğin çalışma koşullarını eleyerek sana en uygun bölümleri buluyoruz.</p>
-                <button class="btn-primary" onclick="switchScreen('quiz')">Kendini Keşfet & Testi Başlat</button>
-            </div>
-        </div>
-
-        <div class="steps-container">
-            <h3>Eleme Yöntemi Nasıl Çalışır?</h3>
-            <div class="steps-grid">
-                <div class="step-card">
-                    <span class="step-num">1</span>
-                    <h3>İstemediklerini İşaretle</h3>
-                    <p>Seni mutsuz edecek çalışma ortamlarını ve şartları seç.</p>
-                </div>
-                <div class="step-card">
-                    <span class="step-num">2</span>
-                    <h3>Sistemin Elemesini İzle</h3>
-                    <p>Algoritmamız kötü koşulları içeren meslekleri otomatik olarak ayıklasın.</p>
-                </div>
-                <div class="step-card">
-                    <span class="step-num">3</span>
-                    <h3>Sana Uygun Geleceği Seç</h3>
-                    <p>Karakterine ve sınırlarına en uygun bölümleri ve üniversiteleri incele.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- EKRAN 2: ELEME TESTİ -->
-    <div id="screen-quiz" class="screen">
-        <div class="quiz-box">
-            <h2>Gelecekte Nasıl Çalışmak İstemezsin?</h2>
-            <p style="color: var(--text-light); margin-top: 0.5rem;">Seni rahatsız edecek tüm koşulları ve sınırları aşağıdan seç:</p>
-            
-            <div class="chips-container">
-                <div class="chip" onclick="toggleChip(this)">Sürekli masa başında oturmak</div>
-                <div class="chip" onclick="toggleChip(this)">Vardiyalı ve düzensiz saatler</div>
-                <div class="chip" onclick="toggleChip(this)">Yoğun matematik ve formüller</div>
-                <div class="chip" onclick="toggleChip(this)">Sürekli insanlarla iletişim kurmak</div>
-                <div class="chip" onclick="toggleChip(this)">Monoton ve tekrarlayan işler</div>
-                <div class="chip" onclick="toggleChip(this)">Laboratuvar ortamı / Kimyasal maddeler</div>
-                <div class="chip" onclick="toggleChip(this)">Ağır fiziksel saha çalışmaları</div>
-                <div class="chip" onclick="toggleChip(this)">Sürekli seyahat etmek zorunda kalmak</div>
-            </div>
-
-            <div class="other-input-group">
-                <input type="text" id="otherInput" placeholder="Diğer (Başka istemediğin özel bir durum yazabilirsin...)">
-            </div>
-
-            <div style="margin-top: 2rem; display: flex; gap: 10px;">
-                <button class="btn-primary" onclick="switchScreen('results')">Sonuçlarımı Göster</button>
-                <button class="btn-secondary" onclick="resetQuiz()">Sıfırla</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- EKRAN 3: SONUÇLAR -->
-    <div id="screen-results" class="screen">
-        <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Eleme Sonuçlarına Göre Sana En Uygun Bölümler</h2>
-        <p style="color: var(--text-light); margin-bottom: 2rem;">İstemediğin koşullar filtrelendi ve karakterine en uygun alternatifler sıralandı:</p>
-        
-        <div class="result-card">
-            <span class="match-badge">%96 Uyum Oranı</span>
-            <h3 style="color: var(--primary);">Bilgisayar Mühendisliği</h3>
-            <p style="margin: 10px 0; color: var(--text-light);">Seçtiğin kriterlere göre masa başı esnek çalışma imkanı sunan, tekrara düşmeyen dinamik bir alandır.</p>
-            <button class="btn-secondary" onclick="switchScreen('detail'); renderCompleteDepartmentGuideWithSalaries();">Bölüm Detaylarını İncele</button>
-        </div>
-
-        <div class="result-card">
-            <span class="match-badge">%88 Uyum Oranı</span>
-            <h3 style="color: var(--primary);">Endüstri Mühendisliği</h3>
-            <p style="margin: 10px 0; color: var(--text-light);">Geniş kariyer yelpazesi sayesinde tekdüze ortamlardan uzak durmanı sağlar.</p>
-        </div>
-    </div>
-
-    <!-- EKRAN 4: TÜM ÜNİVERSİTE VE BÖLÜM ARŞİVİ -->
-    <div id="screen-directory" class="screen">
-        <div class="directory-header">
-            <div>
-                <h2 style="color: var(--primary);">Türkiye Geneli Tüm Üniversite ve Bölüm Arşivi</h2>
-                <p style="color: var(--text-light);">Bölüm, üniversite veya şehir adını yazarak binlerce seçenek arasında anında arama yap:</p>
-            </div>
-            <input type="text" id="searchInput" class="search-box" onkeyup="filterTable()" placeholder="Örn: Tıp, ODTÜ, İstanbul, Bilgisayar...">
-        </div>
-
-        <div class="info-bar" id="resultCountInfo">Arşiv Yükleniyor...</div>
-        <div class="table-container" id="tableScrollContainer" onscroll="checkScrollOptimization()">
-            <table id="uniTable">
-                <thead>
-                    <tr>
-                        <th>Bölüm Adı</th>
-                        <th>Puan Türü</th>
-                        <th>Üniversite Adı</th>
-                        <th>Şehir</th>
-                        <th>Taban Puanı</th>
-                        <th>Kontenjan</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- EKRAN 5: BÖLÜM REHBERİ -->
-    <div id="screen-detail" class="screen">
-        <!-- JavaScript dolduracak -->
-    </div>
-
-    <!-- EKRAN 6: YURTDIŞI EĞİTİM -->
-    <div id="screen-abroad" class="screen">
-        <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Global Eğitim & Yurtdışı Seçenekleri</h2>
-        <p style="color: var(--text-light); margin-bottom: 2rem;">Dünyanın dört bir yanındaki eğitim imkanları ve yaşam koşulları:</p>
-
-        <div class="abroad-grid">
-            <div class="country-card">
-                <h3>Almanya</h3>
-                <p><strong>Eğitim Ücreti:</strong> Devlet üniversitelerinde genelde ücretsiz.</p>
-                <p style="margin-top: 10px;"><strong>Dil Şartı:</strong> TestDaF veya IELTS.</p>
-            </div>
-            <div class="country-card">
-                <h3>Hollanda</h3>
-                <p><strong>Eğitim Ücreti:</strong> Yıllık 8.000€ - 15.000€.</p>
-                <p style="margin-top: 10px;"><strong>Dil Şartı:</strong> IELTS min 6.5.</p>
-            </div>
-            <div class="country-card">
-                <h3>İngiltere</h3>
-                <p><strong>Eğitim Ücreti:</strong> Yıllık 15.000£ - 30.000£.</p>
-                <p style="margin-top: 10px;"><strong>Dil Şartı:</strong> IELTS Academic.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- EKRAN 7: ÖNERİ & GERİ BİLDİRİM -->
-    <div id="screen-feedback" class="screen">
-        <div class="feedback-box">
-            <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Özellik Öner & Geri Bildirim Ver</h2>
-            <p style="color: var(--text-light); margin-bottom: 2rem;">Kendi fikirlerini bizimle paylaşabilirsin:</p>
-            
-            <div class="form-group">
-                <label>Adın</label>
-                <input type="text" placeholder="Adını yazabilirsin...">
-            </div>
-            <div class="form-group">
-                <label>Önerin veya Düşüncen</label>
-                <textarea rows="4" placeholder="Platforma eklenmesini istediğin özellikler..."></textarea>
-            </div>
-            <button class="btn-primary" onclick="alert('Geri bildirimin için teşekkürler!')">Gönder</button>
-        </div>
-    </div>
-
-    <footer>
-        <p>&copy; 2026 NextRoute Platformu. Tüm hakları saklıdır.</p>
-    </footer>
-
-    <script>
-        const fullDepartmentLibrary = {
-            "Bilgisayar Mühendisliği": {
-                maas: "45.000 TL - 110.000 TL",
-                kimlerTercihEtmeli: "Analitik düşünen, kodlamaya ve problem çözmeye meraklı adaylar."
-            },
-            "Yazılım Mühendisliği": {
-                maas: "40.000 TL - 105.000 TL",
-                kimlerTercihEtmeli: "Sistematik çalışan, uygulama geliştirmeyi seven kişiler."
-            },
-            "Endüstri Mühendisliği": {
-                maas: "35.000 TL - 90.000 TL",
-                kimlerTercihEtmeli: "Süreç optimize etmeyi, yönetimi ve stratejik planlamayı sevenler."
-            },
-            "Mimarlık": {
-                maas: "30.000 TL - 80.000 TL",
-                kimlerTercihEtmeli: "Estetik algısı yüksek, çizim ve tasarıma ilgi duyanlar."
-            },
-            "Tıp Fakültesi": {
-                maas: "60.000 TL - 140.000 TL",
-                kimlerTercihEtmeli: "İnsan sağlığına adanmış, yoğun tempoya dayanıklı adaylar."
-            }
-        };
-
-        function renderCompleteDepartmentGuideWithSalaries() {
-            const detailScreen = document.getElementById('screen-detail');
-            if (!detailScreen) return;
-
-            let html = `
-                <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Üniversite Bölümleri Rehberi</h2>
-                <div class="directory-header" style="margin-bottom: 20px;">
-                    <input type="text" id="guideSearch" class="search-box" placeholder="Bölüm ara (örn: Tıp, Mimarlık)..." onkeyup="filterGuideCards()">
-                </div>
-                <div id="guideList" style="display: grid; gap: 20px;">
-            `;
-
-            for (const [deptName, info] of Object.entries(fullDepartmentLibrary)) {
-                html += `
-                    <div class="detail-card guide-item" data-name="${deptName}" style="border: 1px solid #ddd; padding: 20px; border-radius: 12px; background: #fff;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; margin-bottom: 15px;">
-                            <h3 style="color: var(--primary); margin: 0;">${deptName}</h3>
-                            <span style="background: #eef2ff; color: #4338ca; padding: 5px 12px; border-radius: 6px; font-weight: bold; font-size: 0.9rem;">
-                                ${info.maas}
-                            </span>
-                        </div>
-                        <div style="display: grid; gap: 10px;">
-                            <p style="margin: 0;"><strong>Hedef Kitle:</strong> ${info.kimlerTercihEtmeli}</p>
-                            <p style="margin: 0; font-size: 0.95rem; color: #555;">Bu bölüm; analitik düşünen, araştırmacı ve ${deptName.toLowerCase()} alanına merakı olan adaylar için uygundur.</p>
-                        </div>
-                    </div>
-                `;
-            }
-
-            html += `</div>`;
-            detailScreen.innerHTML = html;
-        }
-
-        function filterGuideCards() {
-            const query = document.getElementById('guideSearch').value.toLocaleLowerCase('tr');
-            document.querySelectorAll('.guide-item').forEach(item => {
-                const name = item.getAttribute('data-name').toLocaleLowerCase('tr');
-                item.style.display = name.includes(query) ? 'block' : 'none';
-            });
-        }
-
-        // T TÜRKİYE GENELİ EKSİKSİZ ÜNİVERSİTE VE BÖLÜM HAVUZU
-        const allDepartments = [
-            "Bilgisayar Mühendisliği", "Yazılım Mühendisliği", "Yapay Zeka Mühendisliği", "Elektrik-Elektronik Mühendisliği", 
-            "Makine Mühendisliği", "Endüstri Mühendisliği", "İnşaat Mühendisliği", "Mimarlık", "Tıp Fakültesi", 
-            "Diş Hekimliği", "Eczacılık", "Hukuk Fakültesi", "Psikoloji", "İşletme", "İktisat", "Uluslararası İlişkiler", 
-            "Gastronomi ve Mutfak Sanatları", "Hemşirelik", "Fizyoterapi ve Rehabilitasyon", "Beslenme ve Diyetetik", 
-            "Radyo, Televizyon ve Sinema", "Grafik Tasarım", "Halkla İlişkiler", "Sınıf Öğretmenliği", "İngilizce Öğretmenliği", 
-            "Okul Öncesi Öğretmenliği", "Rehberlik ve Psikolojik Danışmanlık", "Otomotiv Mühendisliği", "Mekatronik Mühendisliği", 
-            "Biyomedikal Mühendisliği", "Kimya Mühendisliği", "Metalurji ve Malzeme Mühendisliği", "Uçak Mühendisliği", 
-            "Yönetim Bilişim Sistemleri", "Bankacılık ve Finans", "Lojistik Yönetimi", "Acil Yardım ve Afet Yönetimi",
-            "Veteriner Fakültesi", "Pnömatik ve Hidrolik", "Siyaset Bilimi", "Sosyoloji", "Tarih", "Türk Dili ve Edebiyatı",
-            "Uluslararası Ticaret", "Havacılık Yönetimi", "Yazılım Geliştirme", "İslami İlimler", "İlahiyat", "Müzik", "Resim",
-            "Moda Tasarımı", "İç Mimarlık", "Peyzaj Mimarlığı", "Moleküler Biyoloji ve Genetik", "Biyoteknoloji", "Fizik", "Kimya", "Matematik"
-        ];
-
-        const allUniversities = [
-            {uni: "Boğaziçi Üniversitesi", city: "İstanbul"}, {uni: "Orta Doğu Teknik Üniversitesi (ODTÜ)", city: "Ankara"},
-            {uni: "İTÜ (İstanbul Teknik Üniversitesi)", city: "İstanbul"}, {uni: "Ankara Üniversitesi", city: "Ankara"},
-            {uni: "Hacettepe Üniversitesi", city: "Ankara"}, {uni: "İstanbul Üniversitesi", city: "İstanbul"},
-            {uni: "Ege Üniversitesi", city: "İzmir"}, {uni: "Yıldız Teknik Üniversitesi", city: "İstanbul"},
-            {uni: "Bilkent Üniversitesi", city: "Ankara"}, {uni: "Koç Üniversitesi", city: "İstanbul"},
-            {uni: "Sabancı Üniversitesi", city: "İstanbul"}, {uni: "Galatasaray Üniversitesi", city: "İstanbul"},
-            {uni: "Marmara Üniversitesi", city: "İstanbul"}, {uni: "Dokuz Eylül Üniversitesi", city: "İzmir"},
-            {uni: "Gazi Üniversitesi", city: "Ankara"}, {uni: "Bursa Uludağ Üniversitesi", city: "Bursa"},
-            {uni: "Akdeniz Üniversitesi", city: "Antalya"}, {uni: "Anadolu Üniversitesi", city: "Eskişehir"},
-            {uni: "Eskişehir Osmangazi Üniversitesi", city: "Eskişehir"}, {uni: "Çukurova Üniversitesi", city: "Adana"},
-            {uni: "Karadeniz Teknik Üniversitesi", city: "Trabzon"}, {uni: "Selçuk Üniversitesi", city: "Konya"},
-            {uni: "Erciyes Üniversitesi", city: "Kayseri"}, {uni: "Ondokuz Mayıs Üniversitesi", city: "Samsun"},
-            {uni: "Pamukkale Üniversitesi", city: "Denizli"}, {uni: "Atatürk Üniversitesi", city: "Erzurum"},
-            {uni: "İzmir Katip Çelebi Üniversitesi", city: "İzmir"}, {uni: "Manisa Celal Bayar Üniversitesi", city: "Manisa"},
-            {uni: "Sakarya Üniversitesi", city: "Sakarya"}, {uni: "Kocaeli Üniversitesi", city: "Kocaeli"},
-            {uni: "Çankaya Üniversitesi", city: "Ankara"}, {uni: "Özyeğin Üniversitesi", city: "İstanbul"},
-            {uni: "Bahçeşehir Üniversitesi", city: "İstanbul"}, {uni: "Yeditepe Üniversitesi", city: "İstanbul"},
-            {uni: "İzmir Yüksek Teknoloji Enstitüsü", city: "İzmir"}, {uni: "Gebze Teknik Üniversitesi", city: "Kocaeli"},
-            {uni: "Mersin Üniversitesi", city: "Mersin"}, {uni: "Van Yüzüncü Yıl Üniversitesi", city: "Van"},
-            {uni: "Süleyman Demirel Üniversitesi", city: "Isparta"}, {uni: "Recep Tayyip Erdoğan Üniversitesi", city: "Rize"}
-        ];
-
-        let universityData = [];
-        let currentFilteredData = [];
-        let displayLimit = 100; // Sayfa kasmasın diye her seferinde 100'er render edilir
-
-        // Tüm kombinasyonları eksiksiz birleştir
-        allUniversities.forEach((u, uIndex) => {
-            allDepartments.forEach((dep, dIndex) => {
-                let type = "SAY";
-                if (dep.includes("Hukuk") || dep.includes("Psikoloji") || dep.includes("İşletme") || dep.includes("İktisat") || dep.includes("Siyaset") || dep.includes("Sosyoloji") || dep.includes("Ticaret")) type = "EA";
-                if (dep.includes("Gastronomi") || dep.includes("Grafik") || dep.includes("Tarih") || dep.includes("Türk Dili") || dep.includes("Radyo") || dep.includes("Halkla") || dep.includes("İlahiyat") || dep.includes("İslami") || dep.includes("Müzik") || dep.includes("Resim") || dep.includes("Moda")) type = "SÖZ";
-                
-                let baseScore = 280 + ((uIndex * 5 + dIndex * 11) % 240);
-                if (baseScore > 540) baseScore = 539.20;
-
-                universityData.push({
-                    dep: dep,
-                    type: type,
-                    uni: u.uni,
-                    city: u.city,
-                    score: baseScore.toFixed(2),
-                    quota: ((uIndex + dIndex) % 3 === 0) ? "40" : ((uIndex + dIndex) % 2 === 0 ? "60" : "80")
-                });
-            });
-        });
-
-        currentFilteredData = universityData;
-
-        document.addEventListener("DOMContentLoaded", () => {
-            renderTableChunks();
-        });
-
-        function renderTableChunks() {
-            const tbody = document.getElementById("tableBody");
-            const infoBar = document.getElementById("resultCountInfo");
-            let html = "";
-            
-            const sliceData = currentFilteredData.slice(0, displayLimit);
-            
-            sliceData.forEach(item => {
-                html += `<tr>
-                    <td>${item.dep}</td>
-                    <td>${item.type}</td>
-                    <td>${item.uni}</td>
-                    <td>${item.city}</td>
-                    <td>${item.score}</td>
-                    <td>${item.quota}</td>
-                </tr>`;
-            });
-            
-            tbody.innerHTML = html;
-            infoBar.innerText = `Toplam ${currentFilteredData.length} sonuç bulundu. (Şu an gösterilen: ${sliceData.length})`;
-        }
-
-        // Sonsuz kaydırma (Infinite Scroll) - Aşağı kaydırdıkça kasmasız yükleme yapar
-        function checkScrollOptimization() {
-            const container = document.getElementById('tableScrollContainer');
-            if (container.scrollTop + container.clientHeight >= container.scrollHeight - 100) {
-                if (displayLimit < currentFilteredData.length) {
-                    displayLimit += 100;
-                    renderTableChunks();
-                }
-            }
-        }
-
-        function filterTable() {
-            const query = document.getElementById('searchInput').value.toLocaleLowerCase('tr').trim();
-            currentFilteredData = universityData.filter(item => {
-                return item.dep.toLocaleLowerCase('tr').includes(query) ||
-                       item.uni.toLocaleLowerCase('tr').includes(query) ||
-                       item.city.toLocaleLowerCase('tr').includes(query);
-            });
-            displayLimit = 100; // Arama yapınca başa dön
-            renderTableChunks();
-            document.getElementById('tableScrollContainer').scrollTop = 0;
-        }
-
-        function switchScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-            
-            document.getElementById('screen-' + screenId).classList.add('active');
-            const navElement = document.getElementById('nav-' + screenId);
-            if(navElement) navElement.classList.add('active');
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function toggleChip(element) {
-            element.classList.toggle('selected');
-        }
-
-        function resetQuiz() {
-            document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
-            document.getElementById('otherInput').value = '';
-        }
-    <!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextRoute - Tam Kapsamlı Üniversite ve Bölüm Arşivi</title>
-    <style>
-        :root {
-            --primary: #11224e;
-            --accent: #f76c6c;
-            --accent-hover: #e05a5a;
-            --bg: #f8f9fa;
-            --card-bg: #ffffff;
-            --text: #333333;
-            --text-light: #666666;
-            --border: #e2e8f0;
-            --radius: 12px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 1rem 2rem;
+        .uni-layout {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 3px solid var(--accent);
+            gap: 30px;
         }
 
-        .logo h1 {
-            font-size: 1.5rem;
-            letter-spacing: 0.5px;
-            cursor: pointer;
+        .filter-sidebar {
+            width: 280px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            height: fit-content;
         }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
+        .filter-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 20px;
         }
 
-        nav a {
-            text-decoration: none;
-            color: white;
-            font-weight: 500;
-            cursor: pointer;
-            transition: color 0.3s;
+        .filter-group {
+            margin-bottom: 20px;
         }
 
-        nav a:hover, nav a.active {
-            color: var(--accent);
-        }
-
-        .screen {
-            display: none;
-            padding: 3rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .screen.active {
+        .filter-group label {
             display: block;
-        }
-
-        .btn-primary {
-            background-color: var(--accent);
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            font-size: 1.1rem;
+            font-size: 12px;
             font-weight: 600;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background-color 0.3s;
+            color: #475569;
+            margin-bottom: 8px;
         }
 
-        .btn-primary:hover {
-            background-color: var(--accent-hover);
-        }
-
-        .btn-secondary {
-            background-color: #64748b;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background-color 0.3s;
-        }
-
-        .btn-secondary:hover {
-            background-color: #475569;
-        }
-
-        .hero {
+        .toggle-switch-group {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-            background: var(--card-bg);
-            padding: 4rem;
-            border-radius: var(--radius);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-        }
-
-        .hero-text {
-            flex: 1;
-        }
-
-        .mission-box {
-            background: #fff3f3;
-            border-left: 4px solid var(--accent);
-            padding: 1.2rem;
-            margin-bottom: 2rem;
-            font-style: italic;
-            color: #444;
-            border-radius: 0 var(--radius) var(--radius) 0;
-            font-size: 1.05rem;
-        }
-
-        .hero-text h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero-text p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            margin-bottom: 2rem;
-        }
-
-        .steps-container {
-            margin-top: 4rem;
-            text-align: center;
-        }
-
-        .steps-container h3 {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 2rem;
-            text-align: left;
-        }
-
-        .step-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .step-num {
-            display: inline-block;
-            background-color: var(--accent);
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 35px;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-
-        .quiz-box {
-            background: var(--card-bg);
-            padding: 3rem;
-            border-radius: var(--radius);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .chips-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin: 2rem 0;
-        }
-
-        .chip {
             background: #f1f5f9;
-            border: 2px solid var(--border);
-            padding: 10px 18px;
-            border-radius: 30px;
+            border-radius: 6px;
+            padding: 3px;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748b;
+            border-radius: 4px;
             cursor: pointer;
-            font-weight: 500;
-            transition: all 0.2s;
-            user-select: none;
         }
 
-        .chip.selected {
-            background-color: #fff3f3;
-            border-color: var(--accent);
-            color: var(--accent);
+        .toggle-btn.active {
+            background: #2563eb;
+            color: white;
         }
 
-        .other-input-group {
-            margin-top: 1.5rem;
-        }
-
-        .other-input-group input {
+        .filter-select {
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #334155;
+            background: #fff;
             outline: none;
         }
 
-        .result-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-bottom: 1.5rem;
-            border-left: 5px solid var(--accent);
+        .table-content {
+            flex: 1;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
         }
 
-        .match-badge {
-            background: #e0f2fe;
-            color: #0369a1;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        .directory-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .search-box {
-            padding: 12px 18px;
-            width: 380px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
-            outline: none;
-        }
-
-        .table-container {
-            max-height: 600px;
-            overflow-y: auto;
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        table {
+        .uni-table {
             width: 100%;
             border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 15px;
             text-align: left;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.95rem;
+            font-size: 13px;
         }
 
-        th {
-            background-color: var(--primary);
+        .uni-table th {
+            background: #f8fafc;
+            color: #64748b;
+            font-weight: 600;
+            padding: 14px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 12px;
+        }
+
+        .uni-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+
+        .badge-success {
+            background: #ecfdf5;
+            color: #059669;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 11px;
+        }
+
+        /* Yurt Dışı Eğitim Sayfası */
+        .abroad-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .abroad-hero-text {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .abroad-hero-text h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .abroad-hero-text p {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .continent-filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .continent-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+        }
+
+        .continent-btn.active {
+            background: #2563eb;
             color: white;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        tr:hover {
-            background-color: #f8fafc;
         }
 
         .abroad-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            margin-top: 2rem;
+            margin-bottom: 50px;
         }
 
-        .country-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-top: 4px solid var(--primary);
+        .abroad-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
-        .country-card h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
+        .abroad-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
         }
 
-        .feedback-box {
-            background: var(--card-bg);
-            padding: 3rem;
-            border-radius: var(--radius);
-            max-width: 700px;
-            margin: 0 auto;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        .abroad-card-body {
+            padding: 16px;
+        }
+
+        .abroad-card-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .abroad-card-title-row h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .visa-badge {
+            font-size: 11px;
+            font-weight: 600;
+            color: #d97706;
+            background: #fef3c7;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .abroad-info-list {
+            font-size: 12px;
+            color: #334155;
+            margin-bottom: 16px;
+        }
+
+        .abroad-info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .abroad-info-label {
+            color: #64748b;
+        }
+
+        .abroad-info-value {
+            font-weight: 600;
+        }
+
+        .btn-outline-full {
+            width: 100%;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #334155;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .compare-section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 15px;
+        }
+
+        /* Geri Bildirim Sayfası (Son Eklenen) */
+        .feedback-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .feedback-banner {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .feedback-badge {
+            display: inline-block;
+            background: #fff7ed;
+            color: #ea580c;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .feedback-banner h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .feedback-banner p {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .feedback-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .feedback-form-card, .community-suggestions-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .feedback-form-card h3, .community-suggestions-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 15px;
         }
 
         .form-group label {
             display: block;
+            font-size: 12px;
             font-weight: 600;
+            color: #475569;
             margin-bottom: 6px;
         }
 
-        .form-group input, .form-group textarea {
+        .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border);
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 13px;
+            outline: none;
+            background: #fff;
+            color: #334155;
         }
 
-        footer {
-            background-color: var(--primary);
+        .form-group textarea {
+            resize: vertical;
+            height: 90px;
+        }
+
+        .btn-submit-feedback {
+            width: 100%;
+            background: #ea580c;
             color: white;
-            text-align: center;
-            padding: 1.5rem;
-            margin-top: 4rem;
+            border: none;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
         }
 
-        @media(max-width: 768px) {
-            .hero, .steps-grid, .abroad-grid {
-                flex-direction: column;
-                grid-template-columns: 1fr;
-            }
+        .btn-submit-feedback:hover {
+            background: #c2410c;
+        }
+
+        .suggestion-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .vote-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 6px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 42px;
+        }
+
+        .vote-box:hover {
+            background: #eff6ff;
+            border-color: #3b82f6;
+            color: #2563eb;
+        }
+
+        .vote-count {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .suggestion-content h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .suggestion-meta {
+            font-size: 11px;
+            color: #94a3b8;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: white;
+            padding: 60px 80px 30px 80px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .footer-brand p {
+            color: #94a3b8;
+            font-size: 13px;
+            margin-top: 15px;
+            max-width: 300px;
+            line-height: 1.5;
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 30px auto 0 auto;
+            color: #94a3b8;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigasyon -->
+    <!-- Üst Menü -->
     <header>
-        <div class="logo">
-            <h1 onclick="switchScreen('home')">NextRoute</h1>
+        <div class="logo" onclick="showPage('home-page')">
+            <span class="logo-icon">?</span> Ne İstemiyorsun?
         </div>
         <nav>
-            <ul>
-                <li><a onclick="switchScreen('home')" id="nav-home" class="active">Ana Sayfa</a></li>
-                <li><a onclick="switchScreen('quiz')" id="nav-quiz">Eleme Testi</a></li>
-                <li><a onclick="switchScreen('directory')" id="nav-directory">Üni & Bölümler</a></li>
-                <li><a onclick="switchScreen('detail'); renderCompleteDepartmentGuideWithSalaries();" id="nav-detail">Bölüm Rehberi</a></li>
-                <li><a onclick="switchScreen('abroad')" id="nav-abroad">Yurtdışı Eğitim</a></li>
-                <li><a onclick="switchScreen('feedback')" id="nav-feedback">Öneri & Geri Bildirim</a></li>
-            </ul>
+            <a onclick="showPage('home-page')" id="nav-home" class="active">Ana Sayfa</a>
+            <a onclick="showPage('quiz-step-1')" id="nav-quiz">Eleme Testi</a>
+            <a onclick="showPage('uni-page')" id="nav-uni">Üniversiteler</a>
+            <a onclick="showPage('uni-page')">Bölümler</a>
+            <a onclick="showPage('abroad-page')" id="nav-abroad">Yurt Dışı Eğitim</a>
+            <a onclick="showPage('feedback-page')" id="nav-feedback">Geri Bildirim</a>
         </nav>
+        <div class="user-area">
+            <button class="notification-btn">🔔</button>
+            <div class="user-profile">
+                <span>Ahmet Y.</span>
+            </div>
+        </div>
     </header>
 
-    <!-- EKRAN 1: ANA SAYFA -->
-    <div id="screen-home" class="screen active">
-        <div class="hero">
-            <div class="hero-text">
-                <div class="mission-box">
-                    "Herkes ne istediğini bilmek zorunda değil; ama hepimiz ne istemediğimizi çok iyi biliriz."
-                </div>
-                <h2>Ne İstediğini Bilmeyebilirsin, Ama Ne İstemediğini Kesin Biliyorsun!</h2>
-                <p>Kendi karakterini henüz yeni keşfederken yanlış bir meslek seçmeye mecbur değilsin. İstemediğin çalışma koşullarını eleyerek sana en uygun bölümleri buluyoruz.</p>
-                <button class="btn-primary" onclick="switchScreen('quiz')">Kendini Keşfet & Testi Başlat</button>
+    <!-- 1. ANA SAYFA -->
+    <div id="home-page" class="page active">
+        <section class="hero">
+            <div class="hero-content">
+                <span class="badge">TÜRKİYE'NİN İLK ELİMİNASYON TABANLI REHBERLİĞİ</span>
+                <h1>Ne İstediğini Bilmek Zorunda Değilsin.</h1>
+                <p>Herkes ne istemediğini bilir. Biz de tam olarak oradan başlıyoruz. İstediğin çalışma ortamlarını, konuları ve özellikleri ele, geriye senin için en ideal gelecek kalsın.</p>
+                <button class="btn-primary" onclick="showPage('quiz-step-1')">Testi Başlat</button>
             </div>
-        </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Öğrenciler">
+            </div>
+        </section>
 
-        <div class="steps-container">
-            <h3>Eleme Yöntemi Nasıl Çalışır?</h3>
+        <section class="process">
+            <h2>Süreç Nasıl Çalışır?</h2>
+            <p>Karmaşık yetenek testlerini ve sıkıcı soruları bir kenara bırakın. 3 adımda geleceğinizi sadeleştirin.</p>
             <div class="steps-grid">
                 <div class="step-card">
-                    <span class="step-num">1</span>
-                    <h3>İstemediklerini İşaretle</h3>
-                    <p>Seni mutsuz edecek çalışma ortamlarını ve şartları seç.</p>
+                    <div class="step-number">1</div>
+                    <h3>İstediğini Seç</h3>
+                    <p>Sana uymayan çalışma koşullarını, ilgini çekmeyen alanları ve yapmak istemediğin görevleri tek tek belirle.</p>
                 </div>
                 <div class="step-card">
-                    <span class="step-num">2</span>
-                    <h3>Sistemin Elemesini İzle</h3>
-                    <p>Algoritmamız kötü koşulları içeren meslekleri otomatik olarak ayıklasın.</p>
+                    <div class="step-number">2</div>
+                    <h3>Profil Oluştur</h3>
+                    <p>Yaptığın seçimlerle sana özel filtrelenmiş kariyer beklentisi profilini ve ilgi haritanı saniyeler içinde çıkaralım.</p>
                 </div>
                 <div class="step-card">
-                    <span class="step-num">3</span>
-                    <h3>Sana Uygun Geleceği Seç</h3>
-                    <p>Karakterine ve sınırlarına en uygun bölümleri ve üniversiteleri incele.</p>
+                    <div class="step-number">3</div>
+                    <h3>Bölümünü Keşfet</h3>
+                    <p>Ellerce seçeneğin ardından geriye kalan ve senin karakterine en çok uyan üniversite bölümlerini analiz et.</p>
+                </div>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-item"><h3>150+</h3><p>Bölüm Analizi</p></div>
+                <div class="stat-item"><h3>200+</h3><p>Üniversite Verisi</p></div>
+                <div class="stat-item"><h3>50.000+</h3><p>Öğrenci Yönlendirildi</p></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 2. ELEME TESTİ - ADIM 1 -->
+    <div id="quiz-step-1" class="page">
+        <div class="quiz-container">
+            <div class="quiz-sidebar">
+                <h3>Test Adımları</h3>
+                <div class="quiz-menu-item active">✓ Çalışma Ortamı</div>
+                <div class="quiz-menu-item">2. İlgi Alanları</div>
+                <div class="quiz-menu-item">3. Yetenekler</div>
+                <div class="quiz-menu-item">4. Değerler & Beklentiler</div>
+                <div class="quiz-menu-item">5. Gelecek Hedefleri</div>
+            </div>
+            <div class="quiz-content">
+                <div class="quiz-progress-header">
+                    <span>ADIM 1 / 5</span>
+                    <span>%20 Tamamlandı</span>
+                </div>
+                <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 20%;"></div></div>
+                
+                <h2>Gelecekte nasıl bir çalışma ortamında OLMAK İSTEMEZSİN?</h2>
+                <p>Sana en uymayan, gelecekte kesinlikle kaçınmak istediğin durumları seç.</p>
+                
+                <div class="tags-container">
+                    <span class="tag" onclick="toggleTag(this)">Sürekli masa başında oturmak +</span>
+                    <span class="tag" onclick="toggleTag(this)">Açık havada çalışmak +</span>
+                    <span class="tag" onclick="toggleTag(this)">Vardiyalı çalışmak +</span>
+                    <span class="tag" onclick="toggleTag(this)">Tek başına çalışmak +</span>
+                    <span class="tag" onclick="toggleTag(this)">Sürekli toplantılar +</span>
+                    <span class="tag" onclick="toggleTag(this)">Fiziksel güç gerektiren işler +</span>
+                    <span class="tag" onclick="toggleTag(this)">Yoğun stres altında çalışmak +</span>
+                    <span class="tag" onclick="toggleTag(this)">Monoton tekrarlayan işler +</span>
+                </div>
+
+                <div class="quiz-footer">
+                    <button class="btn-back" onclick="showPage('home-page')">Geri</button>
+                    <button class="btn-primary" onclick="showPage('quiz-step-2')">Devam Et</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- EKRAN 2: ELEME TESTİ -->
-    <div id="screen-quiz" class="screen">
-        <div class="quiz-box">
-            <h2>Gelecekte Nasıl Çalışmak İstemezsin?</h2>
-            <p style="color: var(--text-light); margin-top: 0.5rem;">Seni rahatsız edecek tüm koşulları ve sınırları aşağıdan seç:</p>
-            
-            <div class="chips-container">
-                <div class="chip" onclick="toggleChip(this)">Sürekli masa başında oturmak</div>
-                <div class="chip" onclick="toggleChip(this)">Vardiyalı ve düzensiz saatler</div>
-                <div class="chip" onclick="toggleChip(this)">Yoğun matematik ve formüller</div>
-                <div class="chip" onclick="toggleChip(this)">Sürekli insanlarla iletişim kurmak</div>
-                <div class="chip" onclick="toggleChip(this)">Monoton ve tekrarlayan işler</div>
-                <div class="chip" onclick="toggleChip(this)">Laboratuvar ortamı / Kimyasal maddeler</div>
-                <div class="chip" onclick="toggleChip(this)">Ağır fiziksel saha çalışmaları</div>
-                <div class="chip" onclick="toggleChip(this)">Sürekli seyahat etmek zorunda kalmak</div>
+    <!-- 3. ELEME TESTİ - ADIM 2 -->
+    <div id="quiz-step-2" class="page">
+        <div class="quiz-container">
+            <div class="quiz-sidebar">
+                <h3>Test Adımları</h3>
+                <div class="quiz-menu-item completed">✓ Çalışma Ortamı</div>
+                <div class="quiz-menu-item active">✓ İlgi Alanları</div>
+                <div class="quiz-menu-item">3. Yetenekler</div>
+                <div class="quiz-menu-item">4. Değerler & Beklentiler</div>
+                <div class="quiz-menu-item">5. Gelecek Hedefleri</div>
             </div>
-
-            <div class="other-input-group">
-                <input type="text" id="otherInput" placeholder="Diğer (Başka istemediğin özel bir durum yazabilirsin...)">
-            </div>
-
-            <div style="margin-top: 2rem; display: flex; gap: 10px;">
-                <button class="btn-primary" onclick="switchScreen('results')">Sonuçlarımı Göster</button>
-                <button class="btn-secondary" onclick="resetQuiz()">Sıfırla</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- EKRAN 3: SONUÇLAR -->
-    <div id="screen-results" class="screen">
-        <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Eleme Sonuçlarına Göre Sana En Uygun Bölümler</h2>
-        <p style="color: var(--text-light); margin-bottom: 2rem;">İstemediğin koşullar filtrelendi ve karakterine en uygun alternatifler sıralandı:</p>
-        
-        <div class="result-card">
-            <span class="match-badge">%96 Uyum Oranı</span>
-            <h3 style="color: var(--primary);">Bilgisayar Mühendisliği</h3>
-            <p style="margin: 10px 0; color: var(--text-light);">Seçtiğin kriterlere göre masa başı esnek çalışma imkanı sunan, tekrara düşmeyen dinamik bir alandır.</p>
-            <button class="btn-secondary" onclick="switchScreen('detail'); renderCompleteDepartmentGuideWithSalaries();">Bölüm Detaylarını İncele</button>
-        </div>
-    </div>
-
-    <!-- EKRAN 4: TÜM ÜNİVERSİTE VE BÖLÜM ARŞİVİ -->
-    <div id="screen-directory" class="screen">
-        <div class="directory-header">
-            <div>
-                <h2 style="color: var(--primary);">Türkiye Geneli Tüm Üniversite ve Bölüm Arşivi</h2>
-                <p style="color: var(--text-light);">Bölüm, üniversite veya şehir adını yazarak binlerce seçenek arasında anında arama yap:</p>
-            </div>
-            <input type="text" id="searchInput" class="search-box" onkeyup="filterTable()" placeholder="Örn: Tıp, ODTÜ, İstanbul, Bilgisayar...">
-        </div>
-
-        <div class="table-container">
-            <table id="uniTable">
-                <thead>
-                    <tr>
-                        <th>Bölüm Adı</th>
-                        <th>Puan Türü</th>
-                        <th>Üniversite Adı</th>
-                        <th>Şehir</th>
-                        <th>Taban Puanı</th>
-                        <th>Kontenjan</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- EKRAN 5: BÖLÜM REHBERİ (Tüm Bölümler Otomatik Listelenir) -->
-    <div id="screen-detail" class="screen">
-        <!-- JavaScript burayı otomatik dolduracak -->
-    </div>
-
-    <!-- EKRAN 6: YURTDIŞI EĞİTİM -->
-    <div id="screen-abroad" class="screen">
-        <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Global Eğitim & Yurtdışı Seçenekleri</h2>
-        <p style="color: var(--text-light); margin-bottom: 2rem;">Dünyanın dört bir yanındaki eğitim imkanları ve yaşam koşulları:</p>
-
-        <div class="abroad-grid">
-            <div class="country-card">
-                <h3>Almanya</h3>
-                <p><strong>Eğitim Ücreti:</strong> Devlet üniversitelerinde genelde ücretsiz.</p>
-                <p style="margin-top: 10px;"><strong>Dil Şartı:</strong> TestDaF veya IELTS.</p>
-            </div>
-            <div class="country-card">
-                <h3>Hollanda</h3>
-                <p><strong>Eğitim Ücreti:</strong> Yıllık 8.000€ - 15.000€.</p>
-                <p style="margin-top: 10px;"><strong>Dil Şartı:</strong> IELTS min 6.5.</p>
-            </div>
-            <div class="country-card">
-                <h3>İngiltere</h3>
-                <p><strong>Eğitim Ücreti:</strong> Yıllık 15.000£ - 30.000£.</p>
-                <p style="margin-top: 10px;"><strong>Dil Şartı:</strong> IELTS Academic.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- EKRAN 7: ÖNERİ & GERİ BİLDİRİM -->
-    <div id="screen-feedback" class="screen">
-        <div class="feedback-box">
-            <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Özellik Öner & Geri Bildirim Ver</h2>
-            <p style="color: var(--text-light); margin-bottom: 2rem;">Kendi fikirlerini bizimle paylaşabilirsin:</p>
-            
-            <div class="form-group">
-                <label>Adın</label>
-                <input type="text" placeholder="Adını yazabilirsin...">
-            </div>
-            <div class="form-group">
-                <label>Önerin veya Düşüncen</label>
-                <textarea rows="4" placeholder="Platforma eklenmesini istediğin özellikler..."></textarea>
-            </div>
-            <button class="btn-primary" onclick="alert('Geri bildirimin için teşekkürler!')">Gönder</button>
-        </div>
-    </div>
-
-    <footer>
-        <p>&copy; 2026 NextRoute Platformu. Tüm hakları saklıdır.</p>
-    </footer>
-
-    <script>
-        const departmentsList = [
-            "Bilgisayar Mühendisliği", "Yazılım Mühendisliği", "Yapay Zeka Mühendisliği", "Elektrik-Elektronik Mühendisliği", 
-            "Makine Mühendisliği", "Endüstri Mühendisliği", "İnşaat Mühendisliği", "Mimarlık", "Tıp Fakültesi", 
-            "Diş Hekimliği", "Eczacılık", "Hukuk Fakültesi", "Psikoloji", "İşletme", "İktisat", "Uluslararası İlişkiler", 
-            "Gastronomi ve Mutfak Sanatları", "Hemşirelik", "Fizyoterapi ve Rehabilitasyon", "Beslenme ve Diyetetik", 
-            "Radyo, Televizyon ve Sinema", "Grafik Tasarım", "Halkla İlişkiler", "Sınıf Öğretmenliği", "İngilizce Öğretmenliği", 
-            "Okul Öncesi Öğretmenliği", "Rehberlik ve Psikolojik Danışmanlık", "Otomotiv Mühendisliği", "Mekatronik Mühendisliği", 
-            "Biyomedikal Mühendisliği", "Kimya Mühendisliği", "Metalurji ve Malzeme Mühendisliği", "Uçak Mühendisliği", 
-            "Yönetim Bilişim Sistemleri", "Bankacılık ve Finans", "Lojistik Yönetimi", "Acil Yardım ve Afet Yönetimi"
-        ];
-
-        // Bölüm Rehberi ekranını TÜM BÖLÜMLER için dinamik olarak oluşturan fonksiyon
-        function renderCompleteDepartmentGuideWithSalaries() {
-            const detailScreen = document.getElementById('screen-detail');
-            if (!detailScreen) return;
-
-            let html = `
-                <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Üniversite Bölümleri Rehberi</h2>
-                <p style="color: var(--text-light); margin-bottom: 1.5rem;">Tüm bölümlerin hedef kitleleri, çalışma hayatı ve kişiye katacakları:</p>
-                <div class="directory-header" style="margin-bottom: 20px;">
-                    <input type="text" id="guideSearch" class="search-box" placeholder="Bölüm ara (örn: Tıp, Mimarlık, Psikoloji)..." onkeyup="filterGuideCards()">
+            <div class="quiz-content">
+                <div class="quiz-progress-header">
+                    <span>ADIM 2 / 5</span>
+                    <span>%40 Tamamlandı</span>
                 </div>
-                <div id="guideList" style="display: grid; gap: 20px;">
-            `;
+                <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 40%;"></div></div>
+                
+                <h2>Hangi konular ve alanlar seni HİÇ ilgilendirmiyor?</h2>
+                <p>Kesinlikle üzerine okumak veya çalışmak istemediğin alanları dışarıda bırak.</p>
+                
+                <div class="tags-container">
+                    <span class="tag" onclick="toggleTag(this)">Matematik ve sayısal işlemler +</span>
+                    <span class="tag" onclick="toggleTag(this)">Biyoloji ve canlı bilimi +</span>
+                    <span class="tag" onclick="toggleTag(this)">Hukuk ve mevzuat +</span>
+                    <span class="tag" onclick="toggleTag(this)">Ekonomi ve finans +</span>
+                    <span class="tag" onclick="toggleTag(this)">Sanat ve tasarım +</span>
+                    <span class="tag" onclick="toggleTag(this)">Edebiyat ve dil bilimi +</span>
+                    <span class="tag" onclick="toggleTag(this)">Tarih ve sosyal bilimler +</span>
+                    <span class="tag" onclick="toggleTag(this)">Teknoloji ve yazılım +</span>
+                </div>
 
-            departmentsList.forEach(deptName => {
-                let maas = "35.000 TL - 90.000 TL";
-                if (deptName.includes("Mühendisliği") || deptName.includes("Tıp") || deptName.includes("Diş")) {
-                    maas = "45.000 TL - 120.000 TL";
-                } else if (deptName.includes("Öğretmenliği") || deptName.includes("Hemşirelik")) {
-                    maas = "35.000 TL - 65.000 TL";
-                }
+                <div class="quiz-footer">
+                    <button class="btn-back" onclick="showPage('quiz-step-1')">Geri</button>
+                    <button class="btn-primary" onclick="showPage('results-page')">Devam Et</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                html += `
-                    <div class="detail-card guide-item" data-name="${deptName}" style="border: 1px solid #ddd; padding: 20px; border-radius: 12px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
-                            <h3 style="color: var(--primary); margin: 0;">${deptName}</h3>
-                            <span style="background: #eef2ff; color: #4338ca; padding: 5px 12px; border-radius: 6px; font-weight: bold; font-size: 0.9rem;">
-                                Maaş Aralığı: ${maas}
-                            </span>
-                        </div>
-                        <div style="display: grid; gap: 8px;">
-                            <p style="margin: 0;"><strong>Hedef Kitle:</strong> Analitik düşünen, ${deptName.toLowerCase()} alanına ve araştırmaya ilgi duyan adaylar.</p>
-                            <p style="margin: 0;"><strong>Çalışma Hayatı:</strong> Sektörün dinamiklerine göre esnek veya kurumsal ofis/saha ortamlarında çalışma imkanı.</p>
-                            <p style="margin: 0; font-size: 0.95rem; color: #555;"><strong>Kişiye Katacakları:</strong> Problem çözme yeteneği, profesyonel yetkinlik ve kariyer gelişiminde geniş bir vizyon.</p>
+    <!-- 4. SONUÇLAR SAYFASI -->
+    <div id="results-page" class="page">
+        <div class="results-container">
+            <div class="results-header">
+                <h1>Senin Profiline Uygun Bölümler</h1>
+                <p>Yaptığın elemelere göre analiz edilerek, kesinlikle uzak durmak istediğin durumları içermeyen en ideal kariyer eşleşmeleri.</p>
+            </div>
+
+            <div class="criteria-box">
+                <div class="criteria-title">🎯 Elediğin Kriterler</div>
+                <div class="criteria-tags">
+                    <span class="criteria-tag">Masa başı çalışma -</span>
+                    <span class="criteria-tag">Monoton işler -</span>
+                    <span class="criteria-tag">Yoğun stres -</span>
+                    <span class="criteria-tag">Gece mesaisi -</span>
+                </div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-card-top">
+                    <div class="result-title-area">
+                        <span class="result-rank">#1</span>
+                        <h3>Endüstri Mühendisliği</h3>
+                    </div>
+                    <span class="match-badge">%94 Uyum</span>
+                </div>
+                <div class="result-section-title">Neden Senin İçin Uygun?</div>
+                <ul class="reason-list">
+                    <li>✓ Sürekli masa başında oturmak istemediğin için hem saha hem planlama dengesi sunar.</li>
+                    <li>✓ Monoton işler yerine sürekli süreç iyileştirme ve problem çözme odaklıdır.</li>
+                </ul>
+                <div class="result-footer-info">
+                    <div class="uni-list">
+                        <span class="salary-label" style="display:block; margin-bottom:4px;">ÖNE ÇIKAN ÜNİVERSİTELER</span>
+                        <span>İTÜ</span> <span>ODTÜ</span> <span>Boğaziçi Üniversitesi</span>
+                    </div>
+                    <div class="salary-info">
+                        <div class="salary-label">ORTALAMA MAAŞ SKALASI</div>
+                        <div class="salary-value">65.000 TL - 120.000 TL</div>
+                    </div>
+                    <button class="btn-detail">Detayları Gör</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. ÜNİVERSİTELER SAYFASI -->
+    <div id="uni-page" class="page">
+        <div class="uni-page-container">
+            <div class="uni-page-header">
+                <h1>Üniversiteler ve Bölümler</h1>
+                <p>İlgini çeken veya eklemek istediğin tüm akademik programları listeleyin.</p>
+            </div>
+
+            <div class="search-bar-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" placeholder="Üniversite veya bölüm ara...">
+            </div>
+
+            <div class="uni-layout">
+                <div class="filter-sidebar">
+                    <div class="filter-title">Filtreler</div>
+                    <div class="filter-group">
+                        <label>Üniversite Türü</label>
+                        <div class="toggle-switch-group">
+                            <button class="toggle-btn active">Devlet</button>
+                            <button class="toggle-btn">Vakıf</button>
                         </div>
                     </div>
-                `;
-            });
+                </div>
+                <div class="table-content">
+                    <table class="uni-table">
+                        <thead>
+                            <tr>
+                                <th>Üniversite</th>
+                                <th>Bölüm</th>
+                                <th>Şehir</th>
+                                <th>2024 Taban P.</th>
+                                <th>Doluluk</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Boğaziçi Üniversitesi</td>
+                                <td>Bilgisayar Müh.</td>
+                                <td>İstanbul</td>
+                                <td>523.45</td>
+                                <td><span class="badge-success">%100</span></td>
+                            </tr>
+                            <tr>
+                                <td>ODTÜ</td>
+                                <td>Elektrik-Elektronik</td>
+                                <td>Ankara</td>
+                                <td>510.23</td>
+                                <td><span class="badge-success">%98</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            html += `</div>`;
-            detailScreen.innerHTML = html;
-        }
+    <!-- 6. YURT DIŞI EĞİTİM SAYFASI -->
+    <div id="abroad-page" class="page">
+        <div class="abroad-container">
+            <div class="abroad-hero-text">
+                <h1>Yurt Dışında Eğitim Fırsatları</h1>
+                <p>Hayalindeki ülkeyi keşfet, yaşam maliyeti ve kabul koşullarına göre sana en uymayan seçenekleri elinden çıkar.</p>
+            </div>
+            <div class="continent-filters">
+                <button class="continent-btn active">Tümü</button>
+                <button class="continent-btn">Avrupa</button>
+                <button class="continent-btn">Kuzey Amerika</button>
+            </div>
+            <div class="abroad-grid">
+                <div class="abroad-card">
+                    <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=400&q=80" alt="Almanya">
+                    <div class="abroad-card-body">
+                        <div class="abroad-card-title-row">
+                            <h3>Almanya</h3>
+                            <span class="visa-badge">Vize Zor</span>
+                        </div>
+                        <div class="abroad-info-list">
+                            <div class="abroad-info-row"><span class="abroad-info-label">Yıllık Harç</span><span class="abroad-info-value">€300 - €1.500</span></div>
+                        </div>
+                        <button class="btn-outline-full">Detayları İncele</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        // Arama kutusu filtrelemesi
-        function filterGuideCards() {
-            const query = document.getElementById('guideSearch').value.toLocaleLowerCase('tr').trim();
-            document.querySelectorAll('.guide-item').forEach(item => {
-                const name = item.getAttribute('data-name').toLocaleLowerCase('tr');
-                item.style.display = name.includes(query) ? 'block' : 'none';
-            });
-        }
+    <!-- 7. GERİ BİLDİRİM SAYFASI (YENİ EKLENDİ) -->
+    <div id="feedback-page" class="page">
+        <div class="feedback-container">
+            <div class="feedback-banner">
+                <span class="feedback-badge">Birlikte Geliştirelim</span>
+                <h1>Platformumuzu Birlikte Geliştirelim</h1>
+                <p>Fikirleriniz bizim için çok değerli. Yeni özellik önerinizi veya geri bildiriminizi paylaşın.</p>
+            </div>
 
-        const universitiesList = [
-            {uni: "Boğaziçi Üniversitesi", city: "İstanbul"},
-            {uni: "Orta Doğu Teknik Üniversitesi (ODTÜ)", city: "Ankara"},
-            {uni: "İTÜ (İstanbul Teknik Üniversitesi)", city: "İstanbul"},
-            {uni: "Ankara Üniversitesi", city: "Ankara"},
-            {uni: "Hacettepe Üniversitesi", city: "Ankara"},
-            {uni: "İstanbul Üniversitesi", city: "İstanbul"},
-            {uni: "Ege Üniversitesi", city: "İzmir"},
-            {uni: "Yıldız Teknik Üniversitesi", city: "İstanbul"},
-            {uni: "Bilkent Üniversitesi", city: "Ankara"},
-            {uni: "Koç Üniversitesi", city: "İstanbul"},
-            {uni: "Sabancı Üniversitesi", city: "İstanbul"}
-        ];
+            <div class="feedback-grid">
+                <!-- Öneri Formu -->
+                <div class="feedback-form-card">
+                    <h3>Öneri Formu</h3>
+                    <form onsubmit="event.preventDefault(); alert('Geri bildiriminiz başarıyla gönderildi!');">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Adınız (İsteğe bağlı)</label>
+                                <input type="text" placeholder="örn. Ahmet">
+                            </div>
+                            <div class="form-group">
+                                <label>E-posta (İsteğe bağlı)</label>
+                                <input type="email" placeholder="örn. ahmet@email.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Geri Bildirim Türü</label>
+                            <select>
+                                <option>Yeni Özellik Önerisi</option>
+                                <option>Hata Bildirimi</option>
+                                <option>Genel Görüş</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Mesajınız</label>
+                            <textarea placeholder="Platformumuz için önerinizi yazın..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit-feedback">Öneriyi Gönder →</button>
+                    </form>
+                </div>
 
-        let universityData = [];
-        let idCounter = 1;
-
-        universitiesList.forEach(u => {
-            departmentsList.forEach((dep, index) => {
-                if ((idCounter + index) % 3 === 0) {
-                    let type = "SAY";
-                    if (dep.includes("Hukuk") || dep.includes("Psikoloji") || dep.includes("İşletme")) type = "EA";
-                    if (dep.includes("Gastronomi") || dep.includes("Grafik")) type = "SÖZ";
+                <!-- Topluluk Önerileri -->
+                <div class="community-suggestions-card">
+                    <h3>Topluluk Önerileri</h3>
                     
-                    universityData.push({
-                        dep: dep,
-                        type: type,
-                        uni: u.uni,
-                        city: u.city,
-                        score: (400 + (idCounter % 100)).toFixed(2),
-                        quota: "60"
-                    });
-                }
-            });
-            idCounter++;
-        });
+                    <div class="suggestion-item">
+                        <div class="vote-box" onclick="upvote(this)">
+                            <span class="vote-count">47</span>
+                        </div>
+                        <div class="suggestion-content">
+                            <h4>Bölüm karşılaştırma özelliği eklensin</h4>
+                            <span class="suggestion-meta">👤 Ahmet • 2 gün önce</span>
+                        </div>
+                    </div>
 
-        document.addEventListener("DOMContentLoaded", () => {
-            renderTable(universityData);
-        });
+                    <div class="suggestion-item">
+                        <div class="vote-box" onclick="upvote(this)">
+                            <span class="vote-count">35</span>
+                        </div>
+                        <div class="suggestion-content">
+                            <h4>Mezun röportajları bölümü olsun</h4>
+                            <span class="suggestion-meta">👤 3 gün önce</span>
+                        </div>
+                    </div>
 
-        function renderTable(data) {
-            const tbody = document.getElementById("tableBody");
-            let html = "";
-            data.slice(0, 300).forEach(item => {
-                html += `<tr>
-                    <td>${item.dep}</td>
-                    <td>${item.type}</td>
-                    <td>${item.uni}</td>
-                    <td>${item.city}</td>
-                    <td>${item.score}</td>
-                    <td>${item.quota}</td>
-                </tr>`;
-            });
-            tbody.innerHTML = html;
+                    <div class="suggestion-item">
+                        <div class="vote-box" onclick="upvote(this)">
+                            <span class="vote-count">28</span>
+                        </div>
+                        <div class="suggestion-content">
+                            <h4>Şehir bazlı yaşam maliyeti bilgisi</h4>
+                            <span class="suggestion-meta">👤 1 gün önce</span>
+                        </div>
+                    </div>
+
+                    <div class="suggestion-item">
+                        <div class="vote-box" onclick="upvote(this)">
+                            <span class="vote-count">22</span>
+                        </div>
+                        <div class="suggestion-content">
+                            <h4>YKS puan hesaplayıcı entegre edilsin</h4>
+                            <span class="suggestion-meta">👤 1 hafta önce</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo" style="color: white;" onclick="showPage('home-page')">
+                    <span class="logo-icon">?</span> Ne İstemiyorsun?
+                </div>
+                <p>Doğru kariyeri seçmek, ne istemediğini bilmekle başlar. Türkiye'nin ilk eliminasyon odaklı kariyer rehberlik platformu.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Ne İstemiyorsun? Tüm hakları saklıdır.</span>
+        </div>
+    </footer>
+
+    <!-- Script -->
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
         }
 
-        function switchScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-            
-            document.getElementById('screen-' + screenId).classList.add('active');
-            const navElement = document.getElementById('nav-' + screenId);
-            if(navElement) navElement.classList.add('active');
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function toggleChip(element) {
+        function toggleTag(element) {
             element.classList.toggle('selected');
         }
 
-        function resetQuiz() {
-            document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
-            document.getElementById('otherInput').value = '';
-        }
-
-        function filterTable() {
-            const query = document.getElementById('searchInput').value.toLocaleLowerCase('tr').trim();
-            const filteredData = universityData.filter(item => {
-                return item.dep.toLocaleLowerCase('tr').includes(query) ||
-                       item.uni.toLocaleLowerCase('tr').includes(query) ||
-                       item.city.toLocaleLowerCase('tr').includes(query);
-            });
-            renderTable(filteredData);
+        function upvote(element) {
+            const countSpan = element.querySelector('.vote-count');
+            let count = parseInt(countSpan.innerText);
+            if (!element.classList.contains('voted')) {
+                count += 1;
+                element.classList.add('voted');
+                element.style.background = '#eff6ff';
+                element.style.borderColor = '#3b82f6';
+                element.style.color = '#2563eb';
+            } else {
+                count -= 1;
+                element.classList.remove('voted');
+                element.style.background = '#f8fafc';
+                element.style.borderColor = '#e2e8f0';
+                element.style.color = '#0f172a';
+            }
+            countSpan.innerText = count;
         }
     </script>
 </body>
