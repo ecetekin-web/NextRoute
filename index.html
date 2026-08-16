@@ -1253,3 +1253,93 @@
             populateDetailedDepartmentGuide();
         });
     </script>
+    <!-- DEVAM PARÇASI: Güncellenmiş Bölüm Rehberi (Maaş Analizi ve Hedef Kitle) -->
+    <script>
+        // Maaş aralıkları (temsili) ve hedef kitle bilgileri eklenmiş güncel kütüphane
+        const fullDepartmentLibrary = {
+            "Bilgisayar Mühendisliği": {
+                neOgretir: "Algoritmalar, veri yapıları, yazılım geliştirme metodolojileri ve sistem mimarisi.",
+                calismaHayti: "Proje odaklı, esnek saatli, genellikle evden veya modern ofislerde geçen teknik bir rutin.",
+                kariyerYolu: "Junior Developer -> Senior Developer -> Team Lead -> CTO.",
+                maas: "35.000 TL - 150.000+ TL",
+                kimlerTercihEtmeli: "Analitik düşünmeyi seven, teknoloji meraklısı ve problem çözmekten keyif alanlar.",
+                katkisi: "Sayısal mantığını geliştirir, dünyayı dijital bir oyun alanı gibi görmeni sağlar."
+            },
+            "Endüstri Mühendisliği": {
+                neOgretir: "Verimlilik analizi, yöneylem araştırması, tedarik zinciri yönetimi ve kalite kontrol.",
+                calismaHayti: "Kurumsal ofislerde veri analizi, toplantılar ve süreç iyileştirme projeleriyle geçen hareketli bir tempo.",
+                kariyerYolu: "Uzman Yardımcısı -> Uzman -> Yönetici -> Genel Müdür.",
+                maas: "30.000 TL - 120.000+ TL",
+                kimlerTercihEtmeli: "Süreçleri yönetmeyi, organizasyon kurmayı ve verimliliği artırmayı sevenler.",
+                katkisi: "Hayatı ve sistemleri bir 'optimizasyon problemi' olarak görmeni sağlar; liderlik yetisi kazandırır."
+            },
+            "Tıp Fakültesi": {
+                neOgretir: "İnsan anatomisi, fizyoloji, patoloji, farmakoloji ve klinik tıp uygulamaları.",
+                calismaHayti: "Yüksek yoğunluklu, nöbetli, insan hayatına doğrudan dokunan çok disiplinli ve yorucu bir rutin.",
+                kariyerYolu: "Pratisyen -> Uzmanlık Eğitimi -> Uzman Doktor -> Akademisyen.",
+                maas: "45.000 TL - 200.000+ TL",
+                kimlerTercihEtmeli: "Yüksek stres toleransı olan, özverili ve biyolojiye derin ilgisi olanlar.",
+                katkisi: "Biyolojik sistemlerin derinliklerine inmeni, hayati krizleri yönetebilmeyi ve derin bir empati duygusu sağlar."
+            },
+            "Hukuk Fakültesi": {
+                neOgretir: "Borçlar, ceza, medeni, idare ve anayasa hukuku; kanun yorumlama teknikleri.",
+                calismaHayti: "Duruşmalar, müvekkil görüşmeleri ve yoğun bir okuma-araştırma döngüsü ile geçen analitik bir hayat.",
+                kariyerYolu: "Avukat -> Hakim/Savcı/Noter.",
+                maas: "25.000 TL - 150.000+ TL",
+                kimlerTercihEtmeli: "Adalet duygusu gelişmiş, okumayı seven, hitabet yeteneği güçlü ve detaycı olanlar.",
+                katkisi: "Sorgulayıcı bir bakış açısı, ikna kabiliyeti ve olayları çok yönlü değerlendirme becerisi kazandırır."
+            },
+            "Psikoloji": {
+                neOgretir: "Bilişsel süreçler, gelişim psikolojisi, sosyal psikoloji, istatistik ve klinik yöntemler.",
+                calismaHayti: "Terapi odaları, hastaneler veya kurumsal İK departmanlarında insanı analiz ederek geçen bir hayat.",
+                kariyerYolu: "Psikolog -> Uzman Psikolog -> Klinik Psikolog.",
+                maas: "22.000 TL - 90.000+ TL",
+                kimlerTercihEtmeli: "İnsan ilişkilerine meraklı, sabırlı, iyi bir dinleyici ve gözlemci olanlar.",
+                katkisi: "İnsan davranışlarının arka planını anlama, derin bir içgörü ve duygusal zeka kapasitesi katar."
+            },
+            "Mimarlık": {
+                neOgretir: "Yapı fiziği, tasarım teorisi, mimari tarih, bilgisayar destekli çizim (CAD) ve statik.",
+                calismaHayti: "Stüdyo ve şantiye arasında geçen; estetik ile teknik dengeyi gözeten yaratıcı bir tempodur.",
+                kariyerYolu: "Mimar -> Proje Müdürü -> Tasarım Ofisi Sahibi.",
+                maas: "28.000 TL - 110.000+ TL",
+                kimlerTercihEtmeli: "Sanata ve tasarıma ilgili, detay odaklı, çizim yeteneği olan ve mekana ruh katmayı sevenler.",
+                katkisi: "Gördüğün her binayı estetik bir filtreden geçirmeni; çevreni daha anlamlı inşa etmeni sağlar."
+            }
+        };
+
+        // Rehberi güncelleme fonksiyonu
+        function populateDetailedDepartmentGuide() {
+            const detailScreen = document.getElementById('screen-detail');
+            let html = `
+                <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Üniversite Bölümleri Rehberi (Detaylı)</h2>
+                <p style="color: var(--text-light); margin-bottom: 2rem;">Bölümün maaş skalası ve ideal aday profili:</p>
+                <div class="directory-header" style="margin-bottom: 20px;">
+                    <input type="text" id="guideSearch" class="search-box" placeholder="Bölüm ara (örn: Tıp, Mimarlık)..." onkeyup="filterGuide()">
+                </div>
+                <div id="guideList" style="display: grid; gap: 20px;">
+            `;
+
+            for (const [dept, info] of Object.entries(fullDepartmentLibrary)) {
+                html += `
+                    <div class="detail-card guide-item" data-name="${dept}">
+                        <h3 style="color: var(--accent); border-bottom: 1px solid #eee; padding-bottom: 10px;">${dept}</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
+                            <p><strong>Kimler Tercih Etmeli:</strong> ${info.kimlerTercihEtmeli}</p>
+                            <p><strong>Maaş Aralığı (Min-Max):</strong> <span style="color: green; font-weight: bold;">${info.maas}</span></p>
+                            <p><strong>Ne Öğretir:</strong> ${info.neOgretir}</p>
+                            <p><strong>Çalışma Hayatı:</strong> ${info.calismaHayti}</p>
+                            <p><strong>Kariyer Yolu:</strong> ${info.kariyerYolu}</p>
+                            <p style="color: var(--primary);"><strong>Bu Bölüm Sana Ne Katacak?:</strong> ${info.katkisi}</p>
+                        </div>
+                    </div>
+                `;
+            }
+            html += `</div>`;
+            detailScreen.innerHTML = html;
+        }
+
+        // Sayfa yüklendiğinde güncel rehberi başlat
+        window.addEventListener('load', () => {
+            populateDetailedDepartmentGuide();
+        });
+    </script>
