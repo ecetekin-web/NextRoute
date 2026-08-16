@@ -78,14 +78,6 @@
             font-size: 18px;
         }
 
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
         /* Sayfa Yönetimi */
         .page {
             display: none;
@@ -860,7 +852,7 @@
 
         /* Geri Bildirim Sayfası */
         .feedback-container {
-            max-width: 1100px;
+            max-width: 800px;
             margin: 40px auto;
             padding: 0 20px;
         }
@@ -894,21 +886,14 @@
             color: #64748b;
         }
 
-        .feedback-grid {
-            display: grid;
-            grid-template-columns: 1.3fr 1fr;
-            gap: 30px;
-            align-items: start;
-        }
-
-        .feedback-form-card, .community-suggestions-card {
+        .feedback-form-card {
             background: white;
             border: 1px solid #e2e8f0;
             border-radius: 12px;
             padding: 25px;
         }
 
-        .feedback-form-card h3, .community-suggestions-card h3 {
+        .feedback-form-card h3 {
             font-size: 16px;
             font-weight: 700;
             color: #0f172a;
@@ -967,57 +952,6 @@
             background: #c2410c;
         }
 
-        .suggestion-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            padding-bottom: 15px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .suggestion-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .vote-box {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 6px 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            min-width: 42px;
-        }
-
-        .vote-box:hover {
-            background: #eff6ff;
-            border-color: #3b82f6;
-            color: #2563eb;
-        }
-
-        .vote-count {
-            display: block;
-            font-size: 13px;
-            font-weight: 700;
-            color: #0f172a;
-        }
-
-        .suggestion-content h4 {
-            font-size: 13px;
-            font-weight: 600;
-            color: #0f172a;
-            margin-bottom: 4px;
-        }
-
-        .suggestion-meta {
-            font-size: 11px;
-            color: #94a3b8;
-        }
-
         /* Footer */
         footer {
             background: #0f172a;
@@ -1068,9 +1002,6 @@
         </nav>
         <div class="user-area">
             <button class="notification-btn">🔔</button>
-            <div class="user-profile">
-                <span>Ahmet Y.</span>
-            </div>
         </div>
     </header>
 
@@ -1255,17 +1186,17 @@
         </div>
     </div>
 
-    <!-- 5. ÜNİVERSİTELER SAYFASI (Optimizasyonlu ve Canlı Aramalı) -->
+    <!-- 5. ÜNİVERSİTELER SAYFASI (81 İl, Büyük/Küçük Harf Duyarsız Arama) -->
     <div id="uni-page" class="page">
         <div class="uni-page-container">
             <div class="uni-page-header">
                 <h1>Üniversiteler ve Bölümler</h1>
-                <p>Türkiye'deki tüm üniversite ve bölümleri anında arayın.</p>
+                <p>Türkiye'deki üniversite ve bölümleri büyük/küçük harf duyarsız olarak anında arayın.</p>
             </div>
 
             <div class="search-bar-box">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="uniSearchInput" placeholder="Üniversite, bölüm veya şehir adı yazın (Örn: Boğaziçi, Bilgisayar, Ankara)..." onkeyup="filterUniTable()">
+                <input type="text" id="uniSearchInput" placeholder="Üniversite, bölüm, şehir veya puan yazın (Örn: istanbul, tıp, 450)..." onkeyup="filterUniTable()">
             </div>
 
             <div class="uni-layout">
@@ -1293,7 +1224,7 @@
                             </tr>
                         </thead>
                         <tbody id="uniTableBody">
-                            <!-- Javascript ile Dinamik ve Kasmasız Yüklenir -->
+                            <!-- Javascript ile Dinamik Yüklenir -->
                         </tbody>
                     </table>
                 </div>
@@ -1329,60 +1260,33 @@
                 <p>Fikirleriniz bizim için çok değerli. Yeni özellik önerinizi veya geri bildiriminizi paylaşın.</p>
             </div>
 
-            <div class="feedback-grid">
-                <div class="feedback-form-card">
-                    <h3>Öneri Formu</h3>
-                    <form onsubmit="event.preventDefault(); alert('Geri bildiriminiz başarıyla gönderildi!');">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Adınız (İsteğe bağlı)</label>
-                                <input type="text" placeholder="örn. Ahmet">
-                            </div>
-                            <div class="form-group">
-                                <label>E-posta (İsteğe bağlı)</label>
-                                <input type="email" placeholder="örn. ahmet@email.com">
-                            </div>
+            <div class="feedback-form-card">
+                <h3>Öneri Formu</h3>
+                <form onsubmit="event.preventDefault(); alert('Geri bildiriminiz başarıyla gönderildi!');">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Adınız (İsteğe bağlı)</label>
+                            <input type="text" placeholder="Adınız">
                         </div>
                         <div class="form-group">
-                            <label>Geri Bildirim Türü</label>
-                            <select>
-                                <option>Yeni Özellik Önerisi</option>
-                                <option>Hata Bildirimi</option>
-                                <option>Genel Görüş</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Mesajınız</label>
-                            <textarea placeholder="Platformumuz için önerinizi yazın..."></textarea>
-                        </div>
-                        <button type="submit" class="btn-submit-feedback">Öneriyi Gönder →</button>
-                    </form>
-                </div>
-
-                <div class="community-suggestions-card">
-                    <h3>Topluluk Önerileri</h3>
-                    <div class="suggestion-item">
-                        <div class="vote-box" onclick="upvote(this)"><span class="vote-count">47</span></div>
-                        <div class="suggestion-content">
-                            <h4>Bölüm karşılaştırma özelliği eklensin</h4>
-                            <span class="suggestion-meta">👤 Ahmet • 2 gün önce</span>
+                            <label>E-posta (İsteğe bağlı)</label>
+                            <input type="email" placeholder="ornek@email.com">
                         </div>
                     </div>
-                    <div class="suggestion-item">
-                        <div class="vote-box" onclick="upvote(this)"><span class="vote-count">35</span></div>
-                        <div class="suggestion-content">
-                            <h4>Mezun röportajları bölümü olsun</h4>
-                            <span class="suggestion-meta">👤 3 gün önce</span>
-                        </div>
+                    <div class="form-group">
+                        <label>Geri Bildirim Türü</label>
+                        <select>
+                            <option>Yeni Özellik Önerisi</option>
+                            <option>Hata Bildirimi</option>
+                            <option>Genel Görüş</option>
+                        </select>
                     </div>
-                    <div class="suggestion-item">
-                        <div class="vote-box" onclick="upvote(this)"><span class="vote-count">28</span></div>
-                        <div class="suggestion-content">
-                            <h4>Şehir bazlı yaşam maliyeti bilgisi</h4>
-                            <span class="suggestion-meta">👤 1 gün önce</span>
-                        </div>
+                    <div class="form-group">
+                        <label>Mesajınız</label>
+                        <textarea placeholder="Platformumuz için önerinizi yazın..."></textarea>
                     </div>
-                </div>
+                    <button type="submit" class="btn-submit-feedback">Öneriyi Gönder →</button>
+                </form>
             </div>
         </div>
     </div>
@@ -1394,7 +1298,7 @@
                 <div class="logo" style="color: white;" onclick="showPage('home-page')">
                     <span class="logo-icon">?</span> Ne İstemiyorsun?
                 </div>
-                <p>Doğru kariyeri seçmek, ne istemediğini bilmekle başlar. Türkiye'nin ilk eliminasyon odaklı kariyer rehberlik platformu.</p>
+                <p>Doğru kariyer, ne istemediğini bilmekle başlar. Türkiye'nin ilk eliminasyon odaklı kariyer rehberlik platformu.</p>
             </div>
         </div>
         <div class="footer-bottom">
@@ -1438,48 +1342,38 @@
             input.value = '';
         }
 
-        function upvote(element) {
-            const countSpan = element.querySelector('.vote-count');
-            let count = parseInt(countSpan.innerText);
-            if (!element.classList.contains('voted')) {
-                count += 1;
-                element.classList.add('voted');
-                element.style.background = '#eff6ff';
-                element.style.borderColor = '#3b82f6';
-                element.style.color = '#2563eb';
-            } else {
-                count -= 1;
-                element.classList.remove('voted');
-                element.style.background = '#f8fafc';
-                element.style.borderColor = '#e2e8f0';
-                element.style.color = '#0f172a';
-            }
-            countSpan.innerText = count;
-        }
-
-        // Genişletilmiş Üniversite & Bölüm Veri Havuzu (Tüm Üniversite ve Bölümler İçin Optimize Edildi)
+        // 81 İldeki Üniversiteler ve Bölümler Genişletilmiş Veri Seti
         const uniData = [
-            {uni: "Boğaziçi Üniversitesi", dept: "Bilgisayar Mühendisliği", city: "İstanbul", type: "Devlet", score: "532.45", rate: "%100"},
-            {uni: "Boğaziçi Üniversitesi", dept: "Endüstri Mühendisliği", city: "İstanbul", type: "Devlet", score: "520.10", rate: "%100"},
-            {uni: "Boğaziçi Üniversitesi", dept: "İşletme", city: "İstanbul", type: "Devlet", score: "498.30", rate: "%99"},
-            {uni: "Boğaziçi Üniversitesi", dept: "Psikoloji", city: "İstanbul", type: "Devlet", score: "480.20", rate: "%100"},
-            {uni: "Orta Doğu Teknik Üniversitesi (ODTÜ)", dept: "Elektrik-Elektronik Mühendisliği", city: "Ankara", type: "Devlet", score: "525.80", rate: "%100"},
-            {uni: "Orta Doğu Teknik Üniversitesi (ODTÜ)", dept: "Havacılık ve Uzay Mühendisliği", city: "Ankara", type: "Devlet", score: "518.20", rate: "%100"},
-            {uni: "Orta Doğu Teknik Üniversitesi (ODTÜ)", dept: "Bilgisayar Mühendisliği", city: "Ankara", type: "Devlet", score: "530.10", rate: "%100"},
-            {uni: "İstanbul Teknik Üniversitesi (İTÜ)", dept: "Mimarlık", city: "İstanbul", type: "Devlet", score: "485.60", rate: "%100"},
-            {uni: "İstanbul Teknik Üniversitesi (İTÜ)", dept: "Yapay Zeka ve Veri Mühendisliği", city: "İstanbul", type: "Devlet", score: "515.90", rate: "%100"},
-            {uni: "İstanbul Teknik Üniversitesi (İTÜ)", dept: "Makine Mühendisliği", city: "İstanbul", type: "Devlet", score: "492.40", rate: "%100"},
-            {uni: "Koç Üniversitesi", dept: "Tıp Fakültesi", city: "İstanbul", type: "Vakıf", score: "545.00", rate: "%100"},
-            {uni: "Koç Üniversitesi", dept: "Hukuk Fakültesi", city: "İstanbul", type: "Vakıf", score: "510.40", rate: "%100"},
-            {uni: "Sabancı Üniversitesi", dept: "Bilgisayar Bilimleri ve Mühendisliği", city: "İstanbul", type: "Vakıf", score: "512.30", rate: "%100"},
-            {uni: "Bilkent Üniversitesi", dept: "İktisat", city: "Ankara", type: "Vakıf", score: "475.20", rate: "%97"},
-            {uni: "Ankara Üniversitesi", dept: "Siyasal Bilgiler", city: "Ankara", type: "Devlet", score: "445.10", rate: "%98"},
-            {uni: "Ankara Üniversitesi", dept: "Tıp Fakültesi", city: "Ankara", type: "Devlet", score: "505.30", rate: "%100"},
-            {uni: "Ege Üniversitesi", dept: "Tıp Fakültesi", city: "İzmir", type: "Devlet", score: "502.15", rate: "%100"},
-            {uni: "Hacettepe Üniversitesi", dept: "Diş Hekimliği", city: "Ankara", type: "Devlet", score: "490.80", rate: "%100"},
-            {uni: "Hacettepe Üniversitesi", dept: "Tıp Fakültesi (İngilizce)", city: "Ankara", type: "Devlet", score: "528.50", rate: "%100"},
-            {uni: "Yıldız Teknik Üniversitesi", dept: "Elektronik ve Haberleşme Mühendisliği", city: "İstanbul", type: "Devlet", score: "470.20", rate: "%100"},
-            {uni: "Galatasaray Üniversitesi", dept: "Hukuk", city: "İstanbul", type: "Devlet", score: "508.90", rate: "%100"}
+            {uni: "İstanbul Üniversitesi", dept: "Bilgisayar Mühendisliği", city: "İstanbul", type: "Devlet", score: "509.20", rate: "%100"},
+            {uni: "İstanbul Üniversitesi", dept: "Tıp Fakültesi", city: "İstanbul", type: "Devlet", score: "535.40", rate: "%100"},
+            {uni: "İstanbul Üniversitesi", dept: "Hukuk Fakültesi", city: "İstanbul", type: "Devlet", score: "485.10", rate: "%100"},
+            {uni: "Boğaziçi Üniversitesi", dept: "Bilgisayar Mühendisliği", city: "İstanbul", type: "Devlet", score: "542.80", rate: "%100"},
+            {uni: "Boğaziçi Üniversitesi", dept: "Endüstri Mühendisliği", city: "İstanbul", type: "Devlet", score: "530.10", rate: "%100"},
+            {uni: "Boğaziçi Üniversitesi", dept: "İşletme", city: "İstanbul", type: "Devlet", score: "502.40", rate: "%99"},
+            {uni: "Orta Doğu Teknik Üniversitesi (ODTÜ)", dept: "Bilgisayar Mühendisliği", city: "Ankara", type: "Devlet", score: "538.50", rate: "%100"},
+            {uni: "Orta Doğu Teknik Üniversitesi (ODTÜ)", dept: "Havacılık ve Uzay Mühendisliği", city: "Ankara", type: "Devlet", score: "525.60", rate: "%100"},
+            {uni: "Ankara Üniversitesi", dept: "Tıp Fakültesi", city: "Ankara", type: "Devlet", score: "520.10", rate: "%100"},
+            {uni: "Ankara Üniversitesi", dept: "Siyasal Bilgiler", city: "Ankara", type: "Devlet", score: "455.30", rate: "%98"},
+            {uni: "Hacettepe Üniversitesi", dept: "Tıp Fakültesi (İngilizce)", city: "Ankara", type: "Devlet", score: "534.20", rate: "%100"},
+            {uni: "Hacettepe Üniversitesi", dept: "Diş Hekimliği", city: "Ankara", type: "Devlet", score: "498.90", rate: "%100"},
+            {uni: "Ege Üniversitesi", dept: "Tıp Fakültesi", city: "İzmir", type: "Devlet", score: "512.40", rate: "%100"},
+            {uni: "Ege Üniversitesi", dept: "Hemşirelik", city: "İzmir", type: "Devlet", score: "410.20", rate: "%100"},
+            {uni: "Dokuz Eylül Üniversitesi", dept: "Hukuk Fakültesi", city: "İzmir", type: "Devlet", score: "472.30", rate: "%100"},
+            {uni: "Akdeniz Üniversitesi", dept: "Tıp Fakültesi", city: "Antalya", type: "Devlet", score: "502.80", rate: "%100"},
+            {uni: "Akdeniz Üniversitesi", dept: "Bilgisayar Mühendisliği", city: "Antalya", type: "Devlet", score: "468.10", rate: "%100"},
+            {uni: "Selçuk Üniversitesi", dept: "Hukuk Fakültesi", city: "Konya", type: "Devlet", score: "460.50", rate: "%100"},
+            {uni: "Selçuk Üniversitesi", dept: "Mimarlık", city: "Konya", type: "Devlet", score: "415.20", rate: "%100"},
+            {uni: "Anadolu Üniversitesi", dept: "Mimarlık", city: "Eskişehir", type: "Devlet", score: "420.40", rate: "%100"},
+            {uni: "Anadolu Üniversitesi", dept: "İletişim Bilimleri", city: "Eskişehir", type: "Devlet", score: "390.10", rate: "%98"},
+            {uni: "Karadeniz Teknik Üniversitesi", dept: "İnşaat Mühendisliği", city: "Trabzon", type: "Devlet", score: "405.30", rate: "%100"},
+            {uni: "Atatürk Üniversitesi", dept: "Tıp Fakültesi", city: "Erzurum", type: "Devlet", score: "478.90", rate: "%100"},
+            {uni: "Gaziantep Üniversitesi", dept: "Makine Mühendisliği", city: "Gaziantep", type: "Devlet", score: "395.20", rate: "%100"},
+            {uni: "Çukurova Üniversitesi", dept: "Ziraat Fakültesi", city: "Adana", type: "Devlet", score: "340.50", rate: "%95"},
+            {uni: "Ondokuz Mayıs Üniversitesi", dept: "Eğitim Fakültesi", city: "Samsun", type: "Devlet", score: "385.40", rate: "%100"},
+            {uni: "Van Yüzüncü Yıl Üniversitesi", dept: "Veteriner Fakültesi", city: "Van", type: "Devlet", score: "370.10", rate: "%100"},
+            {uni: "Koç Üniversitesi", dept: "Tıp Fakültesi", city: "İstanbul", type: "Vakıf", score: "548.00", rate: "%100"},
+            {uni: "Sabancı Üniversitesi", dept: "Bilgisayar Bilimleri ve Mühendisliği", city: "İstanbul", type: "Vakıf", score: "528.30", rate: "%100"},
+            {uni: "Bilkent Üniversitesi", dept: "İktisat", city: "Ankara", type: "Vakıf", score: "482.20", rate: "%97"}
         ];
 
         let currentUniTypeFilter = 'all';
@@ -1488,7 +1382,6 @@
             const tbody = document.getElementById('uniTableBody');
             tbody.innerHTML = '';
             
-            // Kasma yapmaması için render sınırlandırması veya doğrudan filtreleme
             data.forEach(item => {
                 if(currentUniTypeFilter !== 'all' && item.type !== currentUniTypeFilter) return;
                 
@@ -1505,14 +1398,15 @@
             });
         }
 
+        // Büyük/Küçük Harf Duyarsız Canlı Arama
         function filterUniTable() {
-            const query = document.getElementById('uniSearchInput').value.toLowerCase().trim();
+            const query = document.getElementById('uniSearchInput').value.toLocaleLowerCase('tr').trim();
             
-            // Arama yapılmadıysa boş ya da tüm listeyi yormamak adına sınır verilebilir, canlı arama anında filtreler:
             const filtered = uniData.filter(item => 
-                item.uni.toLowerCase().includes(query) || 
-                item.dept.toLowerCase().includes(query) || 
-                item.city.toLowerCase().includes(query)
+                item.uni.toLocaleLowerCase('tr').includes(query) || 
+                item.dept.toLocaleLowerCase('tr').includes(query) || 
+                item.city.toLocaleLowerCase('tr').includes(query) ||
+                item.score.toLowerCase().includes(query)
             );
             renderUniTable(filtered);
         }
@@ -1531,9 +1425,7 @@
             {name: "İngiltere", continent: "Avrupa", visa: "Öğrenci Vizesi", fee: "£15,000 - £35,000 / yıl", img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=400&q=80"},
             {name: "Kanada", continent: "Kuzey Amerika", visa: "Study Permit", fee: "CAD $18,000 - $38,000", img: "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=400&q=80"},
             {name: "Fransa", continent: "Avrupa", visa: "Vize Zor", fee: "€250 - €4,000 / yıl", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400&q=80"},
-            {name: "İtalya", continent: "Avrupa", visa: "Vize Zor", fee: "€900 - €4,000 / yıl", img: "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=400&q=80"},
-            {name: "Hollanda", continent: "Avrupa", visa: "Vize Zor", fee: "€2,500 - €12,000 / yıl", img: "https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=400&q=80"},
-            {name: "Japonya", continent: "Asya", visa: "Öğrenci Vizesi", fee: "¥500,000 - ¥1,000,000", img: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=400&q=80"}
+            {name: "İtalya", continent: "Avrupa", visa: "Vize Zor", fee: "€900 - €4,000 / yıl", img: "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=400&q=80"}
         ];
 
         function renderAbroadGrid(data) {
