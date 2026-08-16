@@ -278,6 +278,7 @@
             background: var(--card-bg);
             border-radius: var(--radius);
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: relative;
         }
 
         table {
@@ -302,6 +303,15 @@
 
         tr:hover {
             background-color: #f8fafc;
+        }
+
+        .info-bar {
+            padding: 10px 15px;
+            background: #e2e8f0;
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-align: right;
         }
 
         .abroad-grid {
@@ -478,7 +488,8 @@
             <input type="text" id="searchInput" class="search-box" onkeyup="filterTable()" placeholder="Örn: Tıp, ODTÜ, İstanbul, Bilgisayar...">
         </div>
 
-        <div class="table-container">
+        <div class="info-bar" id="resultCountInfo">Arşiv Yükleniyor...</div>
+        <div class="table-container" id="tableScrollContainer" onscroll="checkScrollOptimization()">
             <table id="uniTable">
                 <thead>
                     <tr>
@@ -496,9 +507,9 @@
         </div>
     </div>
 
-    <!-- EKRAN 5: BÖLÜM REHBERİ (Dinamik Kartlar) -->
+    <!-- EKRAN 5: BÖLÜM REHBERİ -->
     <div id="screen-detail" class="screen">
-        <!-- JavaScript bu kısmı otomatik dolduracak -->
+        <!-- JavaScript dolduracak -->
     </div>
 
     <!-- EKRAN 6: YURTDIŞI EĞİTİM -->
@@ -548,7 +559,6 @@
     </footer>
 
     <script>
-        // Örnek Bölüm Kütüphanesi (Maaş ve Kriterler)
         const fullDepartmentLibrary = {
             "Bilgisayar Mühendisliği": {
                 maas: "45.000 TL - 110.000 TL",
@@ -572,7 +582,6 @@
             }
         };
 
-        // Rehberi düzenli kutular halinde çizen fonksiyon
         function renderCompleteDepartmentGuideWithSalaries() {
             const detailScreen = document.getElementById('screen-detail');
             if (!detailScreen) return;
@@ -606,7 +615,6 @@
             detailScreen.innerHTML = html;
         }
 
-        // Arama kutusu için filtreleme
         function filterGuideCards() {
             const query = document.getElementById('guideSearch').value.toLocaleLowerCase('tr');
             document.querySelectorAll('.guide-item').forEach(item => {
@@ -615,7 +623,8 @@
             });
         }
 
-        const departmentsList = [
+        // T TÜRKİYE GENELİ EKSİKSİZ ÜNİVERSİTE VE BÖLÜM HAVUZU
+        const allDepartments = [
             "Bilgisayar Mühendisliği", "Yazılım Mühendisliği", "Yapay Zeka Mühendisliği", "Elektrik-Elektronik Mühendisliği", 
             "Makine Mühendisliği", "Endüstri Mühendisliği", "İnşaat Mühendisliği", "Mimarlık", "Tıp Fakültesi", 
             "Diş Hekimliği", "Eczacılık", "Hukuk Fakültesi", "Psikoloji", "İşletme", "İktisat", "Uluslararası İlişkiler", 
@@ -623,54 +632,74 @@
             "Radyo, Televizyon ve Sinema", "Grafik Tasarım", "Halkla İlişkiler", "Sınıf Öğretmenliği", "İngilizce Öğretmenliği", 
             "Okul Öncesi Öğretmenliği", "Rehberlik ve Psikolojik Danışmanlık", "Otomotiv Mühendisliği", "Mekatronik Mühendisliği", 
             "Biyomedikal Mühendisliği", "Kimya Mühendisliği", "Metalurji ve Malzeme Mühendisliği", "Uçak Mühendisliği", 
-            "Yönetim Bilişim Sistemleri", "Bankacılık ve Finans", "Lojistik Yönetimi", "Acil Yardım ve Afet Yönetimi"
+            "Yönetim Bilişim Sistemleri", "Bankacılık ve Finans", "Lojistik Yönetimi", "Acil Yardım ve Afet Yönetimi",
+            "Veteriner Fakültesi", "Pnömatik ve Hidrolik", "Siyaset Bilimi", "Sosyoloji", "Tarih", "Türk Dili ve Edebiyatı",
+            "Uluslararası Ticaret", "Havacılık Yönetimi", "Yazılım Geliştirme", "İslami İlimler", "İlahiyat", "Müzik", "Resim",
+            "Moda Tasarımı", "İç Mimarlık", "Peyzaj Mimarlığı", "Moleküler Biyoloji ve Genetik", "Biyoteknoloji", "Fizik", "Kimya", "Matematik"
         ];
 
-        const universitiesList = [
-            {uni: "Boğaziçi Üniversitesi", city: "İstanbul"},
-            {uni: "Orta Doğu Teknik Üniversitesi (ODTÜ)", city: "Ankara"},
-            {uni: "İTÜ (İstanbul Teknik Üniversitesi)", city: "İstanbul"},
-            {uni: "Ankara Üniversitesi", city: "Ankara"},
-            {uni: "Hacettepe Üniversitesi", city: "Ankara"},
-            {uni: "İstanbul Üniversitesi", city: "İstanbul"},
-            {uni: "Ege Üniversitesi", city: "İzmir"},
-            {uni: "Yıldız Teknik Üniversitesi", city: "İstanbul"},
-            {uni: "Bilkent Üniversitesi", city: "Ankara"},
-            {uni: "Koç Üniversitesi", city: "İstanbul"},
-            {uni: "Sabancı Üniversitesi", city: "İstanbul"}
+        const allUniversities = [
+            {uni: "Boğaziçi Üniversitesi", city: "İstanbul"}, {uni: "Orta Doğu Teknik Üniversitesi (ODTÜ)", city: "Ankara"},
+            {uni: "İTÜ (İstanbul Teknik Üniversitesi)", city: "İstanbul"}, {uni: "Ankara Üniversitesi", city: "Ankara"},
+            {uni: "Hacettepe Üniversitesi", city: "Ankara"}, {uni: "İstanbul Üniversitesi", city: "İstanbul"},
+            {uni: "Ege Üniversitesi", city: "İzmir"}, {uni: "Yıldız Teknik Üniversitesi", city: "İstanbul"},
+            {uni: "Bilkent Üniversitesi", city: "Ankara"}, {uni: "Koç Üniversitesi", city: "İstanbul"},
+            {uni: "Sabancı Üniversitesi", city: "İstanbul"}, {uni: "Galatasaray Üniversitesi", city: "İstanbul"},
+            {uni: "Marmara Üniversitesi", city: "İstanbul"}, {uni: "Dokuz Eylül Üniversitesi", city: "İzmir"},
+            {uni: "Gazi Üniversitesi", city: "Ankara"}, {uni: "Bursa Uludağ Üniversitesi", city: "Bursa"},
+            {uni: "Akdeniz Üniversitesi", city: "Antalya"}, {uni: "Anadolu Üniversitesi", city: "Eskişehir"},
+            {uni: "Eskişehir Osmangazi Üniversitesi", city: "Eskişehir"}, {uni: "Çukurova Üniversitesi", city: "Adana"},
+            {uni: "Karadeniz Teknik Üniversitesi", city: "Trabzon"}, {uni: "Selçuk Üniversitesi", city: "Konya"},
+            {uni: "Erciyes Üniversitesi", city: "Kayseri"}, {uni: "Ondokuz Mayıs Üniversitesi", city: "Samsun"},
+            {uni: "Pamukkale Üniversitesi", city: "Denizli"}, {uni: "Atatürk Üniversitesi", city: "Erzurum"},
+            {uni: "İzmir Katip Çelebi Üniversitesi", city: "İzmir"}, {uni: "Manisa Celal Bayar Üniversitesi", city: "Manisa"},
+            {uni: "Sakarya Üniversitesi", city: "Sakarya"}, {uni: "Kocaeli Üniversitesi", city: "Kocaeli"},
+            {uni: "Çankaya Üniversitesi", city: "Ankara"}, {uni: "Özyeğin Üniversitesi", city: "İstanbul"},
+            {uni: "Bahçeşehir Üniversitesi", city: "İstanbul"}, {uni: "Yeditepe Üniversitesi", city: "İstanbul"},
+            {uni: "İzmir Yüksek Teknoloji Enstitüsü", city: "İzmir"}, {uni: "Gebze Teknik Üniversitesi", city: "Kocaeli"},
+            {uni: "Mersin Üniversitesi", city: "Mersin"}, {uni: "Van Yüzüncü Yıl Üniversitesi", city: "Van"},
+            {uni: "Süleyman Demirel Üniversitesi", city: "Isparta"}, {uni: "Recep Tayyip Erdoğan Üniversitesi", city: "Rize"}
         ];
 
         let universityData = [];
-        let idCounter = 1;
+        let currentFilteredData = [];
+        let displayLimit = 100; // Sayfa kasmasın diye her seferinde 100'er render edilir
 
-        universitiesList.forEach(u => {
-            departmentsList.forEach((dep, index) => {
-                if ((idCounter + index) % 3 === 0) {
-                    let type = "SAY";
-                    if (dep.includes("Hukuk") || dep.includes("Psikoloji") || dep.includes("İşletme")) type = "EA";
-                    if (dep.includes("Gastronomi") || dep.includes("Grafik")) type = "SÖZ";
-                    
-                    universityData.push({
-                        dep: dep,
-                        type: type,
-                        uni: u.uni,
-                        city: u.city,
-                        score: (400 + (idCounter % 100)).toFixed(2),
-                        quota: "60"
-                    });
-                }
+        // Tüm kombinasyonları eksiksiz birleştir
+        allUniversities.forEach((u, uIndex) => {
+            allDepartments.forEach((dep, dIndex) => {
+                let type = "SAY";
+                if (dep.includes("Hukuk") || dep.includes("Psikoloji") || dep.includes("İşletme") || dep.includes("İktisat") || dep.includes("Siyaset") || dep.includes("Sosyoloji") || dep.includes("Ticaret")) type = "EA";
+                if (dep.includes("Gastronomi") || dep.includes("Grafik") || dep.includes("Tarih") || dep.includes("Türk Dili") || dep.includes("Radyo") || dep.includes("Halkla") || dep.includes("İlahiyat") || dep.includes("İslami") || dep.includes("Müzik") || dep.includes("Resim") || dep.includes("Moda")) type = "SÖZ";
+                
+                let baseScore = 280 + ((uIndex * 5 + dIndex * 11) % 240);
+                if (baseScore > 540) baseScore = 539.20;
+
+                universityData.push({
+                    dep: dep,
+                    type: type,
+                    uni: u.uni,
+                    city: u.city,
+                    score: baseScore.toFixed(2),
+                    quota: ((uIndex + dIndex) % 3 === 0) ? "40" : ((uIndex + dIndex) % 2 === 0 ? "60" : "80")
+                });
             });
-            idCounter++;
         });
+
+        currentFilteredData = universityData;
 
         document.addEventListener("DOMContentLoaded", () => {
-            renderTable(universityData);
+            renderTableChunks();
         });
 
-        function renderTable(data) {
+        function renderTableChunks() {
             const tbody = document.getElementById("tableBody");
+            const infoBar = document.getElementById("resultCountInfo");
             let html = "";
-            data.slice(0, 300).forEach(item => {
+            
+            const sliceData = currentFilteredData.slice(0, displayLimit);
+            
+            sliceData.forEach(item => {
                 html += `<tr>
                     <td>${item.dep}</td>
                     <td>${item.type}</td>
@@ -680,7 +709,32 @@
                     <td>${item.quota}</td>
                 </tr>`;
             });
+            
             tbody.innerHTML = html;
+            infoBar.innerText = `Toplam ${currentFilteredData.length} sonuç bulundu. (Şu an gösterilen: ${sliceData.length})`;
+        }
+
+        // Sonsuz kaydırma (Infinite Scroll) - Aşağı kaydırdıkça kasmasız yükleme yapar
+        function checkScrollOptimization() {
+            const container = document.getElementById('tableScrollContainer');
+            if (container.scrollTop + container.clientHeight >= container.scrollHeight - 100) {
+                if (displayLimit < currentFilteredData.length) {
+                    displayLimit += 100;
+                    renderTableChunks();
+                }
+            }
+        }
+
+        function filterTable() {
+            const query = document.getElementById('searchInput').value.toLocaleLowerCase('tr').trim();
+            currentFilteredData = universityData.filter(item => {
+                return item.dep.toLocaleLowerCase('tr').includes(query) ||
+                       item.uni.toLocaleLowerCase('tr').includes(query) ||
+                       item.city.toLocaleLowerCase('tr').includes(query);
+            });
+            displayLimit = 100; // Arama yapınca başa dön
+            renderTableChunks();
+            document.getElementById('tableScrollContainer').scrollTop = 0;
         }
 
         function switchScreen(screenId) {
@@ -702,258 +756,6 @@
             document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
             document.getElementById('otherInput').value = '';
         }
-
-        function filterTable() {
-            const query = document.getElementById('searchInput').value.toLocaleLowerCase('tr').trim();
-            const filteredData = universityData.filter(item => {
-                return item.dep.toLocaleLowerCase('tr').includes(query) ||
-                       item.uni.toLocaleLowerCase('tr').includes(query) ||
-                       item.city.toLocaleLowerCase('tr').includes(query);
-            });
-            renderTable(filteredData);
-        }
     </script>
 </body>
 </html>
-<!-- DEVAM PARÇASI: Tüm Bölümler İçin Sabit ve Detaylı Maaş Gösterim Modülü -->
-<script>
-    // Genişletilmiş tüm bölümler kütüphanesini ve maaş/hedef kitle detaylarını güncelleyen ana fonksiyon
-    const extendedFullDepartmentLibrary = {
-        "Bilgisayar Mühendisliği": {
-            kimlerTercihEtmeli: "Analitik düşünmeyi seven, teknoloji meraklısı ve problem çözmekten keyif alanlar.",
-            maas: "35.000 TL - 150.000+ TL",
-            neOgretir: "Algoritmalar, veri yapıları, yazılım geliştirme metodolojileri ve sistem mimarisi.",
-            calismaHayti: "Proje odaklı, esnek saatli, genellikle evden veya modern ofislerde geçen teknik bir rutin.",
-            kariyerYolu: "Junior Developer -> Senior Developer -> Team Lead -> CTO.",
-            katkisi: "Sayısal mantığını geliştirir, dünyayı dijital bir oyun alanı gibi görmeni sağlar."
-        },
-        "Yazılım Mühendisliği": {
-            kimlerTercihEtmeli: "Sürekli üretmeyi seven, dijital ürünler tasarlamaktan ve kod yazmaktan zevk alanlar.",
-            maas: "40.000 TL - 160.000+ TL",
-            neOgretir: "Web/mobil teknolojileri, yazılım yaşam döngüsü, hata ayıklama ve sürdürülebilir kod mimarisi.",
-            calismaHayti: "Tamamen dijital, remote veya hibrit çalışma modelleriyle esnek saatler.",
-            kariyerYolu: "Frontend/Backend Dev -> Full Stack -> Lead Engineer -> Tech Director.",
-            katkisi: "Fikirlerini fiziksel sınırlamalara takılmadan dijital dünyada gerçeğe dönüştürme gücü verir."
-        },
-        "Endüstri Mühendisliği": {
-            kimlerTercihEtmeli: "Süreçleri yönetmeyi, organizasyon kurmayı ve verimliliği artırmayı sevenler.",
-            maas: "30.000 TL - 120.000+ TL",
-            neOgretir: "Verimlilik analizi, yöneylem araştırması, tedarik zinciri yönetimi ve kalite kontrol.",
-            calismaHayti: "Kurumsal ofislerde veri analizi, toplantılar ve süreç iyileştirme projeleriyle geçen hareketli bir tempo.",
-            kariyerYolu: "Uzman Yardımcısı -> Uzman -> Yönetici -> Genel Müdür.",
-            katkisi: "Hayatı ve sistemleri bir 'optimizasyon problemi' olarak görmeni sağlar; liderlik yetisi kazandırır."
-        },
-        "Tıp Fakültesi": {
-            kimlerTercihEtmeli: "Yüksek stres toleransı olan, özverili ve biyolojiye derin ilgisi olanlar.",
-            maas: "45.000 TL - 200.000+ TL",
-            neOgretir: "İnsan anatomisi, fizyoloji, patoloji, farmakoloji ve klinik tıp uygulamaları.",
-            calismaHayti: "Yüksek yoğunluklu, nöbetli, insan hayatına doğrudan dokunan çok disiplinli ve yorucu bir rutin.",
-            kariyerYolu: "Pratisyen -> Uzmanlık Eğitimi (TUS) -> Uzman Doktor -> Akademisyen.",
-            katkisi: "Biyolojik sistemlerin derinliklerine inmeni, hayati krizleri yönetebilmeyi ve derin bir empati duygusu sağlar."
-        },
-        "Hukuk Fakültesi": {
-            kimlerTercihEtmeli: "Adalet duygusu gelişmiş, okumayı seven, hitabet yeteneği güçlü ve detaycı olanlar.",
-            maas: "25.000 TL - 150.000+ TL",
-            neOgretir: "Borçlar, ceza, medeni, idare ve anayasa hukuku; kanun yorumlama teknikleri.",
-            calismaHayti: "Duruşmalar, müvekkil görüşmeleri ve yoğun bir okuma-araştırma döngüsü ile geçen analitik bir hayat.",
-            kariyerYolu: "Stajyer Avukat -> Serbest Avukat / Hakim / Savcı -> Hukuk Müşaviri.",
-            katkisi: "Sorgulayıcı bir bakış açısı, ikna kabiliyeti ve olayları çok yönlü değerlendirme becerisi kazandırır."
-        },
-        "Psikoloji": {
-            kimlerTercihEtmeli: "İnsan ilişkilerine meraklı, sabırlı, iyi bir dinleyici ve gözlemci olanlar.",
-            maas: "22.000 TL - 90.000+ TL",
-            neOgretir: "Bilişsel süreçler, gelişim psikolojisi, sosyal psikoloji, istatistik ve klinik yöntemler.",
-            calismaHayti: "Terapi odaları, hastaneler veya kurumsal İK departmanlarında insanı analiz ederek geçen bir hayat.",
-            kariyerYolu: "Psikolog -> Uzman Psikolog -> Klinik Psikolog / Akademisyen.",
-            katkisi: "İnsan davranışlarının arka planını anlama, derin bir içgörü ve duygusal zeka kapasitesi katar."
-        },
-        "Mimarlık": {
-            kimlerTercihEtmeli: "Sanata ve tasarıma ilgili, detay odaklı, çizim yeteneği olan ve mekana ruh katmayı sevenler.",
-            maas: "28.000 TL - 110.000+ TL",
-            neOgretir: "Yapı fiziği, tasarım teorisi, mimari tarih, bilgisayar destekli çizim (CAD) ve statik.",
-            calismaHayti: "Stüdyo ve şantiye arasında geçen; estetik ile teknik dengeyi gözeten yaratıcı bir tempodur.",
-            kariyerYolu: "Mimar -> Proje Müdürü -> Tasarım Ofisi Sahibi.",
-            katkisi: "Gördüğün her binayı estetik bir filtreden geçirmeni; çevreni daha anlamlı inşa etmeni sağlar."
-        },
-        "Gastronomi ve Mutfak Sanatları": {
-            kimlerTercihEtmeli: "Mutfakta yaratıcı tarifler denemeyi seven, fiziksel tempoya ayak uydurabilen yemek tutkunları.",
-            maas: "24.000 TL - 100.000+ TL",
-            neOgretir: "Dünya mutfakları, gıda güvenliği, menü planlama, gıda bilimi ve mutfak operasyonları.",
-            calismaHayti: "Ayakta çalışılan, yüksek disiplinli, yoğun saatler gerektiren dinamik mutfak ortamı.",
-            kariyerYolu: "Kom Şef -> Chef de Partie -> Sous Chef -> Head Chef / İşletmeci.",
-            katkisi: "Damak tadını ve kültürel vizyonunu geliştirir; kendi mutfak markanı yaratma imkanı sunar."
-        }
-    };
-
-    // Bölüm rehberini her bir bölüm için ayrı ayrı maaş, kimler tercih etmeli ve diğer detaylarla dolduran fonksiyon
-    function renderCompleteDepartmentGuideWithSalaries() {
-        const detailScreen = document.getElementById('screen-detail');
-        if (!detailScreen) return;
-
-        let html = `
-            <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Üniversite Bölümleri Tam Rehberi</h2>
-            <p style="color: var(--text-light); margin-bottom: 2rem;">Tüm bölümlerin maaş skalası, ideal aday profili ve kariyer detayları:</p>
-            
-            <div class="directory-header" style="margin-bottom: 20px;">
-                <input type="text" id="guideSearch" class="search-box" placeholder="Bölüm ara (örn: Tıp, Bilgisayar, Hukuk)..." onkeyup="filterGuideCards()">
-            </div>
-
-            <div id="guideList" style="display: grid; gap: 20px;">
-        `;
-
-        for (const [deptName, info] of Object.entries(extendedFullDepartmentLibrary)) {
-            html += `
-                <div class="detail-card guide-item" data-name="${deptName}">
-                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); padding-bottom: 10px; margin-bottom: 15px;">
-                        <h3 style="color: var(--primary); margin: 0; font-size: 1.3rem;">${deptName}</h3>
-                        <span style="background: #ecfdf5; color: #047857; padding: 6px 14px; border-radius: 8px; font-weight: 700; border: 1px solid #a7f3d0; font-size: 0.95rem;">
-                            Maaş: ${info.maas}
-                        </span>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                        <p><strong>Kimler Tercih Etmeli?:</strong> ${info.kimlerTercihEtmeli}</p>
-                        <p><strong>Çalışma Hayatı:</strong> ${info.calismaHayti}</p>
-                        <p><strong>Ne Öğretir?:</strong> ${info.neOgretir}</p>
-                        <p><strong>Kariyer Yolu:</strong> ${info.kariyerYolu}</p>
-                    </div>
-
-                    <div style="margin-top: 15px; background: #f8fafc; padding: 12px; border-radius: 8px; border-left: 3px solid var(--accent);">
-                        <p style="margin: 0; color: var(--primary);"><strong>Bu Bölüm Sana Ne Katacak?:</strong> ${info.katkisi}</p>
-                    </div>
-                </div>
-            `;
-        }
-
-        html += `</div>`;
-        detailScreen.innerHTML = html;
-    }
-
-    // Arama filtreleme fonksiyonu
-    function filterGuideCards() {
-        const query = document.getElementById('guideSearch').value.toLocaleLowerCase('tr').trim();
-        document.querySelectorAll('.guide-item').forEach(item => {
-            const name = item.getAttribute('data-name').toLocaleLowerCase('tr');
-            item.style.display = name.includes(query) ? 'block' : 'none';
-        });
-    }
-
-    // Sayfa yüklendiğinde ve rehber sekmesine geçildiğinde çalıştır
-    document.addEventListener("DOMContentLoaded", () => {
-        renderCompleteDepartmentGuideWithSalaries();
-    });
-</script>
-<!-- DEVAM PARÇASI: Dinamik Bölüm Rehberi Kütüphanesi -->
-    <script>
-        // Tüm bölümler için detaylı müfredat, çalışma hayatı ve kariyer rehberi veri tabanı
-        const fullDepartmentLibrary = {
-            "Bilgisayar Mühendisliği": {
-                neOgretir: "Algoritmalar, veri yapıları, yazılım geliştirme metodolojileri ve sistem mimarisi.",
-                calismaHayti: "Proje odaklı, esnek saatli, genellikle evden veya modern ofislerde geçen teknik bir rutin.",
-                kariyerYolu: "Junior Developer -> Senior Developer -> Team Lead -> CTO veya Freelance Girişimcilik.",
-                katkisi: "Sayısal mantığını geliştirir, dünyayı dijital bir oyun alanı gibi görmeni sağlar."
-            },
-            "Endüstri Mühendisliği": {
-                neOgretir: "Verimlilik analizi, yöneylem araştırması, tedarik zinciri yönetimi ve kalite kontrol.",
-                calismaHayti: "Kurumsal ofislerde veri analizi, toplantılar ve süreç iyileştirme projeleriyle geçen hareketli bir tempo.",
-                kariyerYolu: "Uzman Yardımcısı -> Uzman -> Yönetici -> Genel Müdür / Danışman.",
-                katkisi: "Hayatı ve sistemleri bir 'optimizasyon problemi' olarak görmeni sağlar; liderlik yetisi kazandırır."
-            },
-            "Tıp Fakültesi": {
-                neOgretir: "İnsan anatomisi, fizyoloji, patoloji, farmakoloji ve klinik tıp uygulamaları.",
-                calismaHayti: "Yüksek yoğunluklu, nöbetli, insan hayatına doğrudan dokunan çok disiplinli ve yorucu bir rutin.",
-                kariyerYolu: "İntörn Doktor -> Pratisyen -> Uzmanlık Eğitimi (TUS) -> Uzman Doktor -> Akademisyen.",
-                katkisi: "Biyolojik sistemlerin derinliklerine inmeni, hayati krizleri yönetebilmeyi ve derin bir empati duygusu geliştirmeni sağlar."
-            },
-            "Hukuk Fakültesi": {
-                neOgretir: "Borçlar, ceza, medeni, idare ve anayasa hukuku; kanun yorumlama teknikleri.",
-                calismaHayti: "Duruşmalar, müvekkil görüşmeleri ve yoğun bir okuma-araştırma döngüsü ile geçen analitik bir hayat.",
-                kariyerYolu: "Stajyer Avukat -> Avukat -> Hakim/Savcı/Noter veya Hukuk Müşaviri.",
-                katkisi: "Sorgulayıcı bir bakış açısı, ikna kabiliyeti ve olayları çok yönlü değerlendirme becerisi kazandırır."
-            },
-            "Psikoloji": {
-                neOgretir: "Bilişsel süreçler, gelişim psikolojisi, sosyal psikoloji, istatistik ve klinik yöntemler.",
-                calismaHayti: "Terapi odaları, hastaneler veya kurumsal İK departmanlarında insanı analiz ederek geçen bir hayat.",
-                kariyerYolu: "Psikolog -> Uzman Psikolog -> Klinik Psikolog/Akademisyen.",
-                katkisi: "İnsan davranışlarının arka planını anlama, derin bir içgörü ve duygusal zeka kapasitesi katar."
-            },
-            "Mimarlık": {
-                neOgretir: "Yapı fiziği, tasarım teorisi, mimari tarih, bilgisayar destekli çizim (CAD) ve statik.",
-                calismaHayti: "Stüdyo ve şantiye arasında geçen; estetik ile teknik dengeyi gözeten yaratıcı bir tempodur.",
-                kariyerYolu: "Mimar -> Proje Müdürü -> Tasarım Ofisi Sahibi.",
-                katkisi: "Gördüğün her binayı ve alanı estetik bir filtreden geçirmeni; çevreni daha anlamlı inşa etmeni sağlar."
-            },
-            "Gastronomi ve Mutfak Sanatları": {
-                neOgretir: "Dünya mutfakları, gıda güvenliği, menü planlama ve gastronomi tarihi.",
-                calismaHayti: "Ayakta çalışılan, disiplinli, fiziksel dayanıklılık isteyen ancak anlık ödülleri olan yoğun bir ortam.",
-                kariyerYolu: "Kom Şef -> Şef Yardımcısı -> Head Chef -> Restoran İşletmecisi.",
-                katkisi: "Damak tadını geliştirir, kültürel bir vizyon katar ve zanaatın mutfaktaki hazzını yaşatır."
-            }
-        };
-
-        // Bölüm Rehberini dolduran modül
-        function populateDetailedDepartmentGuide() {
-            const detailScreen = document.getElementById('screen-detail');
-            let html = `
-                <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Üniversite Bölümleri Tam Rehberi</h2>
-                <p style="color: var(--text-light); margin-bottom: 2rem;">İlgilendiğin bölümü seçerek detaylarına ulaş:</p>
-                <div class="directory-header" style="margin-bottom: 20px;">
-                    <input type="text" id="guideSearch" class="search-box" placeholder="Bölüm ara (örn: Tıp, Mimarlık)..." onkeyup="filterGuide()">
-                </div>
-                <div id="guideList" style="display: grid; gap: 20px;">
-            `;
-
-            for (const [dept, info] of Object.entries(fullDepartmentLibrary)) {
-                html += `
-                    <div class="detail-card guide-item" data-name="${dept}">
-                        <h3 style="color: var(--accent); border-bottom: 1px solid #eee; padding-bottom: 10px;">${dept}</h3>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
-                            <p><strong>Ne Öğretir:</strong> ${info.neOgretir}</p>
-                            <p><strong>Çalışma Hayatı:</strong> ${info.calismaHayti}</p>
-                            <p><strong>Kariyer Yolu:</strong> ${info.kariyerYolu}</p>
-                            <p style="color: var(--primary);"><strong>Bu Bölüm Sana Ne Katacak?:</strong> ${info.katkisi}</p>
-                        </div>
-                    </div>
-                `;
-            }
-            html += `</div>`;
-            detailScreen.innerHTML = html;
-        }
-
-        // Rehber içi arama filtresi
-        function filterGuide() {
-            const query = document.getElementById('guideSearch').value.toLocaleLowerCase('tr');
-            document.querySelectorAll('.guide-item').forEach(item => {
-                const name = item.getAttribute('data-name').toLocaleLowerCase('tr');
-                item.style.display = name.includes(query) ? 'block' : 'none';
-            });
-        }
-
-        // Rehberin yüklendiğinde otomatik dolması
-        window.addEventListener('load', () => {
-            populateDetailedDepartmentGuide();
-        });
-    </script>
-    const fullDepartmentLibrary = {
-    "Bilgisayar Mühendisliği": { kimlerTercihEtmeli: "Kodlama, yapay zeka ve sistem mimarisine tutkulu olanlar.", maas: "35.000 TL - 200.000 TL" },
-    "Yazılım Mühendisliği": { kimlerTercihEtmeli: "Dijital ürün geliştirme ve kod mimarisiyle ilgilenenler.", maas: "40.000 TL - 180.000 TL" },
-    "Endüstri Mühendisliği": { kimlerTercihEtmeli: "Süreç optimizasyonu, yöneylem ve yönetimsel verimlilik arayanlar.", maas: "33.000 TL - 170.000 TL" },
-    "Makine Mühendisliği": { kimlerTercihEtmeli: "Mekanik sistemler, enerji ve üretim teknolojilerine meraklılar.", maas: "35.000 TL - 160.000 TL" },
-    "İnşaat Mühendisliği": { kimlerTercihEtmeli: "Yapı fiziği, statik ve saha yönetimiyle uğraşmak isteyenler.", maas: "35.000 TL - 180.000 TL" },
-    "Elektrik-Elektronik Mühendisliği": { kimlerTercihEtmeli: "Devre sistemleri, enerji ve gömülü sistemlere ilgisi olanlar.", maas: "35.000 TL - 170.000 TL" },
-    "Tıp": { kimlerTercihEtmeli: "Yüksek empati, disiplin ve insan sağlığına adanmışlık gerektirir.", maas: "45.000 TL - 350.000 TL" },
-    "Diş Hekimliği": { kimlerTercihEtmeli: "El becerisi yüksek, klinik estetikle ilgilenenler.", maas: "80.000 TL - 700.000 TL" },
-    "Eczacılık": { kimlerTercihEtmeli: "Kimyaya meraklı, sağlık danışmanlığı yapmak isteyenler.", maas: "35.000 TL - 500.000 TL" },
-    "Hemşirelik": { kimlerTercihEtmeli: "İnsan ilişkileri kuvvetli, bakım hizmetlerine yatkın olanlar.", maas: "35.000 TL - 55.000 TL" },
-    "Hukuk": { kimlerTercihEtmeli: "Analitik düşünme, hitabet ve adalet arayışı güçlü olanlar.", maas: "28.000 TL - 400.000 TL" },
-    "Psikoloji": { kimlerTercihEtmeli: "İnsan davranışlarını anlamaya çalışan, iyi gözlemci olanlar.", maas: "25.000 TL - 150.000 TL" },
-    "Mimarlık": { kimlerTercihEtmeli: "Tasarım, estetik ve yapısal planlamaya ilgi duyanlar.", maas: "30.000 TL - 300.000 TL" },
-    "İşletme": { kimlerTercihEtmeli: "Organizasyon, liderlik ve ekonomi dünyasında yer almak isteyenler.", maas: "28.000 TL - 300.000 TL" },
-    "İktisat": { kimlerTercihEtmeli: "Finansal piyasalar ve makroekonomik verilerle ilgilenenler.", maas: "28.000 TL - 200.000 TL" },
-    "Uluslararası İlişkiler": { kimlerTercihEtmeli: "Dünya siyaseti ve diplomasiye meraklı olanlar.", maas: "25.000 TL - 150.000 TL" },
-    "Öğretmenlik (Tüm Branşlar)": { kimlerTercihEtmeli: "Eğitim verme ve rehberlik etme tutkusu olanlar.", maas: "30.000 TL - 75.000 TL" },
-    "Veterinerlik": { kimlerTercihEtmeli: "Hayvan sağlığı ve biyolojiye derin ilgisi olanlar.", maas: "50.000 TL - 300.000 TL" },
-    "Grafik Tasarım": { kimlerTercihEtmeli: "Görsel iletişim ve sanatsal üretim odaklı olanlar.", maas: "25.000 TL - 200.000 TL" },
-    "Gastronomi": { kimlerTercihEtmeli: "Mutfak operasyonları ve yemek sanatına tutkulu olanlar.", maas: "24.000 TL - 100.000 TL" },
-    "Sosyoloji": { kimlerTercihEtmeli: "Toplumsal yapıyı ve insan etkileşimini merak edenler.", maas: "24.000 TL - 100.000 TL" }
-};
