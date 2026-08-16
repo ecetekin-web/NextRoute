@@ -1342,4 +1342,45 @@
         window.addEventListener('load', () => {
             populateDetailedDepartmentGuide();
         });
-    </script>
+    </script><!-- DEVAM PARÇASI: Maaş Vurgu Modülü -->
+<style>
+    /* Maaşları belirginleştiren özel stil */
+    .salary-highlight {
+        display: inline-block;
+        background: #e6fffa;
+        color: #047857;
+        padding: 4px 12px;
+        border-radius: 6px;
+        font-weight: 700;
+        border: 1px solid #a7f3d0;
+        font-size: 0.95rem;
+    }
+</style>
+
+<script>
+    // Rehber içeriğini maaşları vurgulayacak şekilde güncelleyen fonksiyon
+    function updateDepartmentGuideDisplay() {
+        const guideItems = document.querySelectorAll('.guide-item');
+        
+        guideItems.forEach(item => {
+            const deptName = item.getAttribute('data-name');
+            const deptInfo = fullDepartmentLibrary[deptName];
+            
+            if (deptInfo && deptInfo.maas) {
+                // Mevcut içeriği bul ve maaş kısmını şık bir kutu ile değiştir
+                const paragraphs = item.querySelectorAll('p');
+                paragraphs.forEach(p => {
+                    if (p.textContent.includes('Maaş Aralığı')) {
+                        p.innerHTML = `<strong>Maaş Aralığı (Min-Max):</strong> <span class="salary-highlight">${deptInfo.maas}</span>`;
+                    }
+                });
+            }
+        });
+    }
+
+    // Sayfa render edildikten hemen sonra maaşları stilize et
+    document.addEventListener("DOMContentLoaded", () => {
+        // Küçük bir gecikme ile verinin yerleştiğinden emin oluyoruz
+        setTimeout(updateDepartmentGuideDisplay, 100);
+    });
+</script>
