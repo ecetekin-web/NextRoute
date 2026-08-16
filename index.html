@@ -1162,3 +1162,1196 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ne İstemiyorsun? - 81 İl Kariyer ve Üniversite Rehberi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #FAFAFA;
+            color: #111;
+        }
+
+        /* Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 80px;
+            background: #fff;
+            border-bottom: 1px solid #eaeaea;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            background: #2563eb;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 8px;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        nav a:hover, nav a.active {
+            color: #2563eb;
+        }
+
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .notification-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* Sayfa Yönetimi */
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+
+        /* Hero Section (Ana Sayfa) */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 40px;
+        }
+
+        .hero-content {
+            max-width: 550px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #f1f5f9;
+            color: #ea580c;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 42px;
+            line-height: 1.2;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #0f172a;
+        }
+
+        .hero-content p {
+            color: #475569;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn-primary {
+            background: #ea580c;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #c2410c;
+        }
+
+        .hero-image img {
+            width: 480px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .process {
+            text-align: center;
+            padding: 60px 20px;
+            background: #fff;
+        }
+
+        .process h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .process > p {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 50px;
+        }
+
+        .steps-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .step-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: left;
+            flex: 1;
+        }
+
+        .step-number {
+            background: #e2e8f0;
+            color: #334155;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .step-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .stats-bar {
+            background: #3b82f6;
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .stat-item h3 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-item p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Quiz Layout (Detaylandırılmış Eleme Testi) */
+        .quiz-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 40px;
+            display: flex;
+            gap: 40px;
+        }
+
+        .quiz-sidebar {
+            width: 280px;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .quiz-sidebar h3 {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .quiz-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            font-size: 13px;
+            color: #64748b;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+
+        .quiz-menu-item.active {
+            background: #eff6ff;
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .quiz-content {
+            flex: 1;
+        }
+
+        .quiz-progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .progress-bar-container {
+            background: #e2e8f0;
+            height: 6px;
+            border-radius: 3px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            background: #2563eb;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .quiz-step-pane {
+            display: none;
+        }
+        .quiz-step-pane.active {
+            display: block;
+        }
+
+        .quiz-content h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .quiz-content > p {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #334155;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tag:hover {
+            background: #e2e8f0;
+        }
+
+        .tag.selected {
+            background: #eff6ff;
+            border-color: #3b82f6;
+            color: #2563eb;
+        }
+
+        .tag-reset {
+            background: #fef2f2;
+            border-color: #fecaca;
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .tag-reset:hover {
+            background: #fee2e2;
+        }
+
+        .quiz-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eaeaea;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .btn-back {
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* Ortak Sayda Konteynerleri */
+        .generic-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .generic-header {
+            margin-bottom: 25px;
+        }
+
+        .generic-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .generic-header p {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .search-bar-box {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .search-bar-box input {
+            width: 100%;
+            padding: 12px 16px 12px 40px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+            background: #fff;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .layout-grid {
+            display: flex;
+            gap: 30px;
+        }
+
+        .filter-sidebar {
+            width: 280px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            height: fit-content;
+        }
+
+        .filter-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 20px;
+        }
+
+        .filter-group {
+            margin-bottom: 20px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+
+        .toggle-switch-group {
+            display: flex;
+            background: #f1f5f9;
+            border-radius: 6px;
+            padding: 3px;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748b;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .toggle-btn.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .table-content {
+            flex: 1;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            max-height: 650px;
+            overflow-y: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        .data-table th {
+            background: #f8fafc;
+            color: #64748b;
+            font-weight: 600;
+            padding: 14px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 12px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .data-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+            cursor: pointer;
+        }
+
+        .data-table tr:hover td {
+            background: #f8fafc;
+        }
+
+        .badge-success {
+            background: #ecfdf5;
+            color: #059669;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 11px;
+        }
+
+        /* Modallar */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-card {
+            background: white;
+            width: 700px;
+            max-width: 90%;
+            border-radius: 16px;
+            padding: 30px;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f1f5f9;
+            border: none;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #475569;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 5px;
+        }
+
+        .modal-subtitle {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        .modal-section {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 15px;
+        }
+
+        .modal-section h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 8px;
+        }
+
+        .modal-section p, .modal-section ul {
+            font-size: 13px;
+            color: #334155;
+            line-height: 1.5;
+        }
+
+        .modal-section ul {
+            padding-left: 18px;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: white;
+            padding: 60px 80px 30px 80px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .footer-brand p {
+            color: #94a3b8;
+            font-size: 13px;
+            margin-top: 15px;
+            max-width: 300px;
+            line-height: 1.5;
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 30px auto 0 auto;
+            color: #94a3b8;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Üst Menü -->
+    <header>
+        <div class="logo" onclick="showPage('home-page')">
+            <span class="logo-icon">?</span> Ne İstemiyorsun?
+        </div>
+        <nav>
+            <a onclick="showPage('home-page')" id="nav-home" class="active">Ana Sayfa</a>
+            <a onclick="showPage('quiz-step-1')" id="nav-quiz">Eleme Testi</a>
+            <a onclick="showPage('uni-page')" id="nav-uni">Üniversiteler (81 İl)</a>
+            <a onclick="showPage('dept-page')" id="nav-dept">Bölümler & Detaylar</a>
+            <a onclick="showPage('feedback-page')" id="nav-feedback">Geri Bildirim</a>
+        </nav>
+        <div class="user-area">
+            <button class="notification-btn">🔔</button>
+        </div>
+    </header>
+
+    <!-- 1. ANA SAYFA -->
+    <div id="home-page" class="page active">
+        <section class="hero">
+            <div class="hero-content">
+                <span class="badge">TÜRKİYE GENELİ 81 İL ÜNİVERSİTE & BÖLÜM REHBERİ</span>
+                <h1>Ne İstediğini Bilmek Zorunda Değilsin.</h1>
+                <p>Türkiye'deki 81 ilin tüm üniversitelerini ve bölümlerini keşfet; bölümlere tıklayarak hedef kitle, maaş ve kariyer detaylarını incele!</p>
+                <button class="btn-primary" onclick="showPage('uni-page')">Tüm Üniversiteleri İncele</button>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Öğrenciler">
+            </div>
+        </section>
+
+        <section class="process">
+            <h2>Sistem Nasıl Çalışır?</h2>
+            <p>81 ildeki binlerce veri parmaklarınızın ucunda.</p>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Üniversitelere Göz At</h3>
+                    <p>81 ilden dilediğin üniversiteye tıkla; o okulda bulunan bütün bölümleri, şehirleri ve taban puanlarını anında gör.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Bölüm Detaylarını İncele</h3>
+                    <p>Elektrik Mühendisliği, Tıp, Bilgisayar veya Hukuk... Hangi bölüme tıklarsan hedef kitleyi, maaş skalasını ve mezuniyet sonrası iş olanaklarını öğren.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Eleme Testiyle Eşleştir</h3>
+                    <p>İstemediğin çalışma koşullarını detaylı adımlarla eleyerek karakterine en uygun mesleği nokta atışı bul.</p>
+                </div>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-item"><h3>81</h3><p>İl Kapsamı</p></div>
+                <div class="stat-item"><h3>200+</h3><p>Üniversite Verisi</p></div>
+                <div class="stat-item"><h3>1000+</h3><p>Bölüm Detayı</p></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 2. ELEME TESTİ - ÇOKLU ADIM (DETAYLANDIRILMIŞ) -->
+    <div id="quiz-step-1" class="page">
+        <div class="quiz-container">
+            <div class="quiz-sidebar">
+                <h3>Test Adımları</h3>
+                <div class="quiz-menu-item active" id="menu-step-1" onclick="goToQuizStep(1)">1. Çalışma Ortamı</div>
+                <div class="quiz-menu-item" id="menu-step-2" onclick="goToQuizStep(2)">2. İletişim & Sosyal Dinamik</div>
+                <div class="quiz-menu-item" id="menu-step-3" onclick="goToQuizStep(3)">3. Fiziksel / Seyahat Koşulları</div>
+                <div class="quiz-menu-item" id="menu-step-4" onclick="goToQuizStep(4)">4. Kariyer / Risk Tercihleri</div>
+            </div>
+
+            <div class="quiz-content">
+                
+                <!-- ADIM 1: Çalışma Ortamı -->
+                <div class="quiz-step-pane active" id="pane-step-1">
+                    <div class="quiz-progress-header">
+                        <span>ADIM 1 / 4: ÇALIŞMA ORTAMI</span>
+                        <span>%25 Tamamlandı</span>
+                    </div>
+                    <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 25%;"></div></div>
+                    
+                    <h2>Gelecekte nasıl bir ofis veya çalışma ortamında OLMAK İSTEMEZSİN?</h2>
+                    <p>Kaçınmak istediğin mekanik veya fiziksel ortam şartlarını seç.</p>
+                    
+                    <div class="tags-container" id="tags-step-1">
+                        <span class="tag tag-reset" onclick="resetTags('tags-step-1')">0'la (Temizle)</span>
+                        <span class="tag" onclick="toggleTag(this)">Sürekli kapalı/penceresiz odalarda kalmak +</span>
+                        <span class="tag" onclick="toggleTag(this)">Açık havada/sokakta çalışmak +</span>
+                        <span class="tag" onclick="toggleTag(this)">Sürekli bilgisayar ekranına bakmak +</span>
+                        <span class="tag" onclick="toggleTag(this)">Laboratuvar ortamında kimyasallarla uğraşmak +</span>
+                        <span class="tag" onclick="toggleTag(this)">Aşırı gürültülü/şantiye ortamında bulunmak +</span>
+                    </div>
+
+                    <div class="quiz-footer">
+                        <button class="btn-back" onclick="showPage('home-page')">Geri</button>
+                        <button class="btn-primary" onclick="goToQuizStep(2)">Sonraki Adım →</button>
+                    </div>
+                </div>
+
+                <!-- ADIM 2: İletişim & Sosyal Dinamik -->
+                <div class="quiz-step-pane" id="pane-step-2">
+                    <div class="quiz-progress-header">
+                        <span>ADIM 2 / 4: İLETİŞİM VE İNSAN İLİŞKİLERİ</span>
+                        <span>%50 Tamamlandı</span>
+                    </div>
+                    <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 50%;"></div></div>
+                    
+                    <h2>İnsanlarla ilişkilerde ve ekip çalışmasında hangi durumlara tahammül edemezsin?</h2>
+                    <p>Sosyal dinamiklerde kaçındığın özellikleri seç.</p>
+                    
+                    <div class="tags-container" id="tags-step-2">
+                        <span class="tag tag-reset" onclick="resetTags('tags-step-2')">0'la (Temizle)</span>
+                        <span class="tag" onclick="toggleTag(this)">Sürekli yeni insanlarla tanışıp konuşmak zorunda kalmak +</span>
+                        <span class="tag" onclick="toggleTag(this)">Derin ve kalabalık krizleri yönetmek +</span>
+                        <span class="tag" onclick="toggleTag(this)">Tek başına, ekipsiz izole çalışmak +</span>
+                        <span class="tag" onclick="toggleTag(this)">Müşteri veya halkla doğrudan yüz yüze gelmek +</span>
+                        <span class="tag" onclick="toggleTag(this)">Sürekli sunum yapmak / topluluk önünde konuşmak +</span>
+                    </div>
+
+                    <div class="quiz-footer">
+                        <button class="btn-back" onclick="goToQuizStep(1)">Geri</button>
+                        <button class="btn-primary" onclick="goToQuizStep(3)">Sonraki Adım →</button>
+                    </div>
+                </div>
+
+                <!-- ADIM 3: Fiziksel / Seyahat Koşulları -->
+                <div class="quiz-step-pane" id="pane-step-3">
+                    <div class="quiz-progress-header">
+                        <span>ADIM 3 / 4: TEMPO VE SEYAHAT</span>
+                        <span>%75 Tamamlandı</span>
+                    </div>
+                    <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 75%;"></div></div>
+                    
+                    <h2>Zamanlama, seyahat ve fiziksel tempo konusunda neleri KABUL EDEMEZSİN?</h2>
+                    <p>Günlük rutininizi kısıtlayacak unsurları seçin.</p>
+                    
+                    <div class="tags-container" id="tags-step-3">
+                        <span class="tag tag-reset" onclick="resetTags('tags-step-3')">0'la (Temizle)</span>
+                        <span class="tag" onclick="toggleTag(this)">Sürekli şehir dışı veya yurt dışı seyahat etmek +</span>
+                        <span class="tag" onclick="toggleTag(this)">Gece nöbetleri ve düzensiz vardiyalar tutmak +</span>
+                        <span class="tag" onclick="toggleTag(this)">Hareketsiz, saatlerce aynı masada çakılı kalmak +</span>
+                        <span class="tag" onclick="toggleTag(this)">Fiziksel güç gerektiren işler yapmak +</span>
+                        <span class="tag" onclick="toggleTag(this)">Esnek olmayan katı mesai saatlerine uymak +</span>
+                    </div>
+
+                    <div class="quiz-footer">
+                        <button class="btn-back" onclick="goToQuizStep(2)">Geri</button>
+                        <button class="btn-primary" onclick="goToQuizStep(4)">Sonraki Adım →</button>
+                    </div>
+                </div>
+
+                <!-- ADIM 4: Kariyer / Risk Tercihleri -->
+                <div class="quiz-step-pane" id="pane-step-4">
+                    <div class="quiz-progress-header">
+                        <span>ADIM 4 / 4: RİSK VE SORUMLULUK</span>
+                        <span>%100 Tamamlandı</span>
+                    </div>
+                    <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 100%;"></div></div>
+                    
+                    <h2>Kariyer riski, sorumluluk türü ve gelecek kaygısı açısından nelerden kaçınırsın?</h2>
+                    <p>Son eleme kriterlerini belirle.</p>
+                    
+                    <div class="tags-container" id="tags-step-4">
+                        <span class="tag tag-reset" onclick="resetTags('tags-step-4')">0'la (Temizle)</span>
+                        <span class="tag" onclick="toggleTag(this)">İnsan hayatından sorumlu olmak (Hukuki/Tıbbi risk) +</span>
+                        <span class="tag" onclick="toggleTag(this)">Yüksek finansal risk almak (Satış primi/Girişimcilik) +</span>
+                        <span class="tag" onclick="toggleTag(this)">Yıllarca süren teorik eğitimler ve sınavlar ezberlemek +</span>
+                        <span class="tag" onclick="toggleTag(this)">Yavaş yükselen, sabit ve düşük maaşlı kariyerler +</span>
+                        <span class="tag" onclick="toggleTag(this)">Sürekli yeni teknolojiler öğrenip kendini güncellememe zorunluluğu +</span>
+                    </div>
+
+                    <div class="quiz-footer">
+                        <button class="btn-back" onclick="goToQuizStep(3)">Geri</button>
+                        <button class="btn-primary" onclick="showPage('uni-page')">Sonuçlara / Üniversitelere Git</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. ÜNİVERSİTELER SAYFASI (81 İl) -->
+    <div id="uni-page" class="page">
+        <div class="generic-container">
+            <div class="generic-header">
+                <h1>81 İl Üniversiteleri ve Bütün Bölümleri</h1>
+                <p>Arama çubuğunu kullanarak şehir, üniversite veya bölüm arayın. Herhangi bir üniversiteye tıklayarak o okula ait tüm bölümleri ve puanları görüntüleyin.</p>
+            </div>
+
+            <div class="search-bar-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="uniSearchInput" placeholder="81 İlden üniversite, şehir veya bölüm arayın (Örn: Adana, Ankara, İstanbul, Tıp)..." onkeyup="filterUniTable()">
+            </div>
+
+            <div class="layout-grid">
+                <div class="filter-sidebar">
+                    <div class="filter-title">Filtreler</div>
+                    <div class="filter-group">
+                        <label>Üniversite Türü</label>
+                        <div class="toggle-switch-group">
+                            <button class="toggle-btn active" onclick="setUniType(this, 'all')">Tümü</button>
+                            <button class="toggle-btn" onclick="setUniType(this, 'Devlet')">Devlet</button>
+                            <button class="toggle-btn" onclick="setUniType(this, 'Vakıf')">Vakıf</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-content">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Şehir</th>
+                                <th>Üniversite Adı</th>
+                                <th>Bölüm</th>
+                                <th>Tür</th>
+                                <th>Taban Puan</th>
+                                <th>Doluluk</th>
+                            </tr>
+                        </thead>
+                        <tbody id="uniTableBody">
+                            <!-- Dinamik yüklenir -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. BÖLÜMLER SAYFASI -->
+    <div id="dept-page" class="page">
+        <div class="generic-container">
+            <div class="generic-header">
+                <h1>Bölüm Rehberi ve Detaylı Analizler</h1>
+                <p>Hangi bölümün kimler için uygun olduğunu, maaş skalasını ve kariyer beklentilerini görmek için ilgili bölüme tıklayın.</p>
+            </div>
+
+            <div class="search-bar-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="deptSearchInput" placeholder="Bölüm adı arayın (Örn: Elektrik Mühendisliği, Tıp, Bilgisayar)..." onkeyup="filterDeptList()">
+            </div>
+
+            <div class="table-content" style="max-height: 700px;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Bölüm Adı</th>
+                            <th>Puan Türü</th>
+                            <th>Ortalama Başlangıç Maaşı</th>
+                            <th>İstihdam Oranı</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody id="deptTableBody">
+                        <!-- Dinamik yüklenir -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. GERİ BİLDİRİM SAYFASI -->
+    <div id="feedback-page" class="page">
+        <div class="generic-container" style="max-width: 800px;">
+            <div class="generic-header" style="text-align: center;">
+                <h1>Geri Bildirim & Öneri</h1>
+                <p>Eksik olmasını istediğiniz bir üniversite veya bölüm varsa bize bildirin.</p>
+            </div>
+            <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 30px;">
+                <form onsubmit="event.preventDefault(); alert('Geri bildiriminiz başarıyla alındı!');">
+                    <div style="margin-bottom: 15px;">
+                        <label style="display:block; font-size:12px; font-weight:600; margin-bottom:6px;">Mesajınız</label>
+                        <textarea style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; height:100px;" placeholder="Öneri veya talebinizi yazın..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Gönder</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ÜNİVERSİTE DETAY MODALI -->
+    <div class="modal-overlay" id="uniModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeUniModal()">✕</button>
+            <div class="modal-title" id="modalUniName">Üniversite Adı</div>
+            <div class="modal-subtitle" id="modalUniCity">Şehir ve Tür</div>
+            <div class="modal-section">
+                <h4>Bu Üniversitedeki Bütün Bölümler ve Puanlar</h4>
+                <div id="modalUniDeptsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BÖLÜM DETAY MODALI -->
+    <div class="modal-overlay" id="deptModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeDeptModal()">✕</button>
+            <div class="modal-title" id="modalDeptName">Bölüm Adı</div>
+            <div class="modal-subtitle" id="modalDeptScoreType">Puan Türü</div>
+            
+            <div class="modal-section">
+                <h4>🎯 Hedef Kitle & Kimler İçin Uygun?</h4>
+                <p id="modalDeptTargetAudience">Hedef kitle bilgisi...</p>
+            </div>
+
+            <div class="modal-section">
+                <h4>💰 Maaş Skalası & Kariyer Olanakları</h4>
+                <p id="modalDeptSalary">Maaş bilgisi...</p>
+            </div>
+
+            <div class="modal-section">
+                <h4>📚 Bölümün Temel Odak Noktaları</h4>
+                <ul id="modalDeptHighlights"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo" style="color: white;" onclick="showPage('home-page')">
+                    <span class="logo-icon">?</span> Ne İstemiyorsun?
+                </div>
+                <p>Türkiye'nin 81 ilindeki tüm üniversite ve bölümleri kapsayan eliminasyon odaklı rehberlik platformu.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Ne İstemiyorsun? Tüm hakları saklıdır.</span>
+        </div>
+    </footer>
+
+    <!-- Script -->
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Quiz Adımları Arasında Geçiş Yapma Fonksiyonu
+        function goToQuizStep(stepNumber) {
+            document.querySelectorAll('.quiz-step-pane').forEach(pane => pane.classList.remove('active'));
+            document.querySelectorAll('.quiz-sidebar .quiz-menu-item').forEach(item => item.classList.remove('active'));
+            
+            document.getElementById(`pane-step-${stepNumber}`).classList.add('active');
+            document.getElementById(`menu-step-${stepNumber}`).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function toggleTag(element) {
+            element.classList.toggle('selected');
+        }
+
+        function resetTags(containerId) {
+            const container = document.getElementById(containerId);
+            container.querySelectorAll('.tag').forEach(tag => {
+                if(!tag.classList.contains('tag-reset')) {
+                    tag.classList.remove('selected');
+                }
+            });
+        }
+
+        // 81 İlden Kapsamlı Üniversite ve Bölüm Veri Tabanı
+        const masterUniversityData = [
+            {city: "Adana", uni: "Çukurova Üniversitesi", dept: "Tıp Fakültesi", type: "Devlet", score: "508.40", rate: "%100"},
+            {city: "Adana", uni: "Çukurova Üniversitesi", dept: "Elektrik-Elektronik Mühendisliği", type: "Devlet", score: "472.10", rate: "%100"},
+            {city: "Adana", uni: "Çukurova Üniversitesi", dept: "Bilgisayar Mühendisliği", type: "Devlet", score: "485.60", rate: "%100"},
+            {city: "Adana", uni: "Çukurova Üniversitesi", dept: "Hukuk Fakültesi", type: "Devlet", score: "479.20", rate: "%100"},
+            {city: "Adana", uni: "Çukurova Üniversitesi", dept: "Makine Mühendisliği", type: "Devlet", score: "430.50", rate: "%100"},
+            {city: "Adana", uni: "Adana Alparslan Türkeş Bilim ve Teknoloji Üniversitesi", dept: "Yazılım Mühendisliği", type: "Devlet", score: "460.30", rate: "%100"},
+            {city: "Adana", uni: "Adana Alparslan Türkeş Bilim ve Teknoloji Üniversitesi", dept: "Elektrik-Elektronik Mühendisliği", type: "Devlet", score: "442.80", rate: "%100"},
+            {city: "Ankara", uni: "Orta Doğu Teknik Üniversitesi (ODTÜ)", dept: "Bilgisayar Mühendisliği", type: "Devlet", score: "538.50", rate: "%100"},
+            {city: "Ankara", uni: "Orta Doğu Teknik Üniversitesi (ODTÜ)", dept: "Elektrik-Elektronik Mühendisliği", type: "Devlet", score: "532.10", rate: "%100"},
+            {city: "Ankara", uni: "Hacettepe Üniversitesi", dept: "Tıp Fakültesi (İngilizce)", type: "Devlet", score: "534.20", rate: "%100"},
+            {city: "İstanbul", uni: "İstanbul Üniversitesi", dept: "Bilgisayar Mühendisliği", type: "Devlet", score: "509.20", rate: "%100"},
+            {city: "İstanbul", uni: "Boğaziçi Üniversitesi", dept: "Elektrik-Elektronik Mühendisliği", type: "Devlet", score: "540.20", rate: "%100"},
+            {city: "İzmir", uni: "Ege Üniversitesi", dept: "Tıp Fakültesi", type: "Devlet", score: "512.40", rate: "%100"}
+        ];
+
+        // Bölüm Detay Veri Tabanı
+        const departmentDetails = {
+            "Elektrik-Elektronik Mühendisliği": {
+                scoreType: "Sayısal",
+                targetAudience: "Fizik ve matematiğe ilgi duyan, donanım, yazılım, enerji sistemleri ve devre tasarımı gibi konularda analitik düşünebilen öğrenciler için idealdir.",
+                salary: "35.000 TL - 95.000 TL (Deneyime ve sektöre göre değişir)",
+                highlights: [
+                    "Enerji üretim ve dağıtım şirketlerinde kariyer imkanı",
+                    "Gömülü sistemler ve savunma sanayiinde yüksek talep",
+                    "Uluslararası Ar-Ge projelerinde çalışma fırsatı"
+                ]
+            },
+            "Bilgisayar Mühendisliği": {
+                scoreType: "Sayısal",
+                targetAudience: "Problem çözmeyi seven, yazılım dilleriyle projeler üretmekten keyif alan ve teknolojik gelişmeleri yakından takip eden bireyler.",
+                salary: "40.000 TL - 120.000+ TL",
+                highlights: [
+                    "Uzaktan (remote) çalışma esnekliği",
+                    "Yapay zeka, veri bilimi ve siber güvenlik gibi geleceğin alanları",
+                    "Küresel ölçekte iş bulma kolaylığı"
+                ]
+            },
+            "Tıp Fakültesi": {
+                scoreType: "Sayısal",
+                targetAudience: "İnsan biyolojisine ilgi duyan, yüksek sorumluluk bilincine ve uzun süreli yoğun tempoda çalışma sabrına sahip adaylar.",
+                salary: "60.000 TL - 150.000+ TL (Uzmanlığa göre artar)",
+                highlights: [
+                    "Toplumda yüksek saygınlık ve iş güvencesi",
+                    "Uzmanlık sınavı (TUS) ile branşlaşma imkanı",
+                    "Hayat kurtarmaya dayalı kutsal bir meslek icra etme"
+                ]
+            },
+            "Hukuk Fakültesi": {
+                scoreType: "Eşit Ağırlık",
+                targetAudience: "Güçlü sözel ifade yeteneğine, analitik muhakeme gücüne, adalet duygusuna ve uzun süreli metin okuma alışkanlığına sahip öğrenciler.",
+                salary: "30.000 TL - 90.000 TL (Serbest avukatlıkta üst sınır yoktur)",
+                highlights: [
+                    "Hakimlik, savcılık, noterlik ve avukatlık gibi geniş kariyer yolları",
+                    "Toplumsal ilişkilerde ve hak savunuculuğunda etkin rol",
+                    "Kendi hukuk bürosunu açma imkanı"
+                ]
+            }
+        };
+
+        let currentUniTypeFilter = 'all';
+
+        function renderUniTable(data) {
+            const tbody = document.getElementById('uniTableBody');
+            tbody.innerHTML = '';
+            
+            data.forEach(item => {
+                if(currentUniTypeFilter !== 'all' && item.type !== currentUniTypeFilter) return;
+                
+                const tr = document.createElement('tr');
+                tr.onclick = function() { openUniModal(item.uni, item.city, item.type); };
+                tr.innerHTML = `
+                    <td><strong>${item.city}</strong></td>
+                    <td><span style="color:#2563eb; text-decoration:underline;">${item.uni}</span></td>
+                    <td>${item.dept}</td>
+                    <td>${item.type}</td>
+                    <td>${item.score}</td>
+                    <td><span class="badge-success">${item.rate}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filterUniTable() {
+            const query = document.getElementById('uniSearchInput').value.toLocaleLowerCase('tr').trim();
+            const filtered = masterUniversityData.filter(item => 
+                item.uni.toLocaleLowerCase('tr').includes(query) || 
+                item.dept.toLocaleLowerCase('tr').includes(query) || 
+                item.city.toLocaleLowerCase('tr').includes(query) ||
+                item.score.toLowerCase().includes(query)
+            );
+            renderUniTable(filtered);
+        }
+
+        function setUniType(btn, type) {
+            document.querySelectorAll('.filter-sidebar .toggle-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentUniTypeFilter = type;
+            filterUniTable();
+        }
+
+        function openUniModal(uniName, city, type) {
+            document.getElementById('modalUniName').innerText = uniName;
+            document.getElementById('modalUniCity').innerText = `${city} | ${type} Üniversitesi`;
+            
+            const deptsListContainer = document.getElementById('modalUniDeptsList');
+            deptsListContainer.innerHTML = '';
+
+            const matchedDepts = masterUniversityData.filter(i => i.uni === uniName);
+            
+            matchedDepts.forEach(d => {
+                const div = document.createElement('div');
+                div.style.cssText = "display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0; font-size: 13px;";
+                div.innerHTML = `<span><strong>${d.dept}</strong></span> <span>Puan: ${d.score} (${d.rate})</span>`;
+                deptsListContainer.appendChild(div);
+            });
+
+            document.getElementById('uniModal').classList.add('active');
+        }
+
+        function closeUniModal() {
+            document.getElementById('uniModal').classList.remove('active');
+        }
+
+        function renderDeptTable(dataMap) {
+            const tbody = document.getElementById('deptTableBody');
+            tbody.innerHTML = '';
+
+            for(let deptName in dataMap) {
+                const info = dataMap[deptName];
+                const tr = document.createElement('tr');
+                tr.onclick = function() { openDeptModal(deptName, info); };
+                tr.innerHTML = `
+                    <td><strong style="color:#2563eb; text-decoration:underline;">${deptName}</strong></td>
+                    <td>${info.scoreType}</td>
+                    <td>${info.salary.split('(')[0]}</td>
+                    <td><span class="badge-success">%95 - %100</span></td>
+                    <td><button class="toggle-btn" style="background:#eff6ff; color:#2563eb;">Detayları Gör →</button></td>
+                `;
+                tbody.appendChild(tr);
+            }
+        }
+
+        function filterDeptList() {
+            const query = document.getElementById('deptSearchInput').value.toLocaleLowerCase('tr').trim();
+            const filteredMap = {};
+            for(let key in departmentDetails) {
+                if(key.toLocaleLowerCase('tr').includes(query)) {
+                    filteredMap[key] = departmentDetails[key];
+                }
+            }
+            renderDeptTable(filteredMap);
+        }
+
+        function openDeptModal(deptName, info) {
+            document.getElementById('modalDeptName').innerText = deptName;
+            document.getElementById('modalDeptScoreType').innerText = `Puan Türü: ${info.scoreType}`;
+            document.getElementById('modalDeptTargetAudience').innerText = info.targetAudience;
+            document.getElementById('modalDeptSalary').innerText = info.salary;
+
+            const highlightsList = document.getElementById('modalDeptHighlights');
+            highlightsList.innerHTML = '';
+            info.highlights.forEach(h => {
+                const li = document.createElement('li');
+                li.innerText = h;
+                highlightsList.appendChild(li);
+            });
+
+            document.getElementById('deptModal').classList.add('active');
+        }
+
+        function closeDeptModal() {
+            document.getElementById('deptModal').classList.remove('active');
+        }
+
+        window.onload = function() {
+            renderUniTable(masterUniversityData);
+            renderDeptTable(departmentDetails);
+        };
+    </script>
+</body>
+</html>
