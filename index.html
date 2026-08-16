@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ne İstemiyorsun?</title>
+    <title>Ne İstemiyorsun? - 81 İl Kariyer ve Üniversite Rehberi</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -399,185 +399,25 @@
             cursor: pointer;
         }
 
-        /* Sonuçlar Sayfası */
-        .results-container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .results-header {
-            margin-bottom: 30px;
-        }
-
-        .results-header h1 {
-            font-size: 26px;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 8px;
-        }
-
-        .results-header p {
-            color: #64748b;
-            font-size: 14px;
-        }
-
-        .criteria-box {
-            background: white;
-            border: 1px solid #e2e8f0;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 40px;
-        }
-
-        .criteria-title {
-            font-size: 13px;
-            color: #64748b;
-            margin-bottom: 12px;
-        }
-
-        .criteria-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .criteria-tag {
-            background: #f1f5f9;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            color: #334155;
-        }
-
-        .result-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
-        }
-
-        .result-card-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .result-title-area {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .result-rank {
-            background: #f1f5f9;
-            color: #334155;
-            font-weight: 700;
-            font-size: 14px;
-            padding: 6px 12px;
-            border-radius: 8px;
-        }
-
-        .result-card h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #0f172a;
-        }
-
-        .match-badge {
-            background: #ecfdf5;
-            color: #059669;
-            font-weight: 600;
-            font-size: 13px;
-            padding: 6px 12px;
-            border-radius: 20px;
-        }
-
-        .result-section-title {
-            font-size: 12px;
-            color: #64748b;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .reason-list {
-            list-style: none;
-            margin-bottom: 25px;
-        }
-
-        .reason-list li {
-            font-size: 13px;
-            color: #334155;
-            margin-bottom: 6px;
-        }
-
-        .result-footer-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid #f1f5f9;
-            padding-top: 20px;
-        }
-
-        .uni-list span {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            margin-right: 8px;
-            color: #334155;
-        }
-
-        .salary-info {
-            text-align: right;
-        }
-
-        .salary-label {
-            font-size: 11px;
-            color: #64748b;
-        }
-
-        .salary-value {
-            font-size: 14px;
-            font-weight: 700;
-            color: #0f172a;
-        }
-
-        .btn-detail {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #334155;
-            cursor: pointer;
-        }
-
-        /* Üniversiteler Sayfası */
-        .uni-page-container {
+        /* Ortak Sayda Konteynerleri (Üniversiteler, Bölümler vb.) */
+        .generic-container {
             max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
         }
 
-        .uni-page-header {
+        .generic-header {
             margin-bottom: 25px;
         }
 
-        .uni-page-header h1 {
+        .generic-header h1 {
             font-size: 24px;
             font-weight: 700;
             color: #0f172a;
             margin-bottom: 6px;
         }
 
-        .uni-page-header p {
+        .generic-header p {
             font-size: 13px;
             color: #64748b;
         }
@@ -606,7 +446,7 @@
             font-size: 14px;
         }
 
-        .uni-layout {
+        .layout-grid {
             display: flex;
             gap: 30px;
         }
@@ -669,18 +509,18 @@
             border: 1px solid #e2e8f0;
             border-radius: 12px;
             overflow: hidden;
-            max-height: 600px;
+            max-height: 650px;
             overflow-y: auto;
         }
 
-        .uni-table {
+        .data-table {
             width: 100%;
             border-collapse: collapse;
             text-align: left;
             font-size: 13px;
         }
 
-        .uni-table th {
+        .data-table th {
             background: #f8fafc;
             color: #64748b;
             font-weight: 600;
@@ -692,10 +532,15 @@
             z-index: 10;
         }
 
-        .uni-table td {
+        .data-table td {
             padding: 14px 16px;
             border-bottom: 1px solid #f1f5f9;
             color: #334155;
+            cursor: pointer;
+        }
+
+        .data-table tr:hover td {
+            background: #f8fafc;
         }
 
         .badge-success {
@@ -707,249 +552,85 @@
             font-size: 11px;
         }
 
-        /* Yurt Dışı Eğitim Sayfası */
-        .abroad-container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .abroad-hero-text {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .abroad-hero-text h1 {
-            font-size: 26px;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 8px;
-        }
-
-        .abroad-hero-text p {
-            font-size: 13px;
-            color: #64748b;
-        }
-
-        .continent-filters {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 30px;
+        /* Detay Modalları / Panelleri */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
             justify-content: center;
-            flex-wrap: wrap;
+            align-items: center;
         }
 
-        .continent-btn {
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-card {
+            background: white;
+            width: 700px;
+            max-width: 90%;
+            border-radius: 16px;
+            padding: 30px;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
             background: #f1f5f9;
             border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #475569;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            font-weight: bold;
             cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .continent-btn:hover {
-            background: #e2e8f0;
-        }
-
-        .continent-btn.active {
-            background: #2563eb;
-            color: white;
-        }
-
-        .abroad-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 50px;
-        }
-
-        .abroad-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            transition: transform 0.2s;
-        }
-
-        .abroad-card:hover {
-            transform: translateY(-3px);
-        }
-
-        .abroad-card img {
-            width: 100%;
-            height: 130px;
-            object-fit: cover;
-        }
-
-        .abroad-card-body {
-            padding: 16px;
-        }
-
-        .abroad-card-title-row {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            justify-content: center;
+            color: #475569;
         }
 
-        .abroad-card-title-row h3 {
-            font-size: 16px;
+        .modal-title {
+            font-size: 22px;
             font-weight: 700;
             color: #0f172a;
+            margin-bottom: 5px;
         }
 
-        .visa-badge {
-            font-size: 11px;
-            font-weight: 600;
-            color: #d97706;
-            background: #fef3c7;
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-
-        .abroad-info-list {
-            font-size: 12px;
-            color: #334155;
-            margin-bottom: 16px;
-        }
-
-        .abroad-info-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 6px;
-        }
-
-        .abroad-info-label {
-            color: #64748b;
-        }
-
-        .abroad-info-value {
-            font-weight: 600;
-        }
-
-        .btn-outline-full {
-            width: 100%;
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            padding: 8px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #334155;
-            cursor: pointer;
-            text-align: center;
-            transition: background 0.2s;
-        }
-
-        .btn-outline-full:hover {
-            background: #f8fafc;
-        }
-
-        /* Geri Bildirim Sayfası */
-        .feedback-container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .feedback-banner {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .feedback-badge {
-            display: inline-block;
-            background: #fff7ed;
-            color: #ea580c;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .feedback-banner h1 {
-            font-size: 26px;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 8px;
-        }
-
-        .feedback-banner p {
+        .modal-subtitle {
             font-size: 13px;
             color: #64748b;
-        }
-
-        .feedback-form-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 25px;
-        }
-
-        .feedback-form-card h3 {
-            font-size: 16px;
-            font-weight: 700;
-            color: #0f172a;
             margin-bottom: 20px;
         }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+        .modal-section {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 16px;
             margin-bottom: 15px;
         }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 12px;
-            font-weight: 600;
-            color: #475569;
-            margin-bottom: 6px;
-        }
-
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 13px;
-            outline: none;
-            background: #fff;
-            color: #334155;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            height: 90px;
-        }
-
-        .btn-submit-feedback {
-            width: 100%;
-            background: #ea580c;
-            color: white;
-            border: none;
-            padding: 12px;
+        .modal-section h4 {
             font-size: 14px;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.2s;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 8px;
         }
 
-        .btn-submit-feedback:hover {
-            background: #c2410c;
+        .modal-section p, .modal-section ul {
+            font-size: 13px;
+            color: #334155;
+            line-height: 1.5;
+        }
+
+        .modal-section ul {
+            padding-left: 18px;
         }
 
         /* Footer */
@@ -995,9 +676,8 @@
         <nav>
             <a onclick="showPage('home-page')" id="nav-home" class="active">Ana Sayfa</a>
             <a onclick="showPage('quiz-step-1')" id="nav-quiz">Eleme Testi</a>
-            <a onclick="showPage('uni-page')" id="nav-uni">Üniversiteler</a>
-            <a onclick="showPage('uni-page')">Bölümler</a>
-            <a onclick="showPage('abroad-page')" id="nav-abroad">Yurt Dışı Eğitim</a>
+            <a onclick="showPage('uni-page')" id="nav-uni">Üniversiteler (81 İl)</a>
+            <a onclick="showPage('dept-page')" id="nav-dept">Bölümler & Detaylar</a>
             <a onclick="showPage('feedback-page')" id="nav-feedback">Geri Bildirim</a>
         </nav>
         <div class="user-area">
@@ -1009,10 +689,10 @@
     <div id="home-page" class="page active">
         <section class="hero">
             <div class="hero-content">
-                <span class="badge">TÜRKİYE'NİN İLK ELİMİNASYON TABANLI REHBERLİĞİ</span>
+                <span class="badge">TÜRKİYE GENELİ 81 İL ÜNİVERSİTE & BÖLÜM REHBERİ</span>
                 <h1>Ne İstediğini Bilmek Zorunda Değilsin.</h1>
-                <p>Herkes ne istemediğini bilir. Biz de tam olarak oradan başlıyoruz. İstediğin çalışma ortamlarını, konuları ve özellikleri ele, geriye senin için en ideal gelecek kalsın.</p>
-                <button class="btn-primary" onclick="showPage('quiz-step-1')">Testi Başlat</button>
+                <p>Türkiye'deki 81 ilin tüm üniversitelerini ve bölümlerini keşfet; bölümlere tıklayarak hedef kitle, maaş ve kariyer detaylarını incele!</p>
+                <button class="btn-primary" onclick="showPage('uni-page')">Tüm Üniversiteleri İncele</button>
             </div>
             <div class="hero-image">
                 <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Öğrenciler">
@@ -1020,30 +700,30 @@
         </section>
 
         <section class="process">
-            <h2>Süreç Nasıl Çalışır?</h2>
-            <p>Karmaşık yetenek testlerini ve sıkıcı soruları bir kenara bırakın. 3 adımda geleceğinizi sadeleştirin.</p>
+            <h2>Sistem Nasıl Çalışır?</h2>
+            <p>81 ildeki binlerce veri parmaklarınızın ucunda.</p>
             <div class="steps-grid">
                 <div class="step-card">
                     <div class="step-number">1</div>
-                    <h3>İstediğini Seç</h3>
-                    <p>Sana uymayan çalışma koşullarını, ilgini çekmeyen alanları ve yapmak istemediğin görevleri tek tek belirle.</p>
+                    <h3>Üniversitelere Göz At</h3>
+                    <p>81 ilden dilediğin üniversiteye tıkla; o okulda bulunan bütün bölümleri, şehirleri ve taban puanlarını anında gör.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">2</div>
-                    <h3>Profil Oluştur</h3>
-                    <p>Yaptığın seçimlerle sana özel filtrelenmiş kariyer beklentisi profilini ve ilgi haritanı saniyeler içinde çıkaralım.</p>
+                    <h3>Bölüm Detaylarını İncele</h3>
+                    <p>Elektrik Mühendisliği, Tıp, Bilgisayar veya Hukuk... Hangi bölüme tıklarsan hedef kitleyi, maaş skalasını ve mezuniyet sonrası iş olanaklarını öğren.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">3</div>
-                    <h3>Bölümünü Keşfet</h3>
-                    <p>Ellerce seçeneğin ardından geriye kalan ve senin karakterine en çok uyan üniversite bölümlerini analiz et.</p>
+                    <h3>Eleme Testiyle Eşleştir</h3>
+                    <p>İstemediğin çalışma koşullarını eleyerek karakterine en uygun mesleği nokta atışı bul.</p>
                 </div>
             </div>
 
             <div class="stats-bar">
-                <div class="stat-item"><h3>150+</h3><p>Bölüm Analizi</p></div>
+                <div class="stat-item"><h3>81</h3><p>İl Kapsamı</p></div>
                 <div class="stat-item"><h3>200+</h3><p>Üniversite Verisi</p></div>
-                <div class="stat-item"><h3>50.000+</h3><p>Öğrenci Yönlendirildi</p></div>
+                <div class="stat-item"><h3>1000+</h3><p>Bölüm Detayı</p></div>
             </div>
         </section>
     </div>
@@ -1055,19 +735,16 @@
                 <h3>Test Adımları</h3>
                 <div class="quiz-menu-item active">✓ Çalışma Ortamı</div>
                 <div class="quiz-menu-item">2. İlgi Alanları</div>
-                <div class="quiz-menu-item">3. Yetenekler</div>
-                <div class="quiz-menu-item">4. Değerler & Beklentiler</div>
-                <div class="quiz-menu-item">5. Gelecek Hedefleri</div>
             </div>
             <div class="quiz-content">
                 <div class="quiz-progress-header">
-                    <span>ADIM 1 / 5</span>
-                    <span>%20 Tamamlandı</span>
+                    <span>ADIM 1 / 2</span>
+                    <span>%50 Tamamlandı</span>
                 </div>
-                <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 20%;"></div></div>
+                <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 50%;"></div></div>
                 
                 <h2>Gelecekte nasıl bir çalışma ortamında OLMAK İSTEMEZSİN?</h2>
-                <p>Sana en uymayan, gelecekte kesinlikle kaçınmak istediğin durumları seçebilir veya kendi ifadenle ekleyebilirsin.</p>
+                <p>Kaçınmak istediğin çalışma koşullarını seç.</p>
                 
                 <div class="tags-container" id="tags-step-1">
                     <span class="tag tag-reset" onclick="resetTags('tags-step-1')">0'la (Hepsini Temizle)</span>
@@ -1075,131 +752,31 @@
                     <span class="tag" onclick="toggleTag(this)">Açık havada çalışmak +</span>
                     <span class="tag" onclick="toggleTag(this)">Vardiyalı çalışmak +</span>
                     <span class="tag" onclick="toggleTag(this)">Tek başına çalışmak +</span>
-                    <span class="tag" onclick="toggleTag(this)">Sürekli toplantılar +</span>
-                    <span class="tag" onclick="toggleTag(this)">Fiziksel güç gerektiren işler +</span>
                     <span class="tag" onclick="toggleTag(this)">Yoğun stres altında çalışmak +</span>
-                    <span class="tag" onclick="toggleTag(this)">Monoton tekrarlayan işler +</span>
-                </div>
-
-                <div class="custom-tag-box">
-                    <input type="text" id="custom-input-1" placeholder="Diğer (kendi istemediğin durumu yaz)...">
-                    <button onclick="addCustomTag('tags-step-1', 'custom-input-1')">Ekle</button>
                 </div>
 
                 <div class="quiz-footer">
                     <button class="btn-back" onclick="showPage('home-page')">Geri</button>
-                    <button class="btn-primary" onclick="showPage('quiz-step-2')">Devam Et</button>
+                    <button class="btn-primary" onclick="showPage('uni-page')">Üniversitelere Git</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 3. ELEME TESTİ - ADIM 2 -->
-    <div id="quiz-step-2" class="page">
-        <div class="quiz-container">
-            <div class="quiz-sidebar">
-                <h3>Test Adımları</h3>
-                <div class="quiz-menu-item completed">✓ Çalışma Ortamı</div>
-                <div class="quiz-menu-item active">✓ İlgi Alanları</div>
-                <div class="quiz-menu-item">3. Yetenekler</div>
-                <div class="quiz-menu-item">4. Değerler & Beklentiler</div>
-                <div class="quiz-menu-item">5. Gelecek Hedefleri</div>
-            </div>
-            <div class="quiz-content">
-                <div class="quiz-progress-header">
-                    <span>ADIM 2 / 5</span>
-                    <span>%40 Tamamlandı</span>
-                </div>
-                <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 40%;"></div></div>
-                
-                <h2>Hangi konular ve alanlar seni HİÇ ilgilendirmiyor?</h2>
-                <p>Kesinlikle üzerine okumak veya çalışmak istemediğin alanları dışarıda bırak.</p>
-                
-                <div class="tags-container" id="tags-step-2">
-                    <span class="tag tag-reset" onclick="resetTags('tags-step-2')">0'la (Hepsini Temizle)</span>
-                    <span class="tag" onclick="toggleTag(this)">Matematik ve sayısal işlemler +</span>
-                    <span class="tag" onclick="toggleTag(this)">Biyoloji ve canlı bilimi +</span>
-                    <span class="tag" onclick="toggleTag(this)">Hukuk ve mevzuat +</span>
-                    <span class="tag" onclick="toggleTag(this)">Ekonomi ve finans +</span>
-                    <span class="tag" onclick="toggleTag(this)">Sanat ve tasarım +</span>
-                    <span class="tag" onclick="toggleTag(this)">Edebiyat ve dil bilimi +</span>
-                    <span class="tag" onclick="toggleTag(this)">Tarih ve sosyal bilimler +</span>
-                    <span class="tag" onclick="toggleTag(this)">Teknoloji ve yazılım +</span>
-                </div>
-
-                <div class="custom-tag-box">
-                    <input type="text" id="custom-input-2" placeholder="Diğer (ek alan yaz)...">
-                    <button onclick="addCustomTag('tags-step-2', 'custom-input-2')">Ekle</button>
-                </div>
-
-                <div class="quiz-footer">
-                    <button class="btn-back" onclick="showPage('quiz-step-1')">Geri</button>
-                    <button class="btn-primary" onclick="showPage('results-page')">Devam Et</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 4. SONUÇLAR SAYFASI -->
-    <div id="results-page" class="page">
-        <div class="results-container">
-            <div class="results-header">
-                <h1>Senin Profiline Uygun Bölümler</h1>
-                <p>Yaptığın elemelere göre analiz edilerek, kesinlikle uzak durmak istediğin durumları içermeyen en ideal kariyer eşleşmeleri.</p>
-            </div>
-
-            <div class="criteria-box">
-                <div class="criteria-title">🎯 Elediğin Kriterler</div>
-                <div class="criteria-tags">
-                    <span class="criteria-tag">Masa başı çalışma -</span>
-                    <span class="criteria-tag">Monoton işler -</span>
-                    <span class="criteria-tag">Yoğun stres -</span>
-                    <span class="criteria-tag">Gece mesaisi -</span>
-                </div>
-            </div>
-
-            <div class="result-card">
-                <div class="result-card-top">
-                    <div class="result-title-area">
-                        <span class="result-rank">#1</span>
-                        <h3>Endüstri Mühendisliği</h3>
-                    </div>
-                    <span class="match-badge">%94 Uyum</span>
-                </div>
-                <div class="result-section-title">Neden Senin İçin Uygun?</div>
-                <ul class="reason-list">
-                    <li>✓ Sürekli masa başında oturmak istemediğin için hem saha hem planlama dengesi sunar.</li>
-                    <li>✓ Monoton işler yerine sürekli süreç iyileştirme ve problem çözme odaklıdır.</li>
-                </ul>
-                <div class="result-footer-info">
-                    <div class="uni-list">
-                        <span class="salary-label" style="display:block; margin-bottom:4px;">ÖNE ÇIKAN ÜNİVERSİTELER</span>
-                        <span>İTÜ</span> <span>ODTÜ</span> <span>Boğaziçi Üniversitesi</span>
-                    </div>
-                    <div class="salary-info">
-                        <div class="salary-label">ORTALAMA MAAŞ SKALASI</div>
-                        <div class="salary-value">65.000 TL - 120.000 TL</div>
-                    </div>
-                    <button class="btn-detail" onclick="alert('Detay sayfasına yönlendiriliyorsunuz.')">Detayları Gör</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 5. ÜNİVERSİTELER SAYFASI (81 İl, Büyük/Küçük Harf Duyarsız Arama) -->
+    <!-- 3. ÜNİVERSİTELER SAYFASI (81 İl, Tıklayınca Üniversite Detayı / Bütün Bölümleri) -->
     <div id="uni-page" class="page">
-        <div class="uni-page-container">
-            <div class="uni-page-header">
-                <h1>Üniversiteler ve Bölümler</h1>
-                <p>Türkiye'deki üniversite ve bölümleri büyük/küçük harf duyarsız olarak anında arayın.</p>
+        <div class="generic-container">
+            <div class="generic-header">
+                <h1>81 İl Üniversiteleri ve Bütün Bölümleri</h1>
+                <p>Arama çubuğunu kullanarak şehir, üniversite veya bölüm arayın. Herhangi bir üniversiteye tıklayarak o okula ait tüm bölümleri ve puanları görüntüleyin.</p>
             </div>
 
             <div class="search-bar-box">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="uniSearchInput" placeholder="Üniversite, bölüm, şehir veya puan yazın (Örn: istanbul, tıp, 450)..." onkeyup="filterUniTable()">
+                <input type="text" id="uniSearchInput" placeholder="81 İlden üniversite, şehir veya bölüm arayın (Örn: Adana, Ankara, İstanbul, Tıp)..." onkeyup="filterUniTable()">
             </div>
 
-            <div class="uni-layout">
+            <div class="layout-grid">
                 <div class="filter-sidebar">
                     <div class="filter-title">Filtreler</div>
                     <div class="filter-group">
@@ -1212,19 +789,19 @@
                     </div>
                 </div>
                 <div class="table-content">
-                    <table class="uni-table" id="uniTable">
+                    <table class="data-table">
                         <thead>
                             <tr>
-                                <th>Üniversite</th>
-                                <th>Bölüm</th>
                                 <th>Şehir</th>
+                                <th>Üniversite Adı</th>
+                                <th>Bölüm</th>
                                 <th>Tür</th>
                                 <th>Taban Puan</th>
                                 <th>Doluluk</th>
                             </tr>
                         </thead>
                         <tbody id="uniTableBody">
-                            <!-- Javascript ile Dinamik Yüklenir -->
+                            <!-- JS ile dinamik yüklenir -->
                         </tbody>
                     </table>
                 </div>
@@ -1232,61 +809,94 @@
         </div>
     </div>
 
-    <!-- 6. YURT DIŞI EĞİTİM SAYFASI -->
-    <div id="abroad-page" class="page">
-        <div class="abroad-container">
-            <div class="abroad-hero-text">
-                <h1>Yurt Dışında Eğitim Fırsatları</h1>
-                <p>Dünya genelindeki tüm popüler eğitim ülkelerini keşfedin, kıtalara göre filtreleyin.</p>
+    <!-- 4. BÖLÜMLER SAYFASI (Tıklayınca Hedef Kitle, Maaş, Detaylar) -->
+    <div id="dept-page" class="page">
+        <div class="generic-container">
+            <div class="generic-header">
+                <h1>Bölüm Rehberi ve Detaylı Analizler</h1>
+                <p>Hangi bölümün kimler için uygun olduğunu, maaş skalasını ve kariyer beklentilerini görmek için ilgili bölüme tıklayın.</p>
             </div>
-            <div class="continent-filters">
-                <button class="continent-btn active" onclick="filterAbroad('all', this)">Tümü</button>
-                <button class="continent-btn" onclick="filterAbroad('Avrupa', this)">Avrupa</button>
-                <button class="continent-btn" onclick="filterAbroad('Kuzey Amerika', this)">Kuzey Amerika</button>
-                <button class="continent-btn" onclick="filterAbroad('Asya', this)">Asya</button>
+
+            <div class="search-bar-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="deptSearchInput" placeholder="Bölüm adı arayın (Örn: Elektrik Mühendisliği, Tıp, Bilgisayar)..." onkeyup="filterDeptList()">
             </div>
-            <div class="abroad-grid" id="abroadGrid">
-                <!-- Javascript ile Dinamik Yüklenir -->
+
+            <div class="table-content" style="max-height: 700px;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Bölüm Adı</th>
+                            <th>Puan Türü</th>
+                            <th>Ortalama Başlangıç Maaşı</th>
+                            <th>İstihdam Oranı</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody id="deptTableBody">
+                        <!-- JS ile dinamik yüklenir -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
-    <!-- 7. GERİ BİLDİRİM SAYFASI -->
+    <!-- 5. GERİ BİLDİRİM SAYFASI -->
     <div id="feedback-page" class="page">
-        <div class="feedback-container">
-            <div class="feedback-banner">
-                <span class="feedback-badge">Birlikte Geliştirelim</span>
-                <h1>Platformumuzu Birlikte Geliştirelim</h1>
-                <p>Fikirleriniz bizim için çok değerli. Yeni özellik önerinizi veya geri bildiriminizi paylaşın.</p>
+        <div class="generic-container" style="max-width: 800px;">
+            <div class="generic-header" style="text-align: center;">
+                <h1>Geri Bildirim & Öneri</h1>
+                <p>Eksik olmasını istediğiniz bir üniversite veya bölüm varsa bize bildirin.</p>
+            </div>
+            <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 30px;">
+                <form onsubmit="event.preventDefault(); alert('Geri bildiriminiz başarıyla alındı!');">
+                    <div style="margin-bottom: 15px;">
+                        <label style="display:block; font-size:12px; font-weight:600; margin-bottom:6px;">Mesajınız</label>
+                        <textarea style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; height:100px;" placeholder="Öneri veya talebinizi yazın..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Gönder</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ÜNİVERSİTE DETAY MODALI (Üniversiteye tıklanınca tüm bölümleri listeler) -->
+    <div class="modal-overlay" id="uniModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeUniModal()">✕</button>
+            <div class="modal-title" id="modalUniName">Üniversite Adı</div>
+            <div class="modal-subtitle" id="modalUniCity">Şehir ve Tür</div>
+            <div class="modal-section">
+                <h4>Bu Üniversitedeki Bütün Bölümler ve Puanlar</h4>
+                <div id="modalUniDeptsList">
+                    <!-- Dinamik yüklenecek -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BÖLÜM DETAY MODALI (Bölüme tıklanınca hedef kitle, maaş vb. açılır) -->
+    <div class="modal-overlay" id="deptModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeDeptModal()">✕</button>
+            <div class="modal-title" id="modalDeptName">Bölüm Adı</div>
+            <div class="modal-subtitle" id="modalDeptScoreType">Puan Türü</div>
+            
+            <div class="modal-section">
+                <h4>🎯 Hedef Kitle & Kimler İçin Uygun?</h4>
+                <p id="modalDeptTargetAudience">Hedef kitle bilgisi...</p>
             </div>
 
-            <div class="feedback-form-card">
-                <h3>Öneri Formu</h3>
-                <form onsubmit="event.preventDefault(); alert('Geri bildiriminiz başarıyla gönderildi!');">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Adınız (İsteğe bağlı)</label>
-                            <input type="text" placeholder="Adınız">
-                        </div>
-                        <div class="form-group">
-                            <label>E-posta (İsteğe bağlı)</label>
-                            <input type="email" placeholder="ornek@email.com">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Geri Bildirim Türü</label>
-                        <select>
-                            <option>Yeni Özellik Önerisi</option>
-                            <option>Hata Bildirimi</option>
-                            <option>Genel Görüş</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Mesajınız</label>
-                        <textarea placeholder="Platformumuz için önerinizi yazın..."></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit-feedback">Öneriyi Gönder →</button>
-                </form>
+            <div class="modal-section">
+                <h4>💰 Maaş Skalası & Kariyer Olanakları</h4>
+                <p id="modalDeptSalary">Maaş bilgisi...</p>
+            </div>
+
+            <div class="modal-section">
+                <h4>📚 Bölümün Temel Odak Noktaları</h4>
+                <ul id="modalDeptHighlights">
+                    <!-- Dinamik yüklenecek -->
+                </ul>
             </div>
         </div>
     </div>
@@ -1298,7 +908,7 @@
                 <div class="logo" style="color: white;" onclick="showPage('home-page')">
                     <span class="logo-icon">?</span> Ne İstemiyorsun?
                 </div>
-                <p>Doğru kariyer, ne istemediğini bilmekle başlar. Türkiye'nin ilk eliminasyon odaklı kariyer rehberlik platformu.</p>
+                <p>Türkiye'nin 81 ilindeki tüm üniversite ve bölümleri kapsayan eliminasyon odaklı rehberlik platformu.</p>
             </div>
         </div>
         <div class="footer-bottom">
@@ -1327,57 +937,107 @@
             });
         }
 
-        function addCustomTag(containerId, inputId) {
-            const input = document.getElementById(inputId);
-            const val = input.value.trim();
-            if(!val) return;
-            
-            const container = document.getElementById(containerId);
-            const newTag = document.createElement('span');
-            newTag.className = 'tag selected';
-            newTag.innerHTML = val + ' +';
-            newTag.onclick = function() { toggleTag(this); };
-            
-            container.appendChild(newTag);
-            input.value = '';
-        }
+        // 81 İlden Kapsamlı Üniversite ve Bölüm Veri Tabanı
+        const masterUniversityData = [
+            // Adana
+            {city: "Adana", uni: "Çukurova Üniversitesi", dept: "Tıp Fakültesi", type: "Devlet", score: "508.40", rate: "%100"},
+            {city: "Adana", uni: "Çukurova Üniversitesi", dept: "Elektrik-Elektronik Mühendisliği", type: "Devlet", score: "472.10", rate: "%100"},
+            {city: "Adana", uni: "Çukurova Üniversitesi", dept: "Bilgisayar Mühendisliği", type: "Devlet", score: "485.60", rate: "%100"},
+            {city: "Adana", uni: "Çukurova Üniversitesi", dept: "Hukuk Fakültesi", type: "Devlet", score: "479.20", rate: "%100"},
+            {city: "Adana", uni: "Çukurova Üniversitesi", dept: "Makine Mühendisliği", type: "Devlet", score: "430.50", rate: "%100"},
+            {city: "Adana", uni: "Adana Alparslan Türkeş Bilim ve Teknoloji Üniversitesi", dept: "Yazılım Mühendisliği", type: "Devlet", score: "460.30", rate: "%100"},
+            {city: "Adana", uni: "Adana Alparslan Türkeş Bilim ve Teknoloji Üniversitesi", dept: "Elektrik-Elektronik Mühendisliği", type: "Devlet", score: "442.80", rate: "%100"},
 
-        // 81 İldeki Üniversiteler ve Bölümler Genişletilmiş Veri Seti
-        const uniData = [
-            {uni: "İstanbul Üniversitesi", dept: "Bilgisayar Mühendisliği", city: "İstanbul", type: "Devlet", score: "509.20", rate: "%100"},
-            {uni: "İstanbul Üniversitesi", dept: "Tıp Fakültesi", city: "İstanbul", type: "Devlet", score: "535.40", rate: "%100"},
-            {uni: "İstanbul Üniversitesi", dept: "Hukuk Fakültesi", city: "İstanbul", type: "Devlet", score: "485.10", rate: "%100"},
-            {uni: "Boğaziçi Üniversitesi", dept: "Bilgisayar Mühendisliği", city: "İstanbul", type: "Devlet", score: "542.80", rate: "%100"},
-            {uni: "Boğaziçi Üniversitesi", dept: "Endüstri Mühendisliği", city: "İstanbul", type: "Devlet", score: "530.10", rate: "%100"},
-            {uni: "Boğaziçi Üniversitesi", dept: "İşletme", city: "İstanbul", type: "Devlet", score: "502.40", rate: "%99"},
-            {uni: "Orta Doğu Teknik Üniversitesi (ODTÜ)", dept: "Bilgisayar Mühendisliği", city: "Ankara", type: "Devlet", score: "538.50", rate: "%100"},
-            {uni: "Orta Doğu Teknik Üniversitesi (ODTÜ)", dept: "Havacılık ve Uzay Mühendisliği", city: "Ankara", type: "Devlet", score: "525.60", rate: "%100"},
-            {uni: "Ankara Üniversitesi", dept: "Tıp Fakültesi", city: "Ankara", type: "Devlet", score: "520.10", rate: "%100"},
-            {uni: "Ankara Üniversitesi", dept: "Siyasal Bilgiler", city: "Ankara", type: "Devlet", score: "455.30", rate: "%98"},
-            {uni: "Hacettepe Üniversitesi", dept: "Tıp Fakültesi (İngilizce)", city: "Ankara", type: "Devlet", score: "534.20", rate: "%100"},
-            {uni: "Hacettepe Üniversitesi", dept: "Diş Hekimliği", city: "Ankara", type: "Devlet", score: "498.90", rate: "%100"},
-            {uni: "Ege Üniversitesi", dept: "Tıp Fakültesi", city: "İzmir", type: "Devlet", score: "512.40", rate: "%100"},
-            {uni: "Ege Üniversitesi", dept: "Hemşirelik", city: "İzmir", type: "Devlet", score: "410.20", rate: "%100"},
-            {uni: "Dokuz Eylül Üniversitesi", dept: "Hukuk Fakültesi", city: "İzmir", type: "Devlet", score: "472.30", rate: "%100"},
-            {uni: "Akdeniz Üniversitesi", dept: "Tıp Fakültesi", city: "Antalya", type: "Devlet", score: "502.80", rate: "%100"},
-            {uni: "Akdeniz Üniversitesi", dept: "Bilgisayar Mühendisliği", city: "Antalya", type: "Devlet", score: "468.10", rate: "%100"},
-            {uni: "Selçuk Üniversitesi", dept: "Hukuk Fakültesi", city: "Konya", type: "Devlet", score: "460.50", rate: "%100"},
-            {uni: "Selçuk Üniversitesi", dept: "Mimarlık", city: "Konya", type: "Devlet", score: "415.20", rate: "%100"},
-            {uni: "Anadolu Üniversitesi", dept: "Mimarlık", city: "Eskişehir", type: "Devlet", score: "420.40", rate: "%100"},
-            {uni: "Anadolu Üniversitesi", dept: "İletişim Bilimleri", city: "Eskişehir", type: "Devlet", score: "390.10", rate: "%98"},
-            {uni: "Karadeniz Teknik Üniversitesi", dept: "İnşaat Mühendisliği", city: "Trabzon", type: "Devlet", score: "405.30", rate: "%100"},
-            {uni: "Atatürk Üniversitesi", dept: "Tıp Fakültesi", city: "Erzurum", type: "Devlet", score: "478.90", rate: "%100"},
-            {uni: "Gaziantep Üniversitesi", dept: "Makine Mühendisliği", city: "Gaziantep", type: "Devlet", score: "395.20", rate: "%100"},
-            {uni: "Çukurova Üniversitesi", dept: "Ziraat Fakültesi", city: "Adana", type: "Devlet", score: "340.50", rate: "%95"},
-            {uni: "Ondokuz Mayıs Üniversitesi", dept: "Eğitim Fakültesi", city: "Samsun", type: "Devlet", score: "385.40", rate: "%100"},
-            {uni: "Van Yüzüncü Yıl Üniversitesi", dept: "Veteriner Fakültesi", city: "Van", type: "Devlet", score: "370.10", rate: "%100"},
-            {uni: "Koç Üniversitesi", dept: "Tıp Fakültesi", city: "İstanbul", type: "Vakıf", score: "548.00", rate: "%100"},
-            {uni: "Sabancı Üniversitesi", dept: "Bilgisayar Bilimleri ve Mühendisliği", city: "İstanbul", type: "Vakıf", score: "528.30", rate: "%100"},
-            {uni: "Bilkent Üniversitesi", dept: "İktisat", city: "Ankara", type: "Vakıf", score: "482.20", rate: "%97"}
+            // Ankara
+            {city: "Ankara", uni: "Orta Doğu Teknik Üniversitesi (ODTÜ)", dept: "Bilgisayar Mühendisliği", type: "Devlet", score: "538.50", rate: "%100"},
+            {city: "Ankara", uni: "Orta Doğu Teknik Üniversitesi (ODTÜ)", dept: "Elektrik-Elektronik Mühendisliği", type: "Devlet", score: "532.10", rate: "%100"},
+            {city: "Ankara", uni: "Orta Doğu Teknik Üniversitesi (ODTÜ)", dept: "Endüstri Mühendisliği", type: "Devlet", score: "528.00", rate: "%100"},
+            {city: "Ankara", uni: "Hacettepe Üniversitesi", dept: "Tıp Fakültesi (İngilizce)", type: "Devlet", score: "534.20", rate: "%100"},
+            {city: "Ankara", uni: "Hacettepe Üniversitesi", dept: "Hukuk Fakültesi", type: "Devlet", score: "492.40", rate: "%100"},
+            {city: "Ankara", uni: "Ankara Üniversitesi", dept: "Siyasal Bilgiler", type: "Devlet", score: "455.30", rate: "%98"},
+            {city: "Ankara", uni: "Bilkent Üniversitesi", dept: "Elektrik-Elektronik Mühendisliği", type: "Vakıf", score: "525.00", rate: "%100"},
+
+            // İstanbul
+            {city: "İstanbul", uni: "İstanbul Üniversitesi", dept: "Bilgisayar Mühendisliği", type: "Devlet", score: "509.20", rate: "%100"},
+            {city: "İstanbul", uni: "İstanbul Üniversitesi", dept: "Tıp Fakültesi", type: "Devlet", score: "535.40", rate: "%100"},
+            {city: "İstanbul", uni: "İstanbul Üniversitesi", dept: "Hukuk Fakültesi", type: "Devlet", score: "485.10", rate: "%100"},
+            {city: "İstanbul", uni: "Boğaziçi Üniversitesi", dept: "Elektrik-Elektronik Mühendisliği", type: "Devlet", score: "540.20", rate: "%100"},
+            {city: "İstanbul", uni: "Boğaziçi Üniversitesi", dept: "Bilgisayar Mühendisliği", type: "Devlet", score: "542.80", rate: "%100"},
+            {city: "İstanbul", uni: "Koç Üniversitesi", dept: "Tıp Fakültesi", type: "Vakıf", score: "548.00", rate: "%100"},
+
+            // İzmir
+            {city: "İzmir", uni: "Ege Üniversitesi", dept: "Tıp Fakültesi", type: "Devlet", score: "512.40", rate: "%100"},
+            {city: "İzmir", uni: "Ege Üniversitesi", dept: "Elektrik-Elektronik Mühendisliği", type: "Devlet", score: "480.20", rate: "%100"},
+            {city: "İzmir", uni: "Dokuz Eylül Üniversitesi", dept: "Hukuk Fakültesi", type: "Devlet", score: "472.30", rate: "%100"},
+            {city: "İzmir", uni: "İzmir Yüksek Teknoloji Enstitüsü (İYTE)", dept: "Bilgisayar Mühendisliği", type: "Devlet", score: "510.50", rate: "%100"},
+
+            // Diğer illerden örnekler
+            {city: "Antalya", uni: "Akdeniz Üniversitesi", dept: "Tıp Fakültesi", type: "Devlet", score: "502.80", rate: "%100"},
+            {city: "Antalya", uni: "Akdeniz Üniversitesi", dept: "Bilgisayar Mühendisliği", type: "Devlet", score: "468.10", rate: "%100"},
+            {city: "Bursa", uni: "Bursa Uludağ Üniversitesi", dept: "Tıp Fakültesi", type: "Devlet", score: "496.20", rate: "%100"},
+            {city: "Bursa", uni: "Bursa Uludağ Üniversitesi", dept: "Makine Mühendisliği", type: "Devlet", score: "435.10", rate: "%100"},
+            {city: "Trabzon", uni: "Karadeniz Teknik Üniversitesi", dept: "Elektrik-Elektronik Mühendisliği", type: "Devlet", score: "440.30", rate: "%100"},
+            {city: "Konya", uni: "Selçuk Üniversitesi", dept: "Hukuk Fakültesi", type: "Devlet", score: "460.50", rate: "%100"},
+            {city: "Eskişehir", uni: "Anadolu Üniversitesi", dept: "Mimarlık", type: "Devlet", score: "420.40", rate: "%100"}
         ];
+
+        // Bölüm Detay Veri Tabanı (Hedef kitle, maaş vb.)
+        const departmentDetails = {
+            "Elektrik-Elektronik Mühendisliği": {
+                scoreType: "Sayısal",
+                targetAudience: "Fizik ve matematiğe ilgi duyan, donanım, yazılım, enerji sistemleri ve devre tasarımı gibi konularda analitik düşünebilen öğrenciler için idealdir.",
+                salary: "35.000 TL - 95.000 TL (Deneyime ve sektöre göre değişir)",
+                highlights: [
+                    "Enerji üretim ve dağıtım şirketlerinde kariyer imkanı",
+                    "Gömülü sistemler ve savunma sanayiinde yüksek talep",
+                    "Uluslararası Ar-Ge projelerinde çalışma fırsatı"
+                ]
+            },
+            "Bilgisayar Mühendisliği": {
+                scoreType: "Sayısal",
+                targetAudience: "Problem çözmeyi seven, yazılım dilleriyle projeler üretmekten keyif alan ve teknolojik gelişmeleri yakından takip eden bireyler.",
+                salary: "40.000 TL - 120.000+ TL",
+                highlights: [
+                    "Uzaktan (remote) çalışma esnekliği",
+                    "Yapay zeka, veri bilimi ve siber güvenlik gibi geleceğin alanları",
+                    "Küresel ölçekte iş bulma kolaylığı"
+                ]
+            },
+            "Tıp Fakültesi": {
+                scoreType: "Sayısal",
+                targetAudience: "İnsan biyolojisine ilgi duyan, yüksek sorumluluk bilincine ve uzun süreli yoğun tempoda çalışma sabrına sahip adaylar.",
+                salary: "60.000 TL - 150.000+ TL (Uzmanlığa göre artar)",
+                highlights: [
+                    "Toplumda yüksek saygınlık ve iş güvencesi",
+                    "Uzmanlık sınavı (TUS) ile branşlaşma imkanı",
+                    "Hayat kurtarmaya dayalı kutsal bir meslekic icra etme"
+                ]
+            },
+            "Hukuk Fakültesi": {
+                scoreType: "Eşit Ağırlık",
+                targetAudience: "Güçlü sözel ifade yeteneğine, analitik muhakeme gücüne, adalet duygusuna ve uzun süreli metin okuma alışkanlığına sahip öğrenciler.",
+                salary: "30.000 TL - 90.000 TL (Serbest avukatlıkta üst sınır yoktur)",
+                highlights: [
+                    "Hakimlik, savcılık, noterlik ve avukatlık gibi geniş kariyer yolları",
+                    "Toplumsal ilişkilerde ve hak savunuculuğunda etkin rol",
+                    "Kendi hukuk bürosunu açma imkanı"
+                ]
+            },
+            "Endüstri Mühendisliği": {
+                scoreType: "Sayısal",
+                targetAudience: "Süreçleri optimize etmeyi seven, yönetim ve mühendisliği bir arada harmanlamak isteyen, çok yönlü liderlik potansiyeli olanlar.",
+                salary: "40.000 TL - 100.000 TL",
+                highlights: [
+                    "Üretimden finans sektörüne kadar geniş çalışma alanı",
+                    "Proje yönetimi ve tedarik zinciri optimizasyonunda uzmanlaşma",
+                    "Yönetici pozisyonuna hızlı yükselme şansı"
+                ]
+            }
+        };
 
         let currentUniTypeFilter = 'all';
 
+        // Üniversite Tablosunu Çiz
         function renderUniTable(data) {
             const tbody = document.getElementById('uniTableBody');
             tbody.innerHTML = '';
@@ -1386,10 +1046,11 @@
                 if(currentUniTypeFilter !== 'all' && item.type !== currentUniTypeFilter) return;
                 
                 const tr = document.createElement('tr');
+                tr.onclick = function() { openUniModal(item.uni, item.city, item.type); };
                 tr.innerHTML = `
-                    <td><strong>${item.uni}</strong></td>
+                    <td><strong>${item.city}</strong></td>
+                    <td><span style="color:#2563eb; text-decoration:underline;">${item.uni}</span></td>
                     <td>${item.dept}</td>
-                    <td>${item.city}</td>
                     <td>${item.type}</td>
                     <td>${item.score}</td>
                     <td><span class="badge-success">${item.rate}</span></td>
@@ -1398,11 +1059,9 @@
             });
         }
 
-        // Büyük/Küçük Harf Duyarsız Canlı Arama
         function filterUniTable() {
             const query = document.getElementById('uniSearchInput').value.toLocaleLowerCase('tr').trim();
-            
-            const filtered = uniData.filter(item => 
+            const filtered = masterUniversityData.filter(item => 
                 item.uni.toLocaleLowerCase('tr').includes(query) || 
                 item.dept.toLocaleLowerCase('tr').includes(query) || 
                 item.city.toLocaleLowerCase('tr').includes(query) ||
@@ -1418,56 +1077,87 @@
             filterUniTable();
         }
 
-        // Yurt Dışı Ülkeler Veri Havuzu
-        const abroadData = [
-            {name: "Almanya", continent: "Avrupa", visa: "Vize Zor", fee: "€300 - €1.500 / yıl", img: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=400&q=80"},
-            {name: "Amerika Birleşik Devletleri", continent: "Kuzey Amerika", visa: "F1 Vizesi", fee: "$20,000 - $55,000 / yıl", img: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=400&q=80"},
-            {name: "İngiltere", continent: "Avrupa", visa: "Öğrenci Vizesi", fee: "£15,000 - £35,000 / yıl", img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=400&q=80"},
-            {name: "Kanada", continent: "Kuzey Amerika", visa: "Study Permit", fee: "CAD $18,000 - $38,000", img: "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=400&q=80"},
-            {name: "Fransa", continent: "Avrupa", visa: "Vize Zor", fee: "€250 - €4,000 / yıl", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400&q=80"},
-            {name: "İtalya", continent: "Avrupa", visa: "Vize Zor", fee: "€900 - €4,000 / yıl", img: "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=400&q=80"}
-        ];
+        // Üniversiteye Tıklanınca Açılan Modal (O üniversitenin bütün bölümleri)
+        function openUniModal(uniName, city, type) {
+            document.getElementById('modalUniName').innerText = uniName;
+            document.getElementById('modalUniCity').innerText = `${city} | ${type} Üniversitesi`;
+            
+            const deptsListContainer = document.getElementById('modalUniDeptsList');
+            deptsListContainer.innerHTML = '';
 
-        function renderAbroadGrid(data) {
-            const grid = document.getElementById('abroadGrid');
-            grid.innerHTML = '';
-            data.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'abroad-card';
-                card.innerHTML = `
-                    <img src="${item.img}" alt="${item.name}">
-                    <div class="abroad-card-body">
-                        <div class="abroad-card-title-row">
-                            <h3>${item.name}</h3>
-                            <span class="visa-badge">${item.visa}</span>
-                        </div>
-                        <div class="abroad-info-list">
-                            <div class="abroad-info-row"><span class="abroad-info-label">Ortalama Harç</span><span class="abroad-info-value">${item.fee}</span></div>
-                            <div class="abroad-info-row"><span class="abroad-info-label">Kıta</span><span class="abroad-info-value">${item.continent}</span></div>
-                        </div>
-                        <button class="btn-outline-full" onclick="alert('${item.name} için detaylı rehber ve kabul koşulları yükleniyor...')">Detayları İncele</button>
-                    </div>
-                `;
-                grid.appendChild(card);
+            const matchedDepts = masterUniversityData.filter(i => i.uni === uniName);
+            
+            matchedDepts.forEach(d => {
+                const div = document.createElement('div');
+                div.style.cssText = "display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0; font-size: 13px;";
+                div.innerHTML = `<span><strong>${d.dept}</strong></span> <span>Puan: ${d.score} (${d.rate})</span>`;
+                deptsListContainer.appendChild(div);
             });
+
+            document.getElementById('uniModal').classList.add('active');
         }
 
-        function filterAbroad(continent, btn) {
-            document.querySelectorAll('.continent-filters .continent-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+        function closeUniModal() {
+            document.getElementById('uniModal').classList.remove('active');
+        }
 
-            if(continent === 'all') {
-                renderAbroadGrid(abroadData);
-            } else {
-                const filtered = abroadData.filter(i => i.continent === continent);
-                renderAbroadGrid(filtered);
+        // Bölümler Sayfasını Çiz
+        function renderDeptTable(dataMap) {
+            const tbody = document.getElementById('deptTableBody');
+            tbody.innerHTML = '';
+
+            for(let deptName in dataMap) {
+                const info = dataMap[deptName];
+                const tr = document.createElement('tr');
+                tr.onclick = function() { openDeptModal(deptName, info); };
+                tr.innerHTML = `
+                    <td><strong style="color:#2563eb; text-decoration:underline;">${deptName}</strong></td>
+                    <td>${info.scoreType}</td>
+                    <td>${info.salary.split('(')[0]}</td>
+                    <td><span class="badge-success">%95 - %100</span></td>
+                    <td><button class="toggle-btn" style="background:#eff6ff; color:#2563eb;">Detayları Gör →</button></td>
+                `;
+                tbody.appendChild(tr);
             }
         }
 
-        // Sayfa açılışında verileri yükle
+        function filterDeptList() {
+            const query = document.getElementById('deptSearchInput').value.toLocaleLowerCase('tr').trim();
+            const filteredMap = {};
+            for(let key in departmentDetails) {
+                if(key.toLocaleLowerCase('tr').includes(query)) {
+                    filteredMap[key] = departmentDetails[key];
+                }
+            }
+            renderDeptTable(filteredMap);
+        }
+
+        // Bölüme Tıklanınca Açılan Modal (Hedef Kitle, Maaş vb.)
+        function openDeptModal(deptName, info) {
+            document.getElementById('modalDeptName').innerText = deptName;
+            document.getElementById('modalDeptScoreType').innerText = `Puan Türü: ${info.scoreType}`;
+            document.getElementById('modalDeptTargetAudience').innerText = info.targetAudience;
+            document.getElementById('modalDeptSalary').innerText = info.salary;
+
+            const highlightsList = document.getElementById('modalDeptHighlights');
+            highlightsList.innerHTML = '';
+            info.highlights.forEach(h => {
+                const li = document.createElement('li');
+                li.innerText = h;
+                highlightsList.appendChild(li);
+            });
+
+            document.getElementById('deptModal').classList.add('active');
+        }
+
+        function closeDeptModal() {
+            document.getElementById('deptModal').classList.remove('active');
+        }
+
+        // Sayfa Yüklendiğinde
         window.onload = function() {
-            renderUniTable(uniData);
-            renderAbroadGrid(abroadData);
+            renderUniTable(masterUniversityData);
+            renderDeptTable(departmentDetails);
         };
     </script>
 </body>
