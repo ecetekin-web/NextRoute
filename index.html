@@ -999,3 +999,107 @@
             appendAllTurkeyData();
         });
     </script>
+    <!-- DEVAM PARÇASI: Gerçek Zamanlı Kullanıcı Anketi ve Eşleşen Bölüm Analiz Motoru -->
+    <script>
+        // Kullanıcının anket seçimlerine (işaretlediği istenmeyen koşullara) göre çalışan akıllı analiz motoru
+        function generateCustomResults() {
+            // Kullanıcının seçtiği çipleri al
+            const selectedChips = Array.from(document.querySelectorAll('#screen-quiz .chip.selected'))
+                                       .map(chip => chip.textContent.trim());
+            
+            const resultsContainer = document.querySelector('#screen-results');
+            
+            // Kullanıcının elediği kriterlere göre eşleşen bölümleri ve özel analizleri filtrele
+            let matchedCareers = [];
+
+            // Eğer sürekli masa başı istenmiyorsa
+            if (!selectedChips.includes("Sürekli masa başında oturmak")) {
+                matchedCareers.push({
+                    name: "Bilgisayar Mühendisliği / Yazılım",
+                    match: "%95 Uyum Oranı",
+                    desc: "Seçtiğin tercihler doğrultusunda esnek çalışma alanları sunan, dijital dünyada kendi kurallarını koyabileceğin bir alan.",
+                    conditions: "Uzaktan (remote), hibrit veya modern teknoloji ofislerinde esnek saatler.",
+                    salary: "Sektör ortalamasının üzerinde, kendini geliştirdikçe döviz bazlı global kazanç imkanı.",
+                    areas: "Teknoloji şirketleri, yazılım ajansları, oyun stüdyoları ve tüm global şirketlerin Ar-Ge merkezleri.",
+                    lifeStyle: "Ekran karşısında problem çözme odaklı, sürekli öğrenmeyi ve üretmeyi tetikleyen modern bir rutin.",
+                    addedValue: "Sana sadece bir meslek değil; dünyanın neresinde olursan ol kendi projelerini üretme ve bağımsız (freelance) yaşama özgürlüğü kazandırır."
+                });
+            }
+
+            // Eğer yoğun matematik veya laboratuvar istenmiyorsa / genel denge
+            if (!selectedChips.includes("Yoğun matematik ve formüller")) {
+                matchedCareers.push({
+                    name: "Yönetim Bilişim Sistemleri (YBS)",
+                    match: "%92 Uyum Oranı",
+                    desc: "Teknoloji ile iş dünyasını harmanlayan, sayısal baskısından uzak ama dijitalin kalbinde yer alan bir bölüm.",
+                    conditions: "Kurumsal ofislerde, proje yönetim toplantıları ve analiz süreçleriyle geçen dengeli bir tempo.",
+                    salary: "İş ve teknolojiyi köprü gibi bağladığı için şirketlerin aranan pozisyonlarında hızlı maaş artışı.",
+                    areas: "E-ticaret firmaları, bankalar, kurumsal şirketlerin bilgi işlem ve dijital pazarlama departmanları.",
+                    lifeStyle: "İnsanlarla iletişim kurarak strateji belirlediğin, hem teknik hem de yönetimsel yönünü geliştirdiğin dinamik bir gün.",
+                    addedValue: "Teknik dünyayı iş diliyle tercüme edebilen, şirketlerde lider pozisyonlara hızlıca tırmanmanı sağlayan çok yönlü bir vizyon katar."
+                });
+            }
+
+            if (!selectedChips.includes("Sürekli insanlarla iletişim kurmak")) {
+                matchedCareers.push({
+                    name: "Endüstri Mühendisliği",
+                    match: "%89 Uyum Oranı",
+                    desc: "Süreçleri optimize eden, verimlilik üzerine odaklanan ve geniş kariyer alternatifleri sunan esnek bir mühendislik.",
+                    conditions: "Modern ofis ortamları, planlama toplantıları ve veri analizi ağırlıklı çalışma koşulları.",
+                    salary: "Kurumsal yönetim kadrolarında hızla yükselme ve yüksek başlangıç paketleri.",
+                    areas: "Üretim tesisleri, tedarik zinciri devleri, yönetim danışmanlığı ve lojistik firmaları.",
+                    lifeStyle: "Farklı departmanlarla koordine çalışan, sürekli yeni projeler ve optimizasyonlar üreten hareketli bir yaşam.",
+                    addedValue: "Karmaşık sistemleri kuş bakışı görüp her türlü problemi analitik yoldan çözebilme ve liderlik etme yeteneği kazandırır."
+                });
+            }
+
+            // Eğer genel bir yedek liste oluşturmak gerekirse veya kullanıcı az eleme yaptıysa
+            matchedCareers.push({
+                name: "Uluslararası İlişkiler / Dijital Medya",
+                match: "%85 Uyum Oranı",
+                desc: "Tekdüze kurallara bağlı kalmadan, küresel gelişmeleri takip eden ve yaratıcılığını öne çıkaran alan.",
+                conditions: "Hibrit ofisler, medya ajansları veya kurumların dış ilişkiler departmanları.",
+                salary: "Kişisel yeteneklerine, dil becerilerine ve kendini konumlandırdığın sektöre göre esnek gelir aralığı.",
+                areas: "Medya kuruluşları, uluslararası şirketler, iletişim ajansları ve düşünce kuruluşları.",
+                lifeStyle: "Gündemi yakından takip eden, sürekli etrafındaki dünyayı sorgulayan ve üreten sosyal bir rutin.",
+                addedValue: "Güçlü bir ifade yeteneği, küresel bir bakış açısı ve kriz yönetimi becerisi kazandırır."
+            });
+
+            // Sonuç ekranının HTML yapısını kullanıcının anket sonuçlarına göre dinamik inşa et
+            let html = `
+                <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Anket Eleme Sonuçlarına Göre Sana Özel Bölüm Analizi</h2>
+                <p style="color: var(--text-light); margin-bottom: 2rem;">İşaretlediğin <strong>${selectedChips.length} adet</strong> istenmeyen koşul filtrelendi ve karakterine en uygun şu rotalar belirlendi:</p>
+            `;
+
+            matchedCareers.forEach(career => {
+                html += `
+                    <div class="result-card" style="margin-bottom: 2rem;">
+                        <span class="match-badge">${career.match}</span>
+                        <h3 style="color: var(--primary); font-size: 1.4rem; margin-top: 5px;">${career.name}</h3>
+                        <p style="margin: 10px 0; color: var(--text);"><strong>Karakter Uyumu:</strong> ${career.desc}</p>
+                        
+                        <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 3px solid var(--accent);">
+                            <p style="margin-bottom: 8px;"><strong>Çalışma Şartları:</strong> ${career.conditions}</p>
+                            <p style="margin-bottom: 8px;"><strong>Maaş Potansiyeli:</strong> ${career.salary}</p>
+                            <p style="margin-bottom: 8px;"><strong>Çalışma Alanı / Sektörler:</strong> ${career.areas}</p>
+                            <p style="margin-bottom: 8px;"><strong>Günlük Çalışma Hayatı:</strong> ${career.lifeStyle}</p>
+                            <p style="margin-bottom: 0; color: var(--primary); font-weight: 600;"><strong>Bu Bölüm Sana Ne Katacak?:</strong> ${career.addedValue}</p>
+                        </div>
+                        
+                        <button class="btn-secondary" style="margin-top: 15px;" onclick="switchScreen('detail')">Bölüm Rehberini İncele</button>
+                    </div>
+                `;
+            });
+
+            resultsContainer.innerHTML = html;
+            switchScreen('results');
+        }
+
+        // Testin "Sonuçlarımı Göster" butonunu doğrudan bu dinamik fonksiyona bağlama
+        document.addEventListener("DOMContentLoaded", () => {
+            const quizSubmitBtn = document.querySelector("#screen-quiz button[onclick*=\"switchScreen('results')\"]");
+            if (quizSubmitBtn) {
+                quizSubmitBtn.setAttribute("onclick", "generateCustomResults()");
+            }
+        });
+    </script>
