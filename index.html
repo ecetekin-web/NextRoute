@@ -756,31 +756,699 @@
             document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
             document.getElementById('otherInput').value = '';
         }
+    <!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextRoute - Tam Kapsamlı Üniversite ve Bölüm Arşivi</title>
+    <style>
+        :root {
+            --primary: #11224e;
+            --accent: #f76c6c;
+            --accent-hover: #e05a5a;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #333333;
+            --text-light: #666666;
+            --border: #e2e8f0;
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent);
+        }
+
+        .screen {
+            display: none;
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background-color: #64748b;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #475569;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            background: var(--card-bg);
+            padding: 4rem;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .mission-box {
+            background: #fff3f3;
+            border-left: 4px solid var(--accent);
+            padding: 1.2rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+            color: #444;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            font-size: 1.05rem;
+        }
+
+        .hero-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .steps-container {
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .steps-container h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .step-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .step-num {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-box {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .chips-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 2rem 0;
+        }
+
+        .chip {
+            background: #f1f5f9;
+            border: 2px solid var(--border);
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .chip.selected {
+            background-color: #fff3f3;
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .other-input-group {
+            margin-top: 1.5rem;
+        }
+
+        .other-input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .result-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--accent);
+        }
+
+        .match-badge {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .directory-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .search-box {
+            padding: 12px 18px;
+            width: 380px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .table-container {
+            max-height: 600px;
+            overflow-y: auto;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .abroad-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 2rem;
+        }
+
+        .country-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--primary);
+        }
+
+        .country-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feedback-box {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: var(--radius);
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        @media(max-width: 768px) {
+            .hero, .steps-grid, .abroad-grid {
+                flex-direction: column;
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigasyon -->
+    <header>
+        <div class="logo">
+            <h1 onclick="switchScreen('home')">NextRoute</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a onclick="switchScreen('home')" id="nav-home" class="active">Ana Sayfa</a></li>
+                <li><a onclick="switchScreen('quiz')" id="nav-quiz">Eleme Testi</a></li>
+                <li><a onclick="switchScreen('directory')" id="nav-directory">Üni & Bölümler</a></li>
+                <li><a onclick="switchScreen('detail'); renderCompleteDepartmentGuideWithSalaries();" id="nav-detail">Bölüm Rehberi</a></li>
+                <li><a onclick="switchScreen('abroad')" id="nav-abroad">Yurtdışı Eğitim</a></li>
+                <li><a onclick="switchScreen('feedback')" id="nav-feedback">Öneri & Geri Bildirim</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- EKRAN 1: ANA SAYFA -->
+    <div id="screen-home" class="screen active">
+        <div class="hero">
+            <div class="hero-text">
+                <div class="mission-box">
+                    "Herkes ne istediğini bilmek zorunda değil; ama hepimiz ne istemediğimizi çok iyi biliriz."
+                </div>
+                <h2>Ne İstediğini Bilmeyebilirsin, Ama Ne İstemediğini Kesin Biliyorsun!</h2>
+                <p>Kendi karakterini henüz yeni keşfederken yanlış bir meslek seçmeye mecbur değilsin. İstemediğin çalışma koşullarını eleyerek sana en uygun bölümleri buluyoruz.</p>
+                <button class="btn-primary" onclick="switchScreen('quiz')">Kendini Keşfet & Testi Başlat</button>
+            </div>
+        </div>
+
+        <div class="steps-container">
+            <h3>Eleme Yöntemi Nasıl Çalışır?</h3>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <span class="step-num">1</span>
+                    <h3>İstemediklerini İşaretle</h3>
+                    <p>Seni mutsuz edecek çalışma ortamlarını ve şartları seç.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-num">2</span>
+                    <h3>Sistemin Elemesini İzle</h3>
+                    <p>Algoritmamız kötü koşulları içeren meslekleri otomatik olarak ayıklasın.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-num">3</span>
+                    <h3>Sana Uygun Geleceği Seç</h3>
+                    <p>Karakterine ve sınırlarına en uygun bölümleri ve üniversiteleri incele.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EKRAN 2: ELEME TESTİ -->
+    <div id="screen-quiz" class="screen">
+        <div class="quiz-box">
+            <h2>Gelecekte Nasıl Çalışmak İstemezsin?</h2>
+            <p style="color: var(--text-light); margin-top: 0.5rem;">Seni rahatsız edecek tüm koşulları ve sınırları aşağıdan seç:</p>
+            
+            <div class="chips-container">
+                <div class="chip" onclick="toggleChip(this)">Sürekli masa başında oturmak</div>
+                <div class="chip" onclick="toggleChip(this)">Vardiyalı ve düzensiz saatler</div>
+                <div class="chip" onclick="toggleChip(this)">Yoğun matematik ve formüller</div>
+                <div class="chip" onclick="toggleChip(this)">Sürekli insanlarla iletişim kurmak</div>
+                <div class="chip" onclick="toggleChip(this)">Monoton ve tekrarlayan işler</div>
+                <div class="chip" onclick="toggleChip(this)">Laboratuvar ortamı / Kimyasal maddeler</div>
+                <div class="chip" onclick="toggleChip(this)">Ağır fiziksel saha çalışmaları</div>
+                <div class="chip" onclick="toggleChip(this)">Sürekli seyahat etmek zorunda kalmak</div>
+            </div>
+
+            <div class="other-input-group">
+                <input type="text" id="otherInput" placeholder="Diğer (Başka istemediğin özel bir durum yazabilirsin...)">
+            </div>
+
+            <div style="margin-top: 2rem; display: flex; gap: 10px;">
+                <button class="btn-primary" onclick="switchScreen('results')">Sonuçlarımı Göster</button>
+                <button class="btn-secondary" onclick="resetQuiz()">Sıfırla</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- EKRAN 3: SONUÇLAR -->
+    <div id="screen-results" class="screen">
+        <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Eleme Sonuçlarına Göre Sana En Uygun Bölümler</h2>
+        <p style="color: var(--text-light); margin-bottom: 2rem;">İstemediğin koşullar filtrelendi ve karakterine en uygun alternatifler sıralandı:</p>
+        
+        <div class="result-card">
+            <span class="match-badge">%96 Uyum Oranı</span>
+            <h3 style="color: var(--primary);">Bilgisayar Mühendisliği</h3>
+            <p style="margin: 10px 0; color: var(--text-light);">Seçtiğin kriterlere göre masa başı esnek çalışma imkanı sunan, tekrara düşmeyen dinamik bir alandır.</p>
+            <button class="btn-secondary" onclick="switchScreen('detail'); renderCompleteDepartmentGuideWithSalaries();">Bölüm Detaylarını İncele</button>
+        </div>
+    </div>
+
+    <!-- EKRAN 4: TÜM ÜNİVERSİTE VE BÖLÜM ARŞİVİ -->
+    <div id="screen-directory" class="screen">
+        <div class="directory-header">
+            <div>
+                <h2 style="color: var(--primary);">Türkiye Geneli Tüm Üniversite ve Bölüm Arşivi</h2>
+                <p style="color: var(--text-light);">Bölüm, üniversite veya şehir adını yazarak binlerce seçenek arasında anında arama yap:</p>
+            </div>
+            <input type="text" id="searchInput" class="search-box" onkeyup="filterTable()" placeholder="Örn: Tıp, ODTÜ, İstanbul, Bilgisayar...">
+        </div>
+
+        <div class="table-container">
+            <table id="uniTable">
+                <thead>
+                    <tr>
+                        <th>Bölüm Adı</th>
+                        <th>Puan Türü</th>
+                        <th>Üniversite Adı</th>
+                        <th>Şehir</th>
+                        <th>Taban Puanı</th>
+                        <th>Kontenjan</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- EKRAN 5: BÖLÜM REHBERİ (Tüm Bölümler Otomatik Listelenir) -->
+    <div id="screen-detail" class="screen">
+        <!-- JavaScript burayı otomatik dolduracak -->
+    </div>
+
+    <!-- EKRAN 6: YURTDIŞI EĞİTİM -->
+    <div id="screen-abroad" class="screen">
+        <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Global Eğitim & Yurtdışı Seçenekleri</h2>
+        <p style="color: var(--text-light); margin-bottom: 2rem;">Dünyanın dört bir yanındaki eğitim imkanları ve yaşam koşulları:</p>
+
+        <div class="abroad-grid">
+            <div class="country-card">
+                <h3>Almanya</h3>
+                <p><strong>Eğitim Ücreti:</strong> Devlet üniversitelerinde genelde ücretsiz.</p>
+                <p style="margin-top: 10px;"><strong>Dil Şartı:</strong> TestDaF veya IELTS.</p>
+            </div>
+            <div class="country-card">
+                <h3>Hollanda</h3>
+                <p><strong>Eğitim Ücreti:</strong> Yıllık 8.000€ - 15.000€.</p>
+                <p style="margin-top: 10px;"><strong>Dil Şartı:</strong> IELTS min 6.5.</p>
+            </div>
+            <div class="country-card">
+                <h3>İngiltere</h3>
+                <p><strong>Eğitim Ücreti:</strong> Yıllık 15.000£ - 30.000£.</p>
+                <p style="margin-top: 10px;"><strong>Dil Şartı:</strong> IELTS Academic.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- EKRAN 7: ÖNERİ & GERİ BİLDİRİM -->
+    <div id="screen-feedback" class="screen">
+        <div class="feedback-box">
+            <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Özellik Öner & Geri Bildirim Ver</h2>
+            <p style="color: var(--text-light); margin-bottom: 2rem;">Kendi fikirlerini bizimle paylaşabilirsin:</p>
+            
+            <div class="form-group">
+                <label>Adın</label>
+                <input type="text" placeholder="Adını yazabilirsin...">
+            </div>
+            <div class="form-group">
+                <label>Önerin veya Düşüncen</label>
+                <textarea rows="4" placeholder="Platforma eklenmesini istediğin özellikler..."></textarea>
+            </div>
+            <button class="btn-primary" onclick="alert('Geri bildirimin için teşekkürler!')">Gönder</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 NextRoute Platformu. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <script>
+        const departmentsList = [
+            "Bilgisayar Mühendisliği", "Yazılım Mühendisliği", "Yapay Zeka Mühendisliği", "Elektrik-Elektronik Mühendisliği", 
+            "Makine Mühendisliği", "Endüstri Mühendisliği", "İnşaat Mühendisliği", "Mimarlık", "Tıp Fakültesi", 
+            "Diş Hekimliği", "Eczacılık", "Hukuk Fakültesi", "Psikoloji", "İşletme", "İktisat", "Uluslararası İlişkiler", 
+            "Gastronomi ve Mutfak Sanatları", "Hemşirelik", "Fizyoterapi ve Rehabilitasyon", "Beslenme ve Diyetetik", 
+            "Radyo, Televizyon ve Sinema", "Grafik Tasarım", "Halkla İlişkiler", "Sınıf Öğretmenliği", "İngilizce Öğretmenliği", 
+            "Okul Öncesi Öğretmenliği", "Rehberlik ve Psikolojik Danışmanlık", "Otomotiv Mühendisliği", "Mekatronik Mühendisliği", 
+            "Biyomedikal Mühendisliği", "Kimya Mühendisliği", "Metalurji ve Malzeme Mühendisliği", "Uçak Mühendisliği", 
+            "Yönetim Bilişim Sistemleri", "Bankacılık ve Finans", "Lojistik Yönetimi", "Acil Yardım ve Afet Yönetimi"
+        ];
+
+        // Bölüm Rehberi ekranını TÜM BÖLÜMLER için dinamik olarak oluşturan fonksiyon
+        function renderCompleteDepartmentGuideWithSalaries() {
+            const detailScreen = document.getElementById('screen-detail');
+            if (!detailScreen) return;
+
+            let html = `
+                <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Üniversite Bölümleri Rehberi</h2>
+                <p style="color: var(--text-light); margin-bottom: 1.5rem;">Tüm bölümlerin hedef kitleleri, çalışma hayatı ve kişiye katacakları:</p>
+                <div class="directory-header" style="margin-bottom: 20px;">
+                    <input type="text" id="guideSearch" class="search-box" placeholder="Bölüm ara (örn: Tıp, Mimarlık, Psikoloji)..." onkeyup="filterGuideCards()">
+                </div>
+                <div id="guideList" style="display: grid; gap: 20px;">
+            `;
+
+            departmentsList.forEach(deptName => {
+                let maas = "35.000 TL - 90.000 TL";
+                if (deptName.includes("Mühendisliği") || deptName.includes("Tıp") || deptName.includes("Diş")) {
+                    maas = "45.000 TL - 120.000 TL";
+                } else if (deptName.includes("Öğretmenliği") || deptName.includes("Hemşirelik")) {
+                    maas = "35.000 TL - 65.000 TL";
+                }
+
+                html += `
+                    <div class="detail-card guide-item" data-name="${deptName}" style="border: 1px solid #ddd; padding: 20px; border-radius: 12px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+                            <h3 style="color: var(--primary); margin: 0;">${deptName}</h3>
+                            <span style="background: #eef2ff; color: #4338ca; padding: 5px 12px; border-radius: 6px; font-weight: bold; font-size: 0.9rem;">
+                                Maaş Aralığı: ${maas}
+                            </span>
+                        </div>
+                        <div style="display: grid; gap: 8px;">
+                            <p style="margin: 0;"><strong>Hedef Kitle:</strong> Analitik düşünen, ${deptName.toLowerCase()} alanına ve araştırmaya ilgi duyan adaylar.</p>
+                            <p style="margin: 0;"><strong>Çalışma Hayatı:</strong> Sektörün dinamiklerine göre esnek veya kurumsal ofis/saha ortamlarında çalışma imkanı.</p>
+                            <p style="margin: 0; font-size: 0.95rem; color: #555;"><strong>Kişiye Katacakları:</strong> Problem çözme yeteneği, profesyonel yetkinlik ve kariyer gelişiminde geniş bir vizyon.</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+            detailScreen.innerHTML = html;
+        }
+
+        // Arama kutusu filtrelemesi
+        function filterGuideCards() {
+            const query = document.getElementById('guideSearch').value.toLocaleLowerCase('tr').trim();
+            document.querySelectorAll('.guide-item').forEach(item => {
+                const name = item.getAttribute('data-name').toLocaleLowerCase('tr');
+                item.style.display = name.includes(query) ? 'block' : 'none';
+            });
+        }
+
+        const universitiesList = [
+            {uni: "Boğaziçi Üniversitesi", city: "İstanbul"},
+            {uni: "Orta Doğu Teknik Üniversitesi (ODTÜ)", city: "Ankara"},
+            {uni: "İTÜ (İstanbul Teknik Üniversitesi)", city: "İstanbul"},
+            {uni: "Ankara Üniversitesi", city: "Ankara"},
+            {uni: "Hacettepe Üniversitesi", city: "Ankara"},
+            {uni: "İstanbul Üniversitesi", city: "İstanbul"},
+            {uni: "Ege Üniversitesi", city: "İzmir"},
+            {uni: "Yıldız Teknik Üniversitesi", city: "İstanbul"},
+            {uni: "Bilkent Üniversitesi", city: "Ankara"},
+            {uni: "Koç Üniversitesi", city: "İstanbul"},
+            {uni: "Sabancı Üniversitesi", city: "İstanbul"}
+        ];
+
+        let universityData = [];
+        let idCounter = 1;
+
+        universitiesList.forEach(u => {
+            departmentsList.forEach((dep, index) => {
+                if ((idCounter + index) % 3 === 0) {
+                    let type = "SAY";
+                    if (dep.includes("Hukuk") || dep.includes("Psikoloji") || dep.includes("İşletme")) type = "EA";
+                    if (dep.includes("Gastronomi") || dep.includes("Grafik")) type = "SÖZ";
+                    
+                    universityData.push({
+                        dep: dep,
+                        type: type,
+                        uni: u.uni,
+                        city: u.city,
+                        score: (400 + (idCounter % 100)).toFixed(2),
+                        quota: "60"
+                    });
+                }
+            });
+            idCounter++;
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            renderTable(universityData);
+        });
+
+        function renderTable(data) {
+            const tbody = document.getElementById("tableBody");
+            let html = "";
+            data.slice(0, 300).forEach(item => {
+                html += `<tr>
+                    <td>${item.dep}</td>
+                    <td>${item.type}</td>
+                    <td>${item.uni}</td>
+                    <td>${item.city}</td>
+                    <td>${item.score}</td>
+                    <td>${item.quota}</td>
+                </tr>`;
+            });
+            tbody.innerHTML = html;
+        }
+
+        function switchScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            
+            document.getElementById('screen-' + screenId).classList.add('active');
+            const navElement = document.getElementById('nav-' + screenId);
+            if(navElement) navElement.classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleChip(element) {
+            element.classList.toggle('selected');
+        }
+
+        function resetQuiz() {
+            document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+            document.getElementById('otherInput').value = '';
+        }
+
+        function filterTable() {
+            const query = document.getElementById('searchInput').value.toLocaleLowerCase('tr').trim();
+            const filteredData = universityData.filter(item => {
+                return item.dep.toLocaleLowerCase('tr').includes(query) ||
+                       item.uni.toLocaleLowerCase('tr').includes(query) ||
+                       item.city.toLocaleLowerCase('tr').includes(query);
+            });
+            renderTable(filteredData);
+        }
     </script>
 </body>
 </html>
-<!-- ŞABLON: Buradaki div yapısını kopyalayıp içine istediğin bölümü yazabilirsin -->
-<div class="department-guide-section" style="margin-bottom: 30px; padding: 20px; background: #f9f9f9; border-radius: 12px; border: 1px solid #ddd;">
-    
-    <!-- Bölüm Adı -->
-    <h2 style="color: var(--primary); margin-top: 0;">Bölüm Adı Buraya Gelecek</h2>
-    
-    <!-- Hedef Kitle -->
-    <div style="margin-bottom: 15px;">
-        <h4 style="margin: 5px 0; color: #333;">🎯 Kimler Tercih Etmeli?</h4>
-        <p style="margin: 0; font-size: 0.95rem;">Buraya bölümü tercih etmesi gereken öğrenci profilini yazacaksın.</p>
-    </div>
-
-    <!-- Çalışma Hayatı -->
-    <div style="margin-bottom: 15px;">
-        <h4 style="margin: 5px 0; color: #333;">💼 Çalışma Hayatı</h4>
-        <p style="margin: 0; font-size: 0.95rem;">Buraya mezun olduktan sonraki iş ortamı ve şartları gelecek.</p>
-    </div>
-
-    <!-- Kişiye Katacakları -->
-    <div style="margin-bottom: 15px;">
-        <h4 style="margin: 5px 0; color: #333;">✨ Kişiye Katacakları</h4>
-        <p style="margin: 0; font-size: 0.95rem;">Buraya bölümün kişisel gelişime ve yeteneklere etkisini yazacaksın.</p>
-    </div>
-
-</div>
